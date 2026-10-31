@@ -303,4 +303,16 @@
   });
 
   updateProgress();
+
+  // Reset the entire learning journey
+  document.querySelector("#reset-journey")?.addEventListener("click", () => {
+    const confirmed = confirm(
+      "Kas soovid kõik oma vastused ja edusammud kustutada ning õpiteekonda uuesti alustada?"
+    );
+  
+    if (!confirmed) return;
+  
+    localStorage.removeItem(config.storageKey);
+    window.location.reload();
+  });
 })();
