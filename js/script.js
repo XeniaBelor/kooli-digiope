@@ -1,6 +1,5 @@
 const subjectsBox = document.querySelector("#subjects");
 const gradesBox = document.querySelector("#grades");
-const gradeSection = document.querySelector("#grade-section");
 const resultsSection = document.querySelector("#results");
 const cardsBox = document.querySelector("#cards");
 
@@ -26,13 +25,8 @@ function makeButtons(items, container, selected, onClick, label) {
 function showSubjects() {
   makeButtons(subjects, subjectsBox, selectedSubject, subject => {
     selectedSubject = subject;
-    selectedGrade = null;
-
-    gradeSection.hidden = false;
-    resultsSection.hidden = true;
-
     showSubjects();
-    showGrades();
+    showMaterials();
   }, subject => subject);
 }
 
@@ -41,14 +35,15 @@ function showGrades() {
 
   makeButtons(grades, gradesBox, selectedGrade, grade => {
     selectedGrade = grade;
-    resultsSection.hidden = false;
-
     showGrades();
     showMaterials();
   }, grade => `${grade}. klass`);
 }
 
 function showMaterials() {
+  resultsSection.hidden = !selectedSubject || !selectedGrade;
+  if (resultsSection.hidden) return;
+
   cardsBox.replaceChildren();
 
   const found = materials.filter(material =>
@@ -93,3 +88,4 @@ function showMaterials() {
 }
 
 showSubjects();
+showGrades();
