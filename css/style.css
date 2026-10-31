@@ -665,3 +665,32 @@ footer {
     transition: none;
   }
 }
+
+/* Smooth opening and closing of learning stages */
+
+@supports (interpolate-size: allow-keywords) {
+  .journey-step {
+    interpolate-size: allow-keywords;
+  }
+
+  .journey-step::details-content {
+    height: 0;
+    opacity: 0;
+    overflow: clip;
+    transition:
+      height 250ms ease,
+      opacity 200ms ease,
+      content-visibility 250ms allow-discrete;
+  }
+
+  .journey-step[open]::details-content {
+    height: auto;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .journey-step::details-content {
+    transition: none;
+  }
+}
