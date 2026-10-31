@@ -283,7 +283,7 @@ nav {
 
 .intro-layout {
   display: grid;
-  grid-template-columns: 1.5fr 0.9fr;
+  grid-template-columns: minmax(0, 1fr) 295px;
   gap: 24px;
   align-items: start;
 }
