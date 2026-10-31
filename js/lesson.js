@@ -2,7 +2,8 @@ const STORAGE_KEY = "digiope-paikesesusteem";
 
 let progress = {
   done: Array(8).fill(false),
-  answers: null
+  answers: null,
+  stage3Answers: null
 };
 
 // Restore progress
@@ -12,6 +13,7 @@ try {
   if (saved && Array.isArray(saved.done) && saved.done.length === 8) {
     progress.done = saved.done.map(value => value === true);
     progress.answers = saved.answers || null;
+    progress.stage3Answers = saved.stage3Answers || null;
   }
 } catch {
   // Continue without saved progress
@@ -211,3 +213,99 @@ steps.forEach(step => {
 });
 
 updateProgress();
+
+
+// Third stage: knowledge check
+
+const stage3Quiz = document.querySelector("#stage3-quiz");
+const stage3Result = document.querySelector("#stage3-result");
+const stage3Retry = document.querySelector("#stage3-retry");
+const stage3Next = document.querySelector("#stage3-next");
+
+const stage3Questions = {
+  s3q1: {
+    correct: "paike",
+    answer: "Päikese ümber",
+    explanation: "Kõik kaheksa planeeti tiirlevad ümber Päikese."
+  },
+  s3q2: {
+    correct: "kolmas",
+    answer: "Kolmas",
+    explanation: "Maa on Päikesest kolmas planeet."
+  },
+  s3q3: {
+    correct: "jupiter",
+    answer: "Jupiter",
+    explanation: "Jupiter on Päikesesüsteemi kõige suurem planeet."
+  }
+};
+
+function checkStage3(answers, save = true) {
+  let score = 0;
+
+  Object.entries(stage3Questions).forEach(([key, question]) => {
+    const correct = answers[key] === question.correct;
+    if (correct) score++;
+
+    const feedback = stage3Quiz.querySelector(
+      `[data-stage3-feedback="${key}"]`
+    );
+
+    feedback.textContent = correct
+      ? `Õige! ${question.explanation}`
+      : `Õige vastus: ${question.answer}. ${question.explanation}`;
+
+    feedback.className =
+      `answer-feedback ${correct ? "is-correct" : "is-wrong"}`;
+
+    feedback.hidden = false;
+  });
+
+  if (score >= 2 && save) {
+    progress.stage3Answers = answers;
+    completeStep(3);
+  }
+
+  stage3Result.textContent = score >= 2
+    ? `${score}/3 õiget vastust. Väga tubli! Etapp läbitud!`
+    : `${score}/3 õiget vastust. Korda õpitut ja proovi uuesti!`;
+
+  stage3Result.hidden = false;
+  stage3Retry.hidden = score >= 2;
+  stage3Next.hidden = !progress.done[2];
+}
+
+stage3Quiz.addEventListener("submit", event => {
+  event.preventDefault();
+
+  const answers = Object.fromEntries(
+    new FormData(stage3Quiz).entries()
+  );
+
+  checkStage3(answers);
+});
+
+stage3Retry.addEventListener("click", () => {
+  stage3Quiz.reset();
+
+  stage3Quiz.querySelectorAll(".answer-feedback").forEach(feedback => {
+    feedback.hidden = true;
+  });
+
+  stage3Result.hidden = true;
+  stage3Retry.hidden = true;
+  stage3Next.hidden = true;
+});
+
+stage3Next.addEventListener("click", () => openStep(4));
+
+// Restore saved answers
+if (progress.done[2] && progress.stage3Answers) {
+  stage3Quiz.querySelectorAll('input[type="radio"]').forEach(input => {
+    input.checked =
+      progress.stage3Answers[input.name] === input.value;
+  });
+
+  checkStage3(progress.stage3Answers, false);
+}
+
