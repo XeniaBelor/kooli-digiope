@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Päikesesüsteem ja planeedid | Digiõppevara</title>
   <link rel="stylesheet" href="../../../css/style.css">
+  <script src="../../../js/loodusopetus/4klasspaikesesusteem.js" defer></script>
   <script src="../../../js/lesson.js" defer></script>
 </head>
-
 <body>
   <header class="site-header">
     <nav class="container">
@@ -20,16 +20,14 @@
   </header>
 
   <main class="container lesson">
-
     <a class="back-button" href="../../../index.html#materjalid">
       ← Tagasi õppematerjalide juurde
     </a>
 
     <section class="topic-header">
       <img class="topic-cover"
-           src="../../../images/loodusopetus/4klass-paikesusteem.png"
+           src="../../../images/loodusopetus/4klass-paikesesusteem.png"
            alt="Päikesesüsteem ja planeedid">
-
       <div class="topic-info">
         <span class="topic-meta">Loodusõpetus · 4. klass</span>
         <h1>Päikesesüsteem ja planeedid</h1>
@@ -43,13 +41,9 @@
     <!-- Vaated -->
     <div class="journey-tabs" aria-label="Õppematerjali vaated">
       <button class="journey-tab active" type="button"
-              data-view="learner" aria-pressed="true">
-        Õppijale
-      </button>
+              data-view="learner" aria-pressed="true">Õppijale</button>
       <button class="journey-tab" type="button"
-              data-view="teacher" aria-pressed="false">
-        Õpetajale
-      </button>
+              data-view="teacher" aria-pressed="false">Õpetajale</button>
     </div>
 
     <!-- ÕPPIJALE -->
@@ -64,12 +58,9 @@
           <span id="journey-count">0 / 8 läbitud</span>
         </div>
 
-        <div class="journey-progress"
-             role="progressbar"
+        <div class="journey-progress" role="progressbar"
              aria-label="Õpiteekonna läbimine"
-             aria-valuemin="0"
-             aria-valuemax="8"
-             aria-valuenow="0">
+             aria-valuemin="0" aria-valuemax="8" aria-valuenow="0">
           <div id="journey-fill"></div>
         </div>
       </div>
@@ -83,10 +74,13 @@
         </summary>
 
         <div class="step-content">
-          <h3>Tere tulemast kosmosereisile! 🚀 </h3>
+          <h3>Tere tulemast kosmosereisile!</h3>
+
           <p>
-            Kas oled kunagi mõelnud, kui suur on maailmaruum? Või miks planeedid tiirlevad ümber Päikese?
+            Kas oled kunagi mõelnud, kui suur on maailmaruum?
+            Või miks planeedid tiirlevad ümber Päikese?
           </p>
+
           <p>
             Sellel kosmosereisil õpid tundma Päikesesüsteemi,
             uurid planeete, täidad põnevaid ülesandeid
@@ -104,10 +98,11 @@
 
           <p>
             Liigu etappide vahel omas tempos.
-            Kui midagi on keeruline, võid alati tagasi tulla. ⏱️
+            Kui midagi on keeruline, võid alati tagasi tulla.
           </p>
 
-          <button id="start-journey" class="action-button" type="button">
+          <button class="action-button" type="button"
+                  data-complete-step="1" data-next-step="2">
             Alusta kosmosereisi
           </button>
         </div>
@@ -128,58 +123,7 @@
             vastust veel ei tea! Pärast saad õigeid vastuseid vaadata.
           </p>
 
-          <form id="diagnostic-form">
-
-            <fieldset>
-              <legend>1. Mis on Päike?</legend>
-              <label><input type="radio" name="q1" value="planeet" required> Planeet</label>
-              <label><input type="radio" name="q1" value="taht"> Täht</label>
-              <label><input type="radio" name="q1" value="kaaslane"> Kaaslane</label>
-              <p class="answer-feedback" data-feedback="q1" hidden></p>
-            </fieldset>
-
-            <fieldset>
-              <legend>2. Mitu planeeti on Päikesesüsteemis?</legend>
-              <label><input type="radio" name="q2" value="7" required> 7</label>
-              <label><input type="radio" name="q2" value="8"> 8</label>
-              <label><input type="radio" name="q2" value="9"> 9</label>
-              <p class="answer-feedback" data-feedback="q2" hidden></p>
-            </fieldset>
-
-            <fieldset>
-              <legend>3. Milline planeet on Päikesele kõige lähemal?</legend>
-              <label><input type="radio" name="q3" value="maa" required> Maa</label>
-              <label><input type="radio" name="q3" value="merkuur"> Merkuur</label>
-              <label><input type="radio" name="q3" value="marss"> Marss</label>
-              <p class="answer-feedback" data-feedback="q3" hidden></p>
-            </fieldset>
-
-            <fieldset>
-              <legend>4. Mis tiirleb ümber Maa?</legend>
-              <label><input type="radio" name="q4" value="kuu" required> Kuu</label>
-              <label><input type="radio" name="q4" value="paike"> Päike</label>
-              <label><input type="radio" name="q4" value="jupiter"> Jupiter</label>
-              <p class="answer-feedback" data-feedback="q4" hidden></p>
-            </fieldset>
-
-            <div class="quiz-actions">
-              <button class="action-button" type="submit">
-                Kontrolli vastuseid
-              </button>
-              <button id="retry-diagnostic" class="secondary-button"
-                      type="button" hidden>
-                Proovi uuesti
-              </button>
-            </div>
-
-            <div id="diagnostic-result" class="learning-box" hidden
-                 aria-live="polite"></div>
-
-            <button id="next-after-diagnostic" class="action-button"
-                    type="button" hidden>
-              Edasi 3. etapiga
-            </button>
-          </form>
+          <div data-quiz="diagnostic"></div>
         </div>
       </details>
 
@@ -190,17 +134,17 @@
           <span class="step-title">Avastame Päikesesüsteemi!</span>
           <span class="step-status">Alustamata</span>
         </summary>
-      
+
         <div class="step-content">
           <h3>Avastame Päikesesüsteemi!</h3>
-      
+
           <p>
             Päikesesüsteemi keskmes asub Päike, mille ümber
             tiirleb kaheksa planeeti. Lisaks planeetidele
             kuuluvad Päikesesüsteemi ka kuud, asteroidid
             ja teised taevakehad.
           </p>
-      
+
           <div class="learning-box">
             <strong>Sinu ülesanne</strong>
             <p>
@@ -209,79 +153,27 @@
               loe nende kohta huvitavaid fakte.
             </p>
           </div>
-      
+
           <iframe
             class="h5p-frame"
             src="https://sisuloome.e-koolikott.ee/h5p/29036/embed"
+            title="Avasta Päikesesüsteem"
             width="100%"
             height="768"
-            title="Avasta Päikesesüsteem"
+            loading="lazy"
             lang="et"
             allowfullscreen>
           </iframe>
-      
-          <script
-            src="https://sisuloome.e-koolikott.ee/sites/default/files/h5p/h5p-core/js/h5p-resizer.js">
-          </script>
-      
-          <p>
-            Kui oled Päikesesüsteemi uurinud, kontrolli
-            oma teadmisi järgmises ülesandes.
-          </p>
-          
+
           <h3>Kontrolli oma teadmisi!</h3>
           <p>
             Vasta kolmele küsimusele. Etapi läbimiseks
             vasta õigesti vähemalt kahele küsimusele.
           </p>
-          
-          <form id="stage3-quiz">
-            <fieldset>
-              <legend>1. Mille ümber tiirlevad Päikesesüsteemi planeedid?</legend>
-              <label><input type="radio" name="s3q1" value="maa" required> Maa ümber</label>
-              <label><input type="radio" name="s3q1" value="paike"> Päikese ümber</label>
-              <label><input type="radio" name="s3q1" value="kuu"> Kuu ümber</label>
-              <p class="answer-feedback" data-stage3-feedback="s3q1" hidden></p>
-            </fieldset>
-          
-            <fieldset>
-              <legend>2. Mitmes planeet Päikesest on Maa?</legend>
-              <label><input type="radio" name="s3q2" value="esimene" required> Esimene</label>
-              <label><input type="radio" name="s3q2" value="kolmas"> Kolmas</label>
-              <label><input type="radio" name="s3q2" value="viies"> Viies</label>
-              <p class="answer-feedback" data-stage3-feedback="s3q2" hidden></p>
-            </fieldset>
-          
-            <fieldset>
-              <legend>3. Milline on Päikesesüsteemi kõige suurem planeet?</legend>
-              <label><input type="radio" name="s3q3" value="saturn" required> Saturn</label>
-              <label><input type="radio" name="s3q3" value="jupiter"> Jupiter</label>
-              <label><input type="radio" name="s3q3" value="neptuun"> Neptuun</label>
-              <p class="answer-feedback" data-stage3-feedback="s3q3" hidden></p>
-            </fieldset>
-          
-            <div class="quiz-actions">
-              <button class="action-button" type="submit">
-                Kontrolli vastuseid
-              </button>
-              <button id="stage3-retry" class="secondary-button"
-                      type="button" hidden>
-                Proovi uuesti
-              </button>
-            </div>
-          
-            <div id="stage3-result" class="learning-box"
-                 role="status" aria-live="polite" hidden></div>
-          
-            <button id="stage3-next" class="action-button"
-                    type="button" hidden>
-              Edasi 4. etapiga
-            </button>
-          </form>
 
+          <div data-quiz="stage3"></div>
         </div>
       </details>
-     
 
       <!-- 4. ETAPP -->
       <details class="journey-step" data-step="4">
@@ -290,6 +182,7 @@
           <span class="step-title">Tutvume planeetidega</span>
           <span class="step-status">Alustamata</span>
         </summary>
+
         <div class="step-content">
           <h3>Vali oma planeet!</h3>
           <p>
@@ -307,6 +200,7 @@
           <span class="step-title">Kosmosemissioon</span>
           <span class="step-status">Alustamata</span>
         </summary>
+
         <div class="step-content">
           <h3>Valmistume kosmosemissiooniks!</h3>
           <p>
@@ -324,13 +218,16 @@
           <span class="step-title">Jagame oma avastusi!</span>
           <span class="step-status">Alustamata</span>
         </summary>
+
         <div class="step-content">
           <h3>Tutvusta oma avastusi!</h3>
           <p>
             Esitle oma rühma kosmosemissiooni,
             kuula kaaslasi ja anna neile tagasisidet.
           </p>
-          <p class="coming-soon">Esitluse ja tagasiside juhend lisatakse siia.</p>
+          <p class="coming-soon">
+            Esitluse ja tagasiside juhend lisatakse siia.
+          </p>
         </div>
       </details>
 
@@ -341,13 +238,16 @@
           <span class="step-title">Kontrollime oma teadmisi!</span>
           <span class="step-status">Alustamata</span>
         </summary>
+
         <div class="step-content">
           <h3>Pane oma teadmised proovile!</h3>
           <p>
             Mängi Scratchi mängu „Kosmosekaitsja:
             Planeetide missioon“ ja lahenda H5P ülesandeid.
           </p>
-          <p class="coming-soon">Scratchi mäng ja ülesanded lisatakse siia.</p>
+          <p class="coming-soon">
+            Scratchi mäng ja ülesanded lisatakse siia.
+          </p>
         </div>
       </details>
 
@@ -358,17 +258,19 @@
           <span class="step-title">Minu järgmine kosmoseseiklus</span>
           <span class="step-status">Alustamata</span>
         </summary>
+
         <div class="step-content">
           <h3>Mida ma õppisin?</h3>
           <p>
-            Mõtle oma õpiteekonnale.
-            Vali, kas soovid midagi korrata või
-            hoopis mõnda kosmoseteemat põhjalikumalt uurida.
+            Mõtle oma õpiteekonnale. Vali, kas soovid midagi
+            korrata või hoopis mõnda kosmoseteemat
+            põhjalikumalt uurida.
           </p>
-          <p class="coming-soon">Enesehindamise ülesanne lisatakse siia.</p>
+          <p class="coming-soon">
+            Enesehindamise ülesanne lisatakse siia.
+          </p>
         </div>
       </details>
-
     </section>
 
     <!-- ÕPETAJALE -->
@@ -376,18 +278,19 @@
       <div class="teacher-placeholder">
         <h2>Õpiteekonna kirjeldus õpetajale</h2>
         <p>
-          Siia lisame õppeteekonna eesmärgid, õpiväljundid,
-          õppetegevuste metoodilise kirjelduse,
-          hindamise ja diferentseerimise võimalused.
+          Siia lisame õpiteekonna eesmärgid, õpiväljundid,
+          õppetegevuste metoodilise kirjelduse, hindamise
+          ja diferentseerimise võimalused.
         </p>
         <p class="coming-soon">Õpetaja vaade on koostamisel.</p>
       </div>
     </section>
-
   </main>
 
   <footer>
     <p>Digiõppevara · Digitaalsed õppematerjalid · 2026</p>
   </footer>
+
+  <script src="https://sisuloome.e-koolikott.ee/sites/default/files/h5p/h5p-core/js/h5p-resizer.js"></script>
 </body>
 </html>
