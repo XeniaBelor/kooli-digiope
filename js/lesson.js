@@ -467,6 +467,17 @@
 
   document.querySelectorAll("[data-research]").forEach(buildResearch);
 
+  // Loading for h5p
+  document.querySelectorAll(".js-embed-frame").forEach(frame => {
+  frame.addEventListener("load", () => {
+    const shell = frame.closest(".embed-shell");
+    if (shell) {
+      shell.classList.remove("is-loading");
+      shell.classList.add("is-loaded");
+      }
+    });
+  });
+
   // Open the first unfinished stage on page load
   const firstUnfinished = progress.done.findIndex(done => !done);
 
