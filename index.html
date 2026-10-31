@@ -1,128 +1,63 @@
+
 <!DOCTYPE html>
 <html lang="et">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kosmoseõpe | Päikesesüsteem ja planeedid</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kosmoseõpe | Päikesesüsteem</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <!-- NAVIGATSIOON -->
-    <header class="site-header">
-        <nav class="navbar container">
-            <a href="#" class="logo">KOSMOSEÕPE</a>
+  <header>
+    <nav class="container">
+      <a class="logo" href="#">Kosmoseõpe</a>
+      <div class="links">
+        <a href="#scratch">Scratch</a>
+        <a href="#h5p">H5P</a>
+      </div>
+    </nav>
+  </header>
 
-            <div class="nav-links">
-                <a href="#scratch">Scratchi mäng</a>
-                <a href="#h5p">H5P ülesanded</a>
-            </div>
-        </nav>
-    </header>
+  <main class="container">
+    <section class="hero">
+      <span>LOODUSÕPETUS · 4. KLASS</span>
+      <h1>Avastame kosmost!</h1>
+      <p>Õpi tundma Päikesesüsteemi mängude ja ülesannete abil.</p>
+      <a class="button" href="#scratch">Alusta õppimist</a>
+    </section>
 
-    <main class="container">
+    <section class="card" id="scratch">
+      <div class="content">
+        <small>SCRATCH</small>
+        <h2>Kosmosekaitsja: Planeetide missioon</h2>
+        <p>Hävita kosmosekive, kogu punkte ja vasta küsimustele!</p>
+      </div>
+      <div class="embed">
+        <iframe class="scratch"
+          src="https://scratch.mit.edu/projects/PROJECT_ID/embed"
+          title="Kosmosekaitsja" allowfullscreen>
+        </iframe>
+      </div>
+    </section>
 
-        <!-- PEAMINE BÄNNER -->
-        <section class="hero">
-            <span class="hero-label">LOODUSÕPETUS · 4. KLASS</span>
-            <h1>Avastame kosmost!</h1>
-            <p>
-                Tule avastama Päikesesüsteemi ja planeete!
-                Mängi, lahenda ülesandeid ja pane oma
-                teadmised proovile.
-            </p>
-            <a href="#scratch" class="hero-button">
-                Alusta õppimist
-            </a>
-        </section>
+    <section class="card" id="h5p">
+      <div class="content">
+        <small>H5P</small>
+        <h2>Päikesesüsteemi ülesanded</h2>
+        <p>Pane oma teadmised proovile!</p>
+      </div>
+      <div class="embed">
+        <iframe class="h5p"
+          src="H5P_EMBED_URL"
+          title="Päikesesüsteemi ülesanded" allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+  </main>
 
-        <!-- SISSEJUHATUS -->
-        <section class="intro">
-            <h2>Õppematerjalid</h2>
-            <p>
-                Siit leiad põnevaid mänge ja interaktiivseid
-                ülesandeid Päikesesüsteemi õppimiseks.
-            </p>
-        </section>
-
-        <!-- SCRATCHI MÄNG -->
-        <section class="activity-card" id="scratch">
-            <div class="card-header">
-                <span class="category">SCRATCH</span>
-                <h2>
-                    Kosmosekaitsja:
-                    Planeetide missioon
-                </h2>
-                <p>
-                    Hävita kosmosekive, kogu punkte
-                    ja vasta planeetide küsimustele!
-                </p>
-            </div>
-            <div class="game-container">
-                <!-- ASENDA PROJECT_ID OMA PROJEKTI NUMBRIGA -->
-                <iframe
-                    class="scratch-frame"
-                    src="https://scratch.mit.edu/projects/PROJECT_ID/embed"
-                    title="Kosmosekaitsja"
-                    allowfullscreen>
-                </iframe>
-            </div>
-            <div class="card-footer">
-                <strong>Juhtimine:</strong>
-                A või ← – vasakule,
-                D või → – paremale,
-                tühik või ↑ – tulista.
-            </div>
-        </section>
-
-        <!-- H5P ÜLESANDED -->
-        <section class="activity-card" id="h5p">
-
-            <div class="card-header">
-                <span class="category">H5P</span>
-
-                <h2>Päikesesüsteemi ülesanded</h2>
-
-                <p>
-                    Kontrolli oma teadmisi planeetide
-                    ja Päikesesüsteemi kohta!
-                </p>
-            </div>
-
-            <div class="game-container">
-
-                <!-- ASENDA H5P_EMBED_URL OMA LINGIGA -->
-                <iframe
-                    class="h5p-frame"
-                    src="H5P_EMBED_URL"
-                    title="Päikesesüsteemi ülesanded"
-                    loading="lazy"
-                    allowfullscreen>
-                </iframe>
-
-            </div>
-
-            <div class="card-footer">
-                Lahenda ülesanded ja kontrolli oma teadmisi!
-            </div>
-
-        </section>
-
-    </main>
-
-    <!-- JALUS -->
-    <footer class="site-footer">
-        <div class="container">
-            <p>
-                Kosmoseõpe · Päikesesüsteem ja planeedid
-            </p>
-
-            <p>
-                Ülikooli õppetöö raames loodud
-                õppematerjal · 2026
-            </p>
-        </div>
-    </footer>
-
+  <footer>
+    Kosmoseõpe · Loodusõpetus · 4. klass · 2026
+  </footer>
 </body>
 </html>
