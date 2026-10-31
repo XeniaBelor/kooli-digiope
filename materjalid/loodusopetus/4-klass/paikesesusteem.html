@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="et">
 <head>
@@ -6,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Päikesesüsteem ja planeedid | Digiõppevara</title>
   <link rel="stylesheet" href="../../../css/style.css">
+  <script src="../../../js/lesson.js" defer></script>
 </head>
 
 <body>
@@ -13,60 +13,296 @@
     <nav class="container">
       <a class="logo" href="../../../index.html">Digiõppevara</a>
       <div class="nav-links">
-        <!--
         <a href="../../../index.html#materjalid">Õppematerjalid</a>
         <a href="../../../index.html#projektist">Projektist</a>
-        -->
       </div>
     </nav>
   </header>
 
   <main class="container lesson">
+
     <a class="back-button" href="../../../index.html#materjalid">
       ← Tagasi õppematerjalide juurde
     </a>
-  
+
     <section class="topic-header">
-      <img
-        class="topic-cover"
-        src="../../../images/loodusopetus/4klass-paikesusteem.png"
-        alt="Päikesesüsteem ja planeedid"
-      >
-  
+      <img class="topic-cover"
+           src="../../../images/loodusopetus/4klass-paikesusteem.png"
+           alt="Päikesesüsteem ja planeedid">
+
       <div class="topic-info">
         <span class="topic-meta">Loodusõpetus · 4. klass</span>
         <h1>Päikesesüsteem ja planeedid</h1>
         <p>
-          Tutvu Päikesesüsteemiga, õpi tundma planeete
-          ning kinnista oma teadmisi mängude ja
-          interaktiivsete ülesannete abil.
+          Avasta Päikesesüsteemi ja planeetide põnev maailm!
+          Õpi mängides, lahenda ülesandeid ja pane oma teadmised proovile.
         </p>
       </div>
     </section>
 
-    <section class="activity">
-      <h2>1. Kosmosekaitsja: Planeetide missioon</h2>
-      <p>
-        Hävita kosmosekive, kogu punkte ja vasta
-        küsimustele. Mängus on 5 taset ja 10 küsimust.
-      </p>
+    <!-- Vaated -->
+    <div class="journey-tabs" aria-label="Õppematerjali vaated">
+      <button class="journey-tab active" type="button"
+              data-view="learner" aria-pressed="true">
+        Õppijale
+      </button>
+      <button class="journey-tab" type="button"
+              data-view="teacher" aria-pressed="false">
+        Õpetajale
+      </button>
+    </div>
 
-      <div class="embed-placeholder">
-        Scratchi mäng lisatakse siia.
+    <!-- ÕPPIJALE -->
+    <section id="learner-view" class="journey-panel">
+
+      <div class="journey-overview">
+        <div class="journey-overview-top">
+          <div>
+            <h2>Minu kosmosereis</h2>
+            <p>Läbi kaheksa etappi ja avasta Päikesesüsteem!</p>
+          </div>
+          <span id="journey-count">0 / 8 läbitud</span>
+        </div>
+
+        <div class="journey-progress"
+             role="progressbar"
+             aria-label="Õpiteekonna läbimine"
+             aria-valuemin="0"
+             aria-valuemax="8"
+             aria-valuenow="0">
+          <div id="journey-fill"></div>
+        </div>
+      </div>
+
+      <!-- 1. ETAPP -->
+      <details class="journey-step" data-step="1" open>
+        <summary>
+          <span class="step-number">1</span>
+          <span class="step-title">Tere, kosmoseuurija!</span>
+          <span class="step-status">Pooleli</span>
+        </summary>
+
+        <div class="step-content">
+          <h3>Tere tulemast kosmosereisile!</h3>
+          <p>
+            Kas oled kunagi mõelnud, kui suur on maailmaruum?
+            Või miks planeedid tiirlevad ümber Päikese?
+          </p>
+          <p>
+            Sellel kosmosereisil õpid tundma Päikesesüsteemi,
+            uurid planeete, täidad põnevaid ülesandeid
+            ja osaled kosmosemissioonil.
+          </p>
+
+          <div class="learning-box">
+            <strong>Mida sa õpid?</strong>
+            <p>
+              Õpid nimetama kaheksat planeeti, kirjeldama nende
+              järjestust ja põhiomadusi ning selgitama,
+              kuidas planeedid ümber Päikese tiirlevad.
+            </p>
+          </div>
+
+          <p>
+            Liigu etappide vahel omas tempos.
+            Kui midagi on keeruline, võid alati tagasi tulla.
+          </p>
+
+          <button id="start-journey" class="action-button" type="button">
+            Alusta kosmosereisi
+          </button>
+        </div>
+      </details>
+
+      <!-- 2. ETAPP -->
+      <details class="journey-step" data-step="2">
+        <summary>
+          <span class="step-number">2</span>
+          <span class="step-title">Mida ma juba tean?</span>
+          <span class="step-status">Alustamata</span>
+        </summary>
+
+        <div class="step-content">
+          <h3>Kui palju sa kosmosest juba tead?</h3>
+          <p>
+            Vasta neljale küsimusele. Ära muretse, kui sa mõnda
+            vastust veel ei tea! Pärast saad õigeid vastuseid vaadata.
+          </p>
+
+          <form id="diagnostic-form">
+
+            <fieldset>
+              <legend>1. Mis on Päike?</legend>
+              <label><input type="radio" name="q1" value="planeet" required> Planeet</label>
+              <label><input type="radio" name="q1" value="taht"> Täht</label>
+              <label><input type="radio" name="q1" value="kaaslane"> Kaaslane</label>
+              <p class="answer-feedback" data-feedback="q1" hidden></p>
+            </fieldset>
+
+            <fieldset>
+              <legend>2. Mitu planeeti on Päikesesüsteemis?</legend>
+              <label><input type="radio" name="q2" value="7" required> 7</label>
+              <label><input type="radio" name="q2" value="8"> 8</label>
+              <label><input type="radio" name="q2" value="9"> 9</label>
+              <p class="answer-feedback" data-feedback="q2" hidden></p>
+            </fieldset>
+
+            <fieldset>
+              <legend>3. Milline planeet on Päikesele kõige lähemal?</legend>
+              <label><input type="radio" name="q3" value="maa" required> Maa</label>
+              <label><input type="radio" name="q3" value="merkuur"> Merkuur</label>
+              <label><input type="radio" name="q3" value="marss"> Marss</label>
+              <p class="answer-feedback" data-feedback="q3" hidden></p>
+            </fieldset>
+
+            <fieldset>
+              <legend>4. Mis tiirleb ümber Maa?</legend>
+              <label><input type="radio" name="q4" value="kuu" required> Kuu</label>
+              <label><input type="radio" name="q4" value="paike"> Päike</label>
+              <label><input type="radio" name="q4" value="jupiter"> Jupiter</label>
+              <p class="answer-feedback" data-feedback="q4" hidden></p>
+            </fieldset>
+
+            <div class="quiz-actions">
+              <button class="action-button" type="submit">
+                Kontrolli vastuseid
+              </button>
+              <button id="retry-diagnostic" class="secondary-button"
+                      type="button" hidden>
+                Proovi uuesti
+              </button>
+            </div>
+
+            <div id="diagnostic-result" class="learning-box" hidden
+                 aria-live="polite"></div>
+
+            <button id="next-after-diagnostic" class="action-button"
+                    type="button" hidden>
+              Edasi 3. etapiga
+            </button>
+          </form>
+        </div>
+      </details>
+
+      <!-- 3. ETAPP -->
+      <details class="journey-step" data-step="3">
+        <summary>
+          <span class="step-number">3</span>
+          <span class="step-title">Avastame Päikesesüsteemi!</span>
+          <span class="step-status">Alustamata</span>
+        </summary>
+        <div class="step-content">
+          <h3>Avastame Päikesesüsteemi!</h3>
+          <p>
+            Uurime Päikest ja kaheksat planeeti.
+            Siia lisame õppevideo, interaktiivse mudeli
+            ja H5P ülesande.
+          </p>
+          <p class="coming-soon">Õppematerjal on koostamisel.</p>
+        </div>
+      </details>
+
+      <!-- 4. ETAPP -->
+      <details class="journey-step" data-step="4">
+        <summary>
+          <span class="step-number">4</span>
+          <span class="step-title">Tutvume planeetidega</span>
+          <span class="step-status">Alustamata</span>
+        </summary>
+        <div class="step-content">
+          <h3>Vali oma planeet!</h3>
+          <p>
+            Vali üks planeet, uuri selle omadusi
+            ja lahenda planeetidega seotud ülesandeid.
+          </p>
+          <p class="coming-soon">Õppematerjal on koostamisel.</p>
+        </div>
+      </details>
+
+      <!-- 5. ETAPP -->
+      <details class="journey-step" data-step="5">
+        <summary>
+          <span class="step-number">5</span>
+          <span class="step-title">Kosmosemissioon</span>
+          <span class="step-status">Alustamata</span>
+        </summary>
+        <div class="step-content">
+          <h3>Valmistume kosmosemissiooniks!</h3>
+          <p>
+            Kavanda koos rühmaga kosmosemissioon
+            valitud planeedile ja loo oma avastustest plakat.
+          </p>
+          <p class="coming-soon">Rühmatöö juhend lisatakse siia.</p>
+        </div>
+      </details>
+
+      <!-- 6. ETAPP -->
+      <details class="journey-step" data-step="6">
+        <summary>
+          <span class="step-number">6</span>
+          <span class="step-title">Jagame oma avastusi!</span>
+          <span class="step-status">Alustamata</span>
+        </summary>
+        <div class="step-content">
+          <h3>Tutvusta oma avastusi!</h3>
+          <p>
+            Esitle oma rühma kosmosemissiooni,
+            kuula kaaslasi ja anna neile tagasisidet.
+          </p>
+          <p class="coming-soon">Esitluse ja tagasiside juhend lisatakse siia.</p>
+        </div>
+      </details>
+
+      <!-- 7. ETAPP -->
+      <details class="journey-step" data-step="7">
+        <summary>
+          <span class="step-number">7</span>
+          <span class="step-title">Kontrollime oma teadmisi!</span>
+          <span class="step-status">Alustamata</span>
+        </summary>
+        <div class="step-content">
+          <h3>Pane oma teadmised proovile!</h3>
+          <p>
+            Mängi Scratchi mängu „Kosmosekaitsja:
+            Planeetide missioon“ ja lahenda H5P ülesandeid.
+          </p>
+          <p class="coming-soon">Scratchi mäng ja ülesanded lisatakse siia.</p>
+        </div>
+      </details>
+
+      <!-- 8. ETAPP -->
+      <details class="journey-step" data-step="8">
+        <summary>
+          <span class="step-number">8</span>
+          <span class="step-title">Minu järgmine kosmoseseiklus</span>
+          <span class="step-status">Alustamata</span>
+        </summary>
+        <div class="step-content">
+          <h3>Mida ma õppisin?</h3>
+          <p>
+            Mõtle oma õpiteekonnale.
+            Vali, kas soovid midagi korrata või
+            hoopis mõnda kosmoseteemat põhjalikumalt uurida.
+          </p>
+          <p class="coming-soon">Enesehindamise ülesanne lisatakse siia.</p>
+        </div>
+      </details>
+
+    </section>
+
+    <!-- ÕPETAJALE -->
+    <section id="teacher-view" class="journey-panel" hidden>
+      <div class="teacher-placeholder">
+        <h2>Õpiteekonna kirjeldus õpetajale</h2>
+        <p>
+          Siia lisame õppeteekonna eesmärgid, õpiväljundid,
+          õppetegevuste metoodilise kirjelduse,
+          hindamise ja diferentseerimise võimalused.
+        </p>
+        <p class="coming-soon">Õpetaja vaade on koostamisel.</p>
       </div>
     </section>
 
-    <section class="activity">
-      <h2>2. Päikesesüsteemi ülesanded</h2>
-      <p>
-        Lahenda interaktiivseid ülesandeid
-        ja kontrolli oma teadmisi.
-      </p>
-
-      <div class="embed-placeholder">
-        H5P ülesanne lisatakse siia.
-      </div>
-    </section>
   </main>
 
   <footer>
