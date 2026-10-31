@@ -1,40 +1,327 @@
+
+/* =========================
+   PÕHISEADED
+========================= */
+
 :root {
     --primary: #6366f1;
     --secondary: #a855f7;
-    --background: #f0f2f5;
+    --background: #f3f5fa;
+    --surface: #ffffff;
     --text: #1e293b;
+    --muted: #64748b;
+    --border: #e8edf4;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
 }
 
 body {
-    font-family: 'Nunito', sans-serif;
-    background-color: var(--background);
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--background);
     color: var(--text);
+    line-height: 1.6;
+}
+
+.container {
+    width: 92%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* =========================
+   NAVIGATSIOON
+========================= */
+
+.site-header {
+    background: white;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .navbar {
-    background-color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    min-height: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
 }
 
-.hero-banner {
+.logo {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: var(--text);
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+
+/* =========================
+   PEAMINE BÄNNER
+========================= */
+
+.hero {
+    margin-top: 35px;
+    padding: 75px 30px;
+    text-align: center;
+    border-radius: 24px;
+
     background: linear-gradient(
         135deg,
         var(--primary),
         var(--secondary)
     );
+
     color: white;
-    padding: 60px 20px;
-    border-radius: 24px;
+
+    box-shadow: 0 10px 30px
+        rgba(99, 102, 241, 0.18);
 }
 
-.game-card {
+.hero-label {
+    display: inline-block;
+    padding: 7px 16px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.18);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.hero h1 {
+    margin: 20px 0 10px;
+    font-size: 44px;
+    font-weight: 800;
+}
+
+.hero p {
+    max-width: 600px;
+    margin: 0 auto 30px;
+    font-size: 17px;
+    opacity: 0.95;
+}
+
+.hero-button {
+    display: inline-block;
     background: white;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease;
+    color: var(--primary);
+    padding: 14px 30px;
+    border-radius: 30px;
+    font-weight: 700;
+
+    transition: transform 0.2s,
+                box-shadow 0.2s;
 }
 
-.game-card:hover {
-    transform: translateY(-5px);
+.hero-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px
+        rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================
+   SISSEJUHATUS
+========================= */
+
+.intro {
+    text-align: center;
+    margin: 60px auto 35px;
+    max-width: 700px;
+}
+
+.intro h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.intro p {
+    color: var(--muted);
+}
+
+
+/* =========================
+   ÕPPEMATERJALIDE KAARDID
+========================= */
+
+.activity-card {
+    max-width: 950px;
+    margin: 0 auto 35px;
+    background: var(--surface);
+    border-radius: 18px;
+    overflow: hidden;
+
+    box-shadow: 0 5px 25px
+        rgba(30, 41, 59, 0.06);
+
+    transition: transform 0.25s,
+                box-shadow 0.25s;
+}
+
+.activity-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px
+        rgba(30, 41, 59, 0.10);
+}
+
+.card-header {
+    padding: 28px 30px 22px;
+}
+
+.category {
+    display: inline-block;
+    background: #eef2ff;
+    color: var(--primary);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.card-header h2 {
+    font-size: 24px;
+    margin: 0 0 10px;
+}
+
+.card-header p {
+    color: var(--muted);
+    margin: 0;
+}
+
+.card-footer {
+    padding: 20px 30px;
+    background: #fafbff;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 14px;
+}
+
+
+/* =========================
+   SCRATCH JA H5P
+========================= */
+
+.game-container {
+    padding: 25px;
+    background: #f8faff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+iframe {
+    display: block;
+    border: none;
+    border-radius: 10px;
+    background: white;
+}
+
+.scratch-frame {
+    width: 100%;
+    max-width: 720px;
+    aspect-ratio: 485 / 402;
+}
+
+.h5p-frame {
+    width: 100%;
+    min-height: 600px;
+}
+
+
+/* =========================
+   JALUS
+========================= */
+
+.site-footer {
+    margin-top: 70px;
+    background: #1e293b;
+    color: #cbd5e1;
+    text-align: center;
+    padding: 35px 20px;
+    font-size: 14px;
+}
+
+.site-footer p {
+    margin: 5px 0;
+}
+
+
+/* =========================
+   MOBIILIVAADE
+========================= */
+
+@media (max-width: 650px) {
+
+    .navbar {
+        flex-direction: column;
+        padding: 18px 0;
+        gap: 12px;
+    }
+
+    .nav-links {
+        gap: 15px;
+        font-size: 13px;
+    }
+
+    .hero {
+        padding: 50px 20px;
+        margin-top: 20px;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .intro h2 {
+        font-size: 25px;
+    }
+
+    .card-header {
+        padding: 22px 20px;
+    }
+
+    .card-header h2 {
+        font-size: 20px;
+    }
+
+    .game-container {
+        padding: 10px;
+    }
+
+    .card-footer {
+        padding: 18px 20px;
+    }
 }
