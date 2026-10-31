@@ -13,7 +13,6 @@ const subjects = [
   "Inimeseõpetus",
   "Inglise keel",
   "Vene keel",
-  "Saksa keel",
   "Muusika",
   "Kunst",
   "Informaatika",
