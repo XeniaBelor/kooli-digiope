@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Digiõppevara | Õppematerjalid põhikoolile</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/materials.js" defer></script>
+  <script src="js/script.js" defer></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <nav class="container">
+      <a class="logo" href="index.html">Digiõppevara</a>
+      <div class="nav-links">
+        <a href="#materjalid">Õppematerjalid</a>
+        <a href="#projektist">Projektist</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Digitaalsed õppematerjalid</h1>
+      <p>Avasta, õpi ja harjuta mänguliste ülesannete abil!</p>
+      <a class="button" href="#materjalid">Avasta materjale</a>
+    </section>
+
+    <section id="materjalid" class="catalog">
+      <h2>Leia õppematerjal</h2>
+      <p>Vali õppeaine ja klass, et leida sobivad materjalid.</p>
+
+      <h3>1. Vali õppeaine</h3>
+      <div id="subjects" class="choices"></div>
+
+      <div id="grade-section" class="filter-step" hidden>
+        <h3>2. Vali klass</h3>
+        <div id="grades" class="choices"></div>
+      </div>
+
+      <div id="results" class="filter-step" hidden>
+        <h3>Õppematerjalid</h3>
+        <div id="cards" class="card-grid"></div>
+      </div>
+    </section>
+
+    <section id="projektist" class="about">
+      <h2>Projektist</h2>
+      <p>
+        Digiõppevara koondab digitaalseid õppematerjale,
+        interaktiivseid ülesandeid ja õppemänge.
+        Materjalid toetavad teadmiste kinnistamist
+        ning mängulist õppimist.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Digiõppevara · Digitaalsed õppematerjalid · 2026</p>
+  </footer>
+</body>
+</html>
