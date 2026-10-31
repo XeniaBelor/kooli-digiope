@@ -291,8 +291,181 @@
     }
   }
 
+    // Build research activities from the topic configuration
+    function buildResearch(container) {
+      const id = container.dataset.research;
+      const activity = config.researchActivities?.[id];
+      if (!activity) return;
+    
+      const form = document.createElement("form");
+      form.className = "learning-research";
+    
+      // Choice cards
+      const group = document.createElement("fieldset");
+      const legend = document.createElement("legend");
+      legend.textContent = activity.choiceLabel;
+      group.append(legend);
+    
+      const choices = document.createElement("div");
+      choices.className = "research-choices";
+    
+      activity.choices.forEach((choice, index) => {
+        const label = document.createElement("label");
+        label.className = "research-choice";
+    
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = "choice";
+        input.value = choice.value;
+        if (index === 0) input.required = true;
+    
+        const text = document.createElement("span");
+        text.textContent = choice.label;
+    
+        label.append(input, text);
+        choices.append(label);
+      });
+    
+      group.append(choices);
+      form.append(group);
+    
+      // Research fields
+      activity.fields.forEach(field => {
+        const label = document.createElement("label");
+        label.className = "research-field";
+    
+        const title = document.createElement("strong");
+        title.textContent = field.label;
+    
+        const control = document.createElement(
+          field.type === "select" ? "select" : "textarea"
+        );
+    
+        control.name = field.name;
+        control.required = true;
+    
+        if (field.type === "select") {
+          const blank = document.createElement("option");
+          blank.value = "";
+          blank.textContent = "Vali vastus";
+          control.append(blank);
+    
+          field.options.forEach(value => {
+            const option = document.createElement("option");
+            option.value = value;
+            option.textContent = value;
+            control.append(option);
+          });
+        } else {
+          control.rows = 3;
+          control.placeholder = field.placeholder || "";
+          control.minLength = field.minLength || 1;
+        }
+    
+        label.append(title, control);
+        form.append(label);
+      });
+    
+      // Feedback and buttons
+      const feedback = document.createElement("p");
+      feedback.className = "answer-feedback";
+      feedback.setAttribute("role", "status");
+      feedback.setAttribute("aria-live", "polite");
+      feedback.hidden = true;
+    
+      const actions = document.createElement("div");
+      actions.className = "quiz-actions";
+    
+      const submit = document.createElement("button");
+      submit.type = "submit";
+      submit.className = "action-button";
+      submit.textContent = "Kontrolli ja salvesta";
+    
+      const next = document.createElement("button");
+      next.type = "button";
+      next.className = "secondary-button";
+      next.textContent = `Edasi ${activity.step + 1}. etapiga`;
+      next.hidden = true;
+    
+      actions.append(submit);
+      if (activity.step < steps.length) actions.append(next);
+    
+      form.append(actions, feedback);
+      container.append(form);
+    
+      function showFeedback(message, correct) {
+        feedback.textContent = message;
+        feedback.className =
+          `answer-feedback ${correct ? "is-correct" : "is-wrong"}`;
+        feedback.hidden = false;
+      }
+    
+      // Check the research form
+      form.addEventListener("submit", event => {
+        event.preventDefault();
+    
+        const answers = Object.fromEntries(new FormData(form));
+        const choice = activity.choices.find(
+          item => item.value === answers.choice
+        );
+    
+        if (!choice || answers[activity.checkField] !== choice.correct) {
+          showFeedback(
+            `Õige vastus: ${choice?.correct || "–"}. ` +
+            "Paranda vastus ja proovi uuesti.",
+            false
+          );
+          return;
+        }
+    
+        progress.responses[id] = answers;
+        progress.done[activity.step - 1] = true;
+    
+        saveProgress();
+        updateProgress();
+    
+        showFeedback(activity.successText, true);
+        next.hidden = false;
+      });
+    
+      // Editing a completed form removes its completion mark
+      form.addEventListener("input", () => {
+        if (progress.done[activity.step - 1]) {
+          progress.done[activity.step - 1] = false;
+          delete progress.responses[id];
+          saveProgress();
+          updateProgress();
+        }
+    
+        feedback.hidden = true;
+        next.hidden = true;
+      });
+    
+      next.addEventListener("click", () => openStep(activity.step + 1));
+    
+      // Restore saved research
+      const saved = progress.responses[id];
+    
+      if (saved) {
+        form.querySelectorAll("[name]").forEach(input => {
+          if (input.type === "radio") {
+            input.checked = input.value === saved[input.name];
+          } else {
+            input.value = saved[input.name] || "";
+          }
+        });
+    
+        if (progress.done[activity.step - 1]) {
+          showFeedback(activity.successText, true);
+          next.hidden = false;
+        }
+      }
+    }
+
   // Initialize quizzes
   document.querySelectorAll("[data-quiz]").forEach(buildQuiz);
+
+  document.querySelectorAll("[data-research]").forEach(buildResearch);
 
   // Open the first unfinished stage on page load
   const firstUnfinished = progress.done.findIndex(done => !done);
