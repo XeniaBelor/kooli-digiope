@@ -281,6 +281,8 @@ nav {
   max-width: 100%;
 }
 
+/* Introduction with illustration */
+
 .intro-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 295px;
@@ -288,9 +290,7 @@ nav {
   align-items: start;
 }
 
-.intro-text {
-  min-width: 0;
-}
+.intro-text { min-width: 0; }
 
 .intro-image-wrap {
   display: flex;
@@ -454,6 +454,29 @@ nav {
 .step-content h3 { margin: 0 0 12px; }
 .step-content p { color: var(--muted); }
 
+/* Smooth opening and closing of learning stages */
+
+@supports (interpolate-size: allow-keywords) {
+  .journey-step {
+    interpolate-size: allow-keywords;
+  }
+
+  .journey-step::details-content {
+    height: 0;
+    opacity: 0;
+    overflow: clip;
+    transition:
+      height 250ms ease,
+      opacity 200ms ease,
+      content-visibility 250ms allow-discrete;
+  }
+
+  .journey-step[open]::details-content {
+    height: auto;
+    opacity: 1;
+  }
+}
+
 /* Information boxes */
 
 .learning-box {
@@ -480,7 +503,7 @@ nav {
 .teacher-placeholder h2 { margin-top: 0; }
 .teacher-placeholder .coming-soon { margin-top: 15px; }
 
-/* Shared buttons and quizzes */
+/* Shared buttons */
 
 .action-button, .secondary-button {
   padding: 12px 20px;
@@ -502,6 +525,8 @@ nav {
   color: var(--blue);
   background: #eaf1fb;
 }
+
+/* Learning quizzes */
 
 .learning-quiz fieldset {
   margin: 18px 0;
@@ -548,6 +573,88 @@ nav {
 .answer-feedback.is-wrong {
   background: #fff3e6;
   color: #93551e;
+}
+
+/* Research activities */
+
+.learning-research fieldset {
+  margin: 20px 0;
+  padding: 0;
+  border: 0;
+}
+
+.learning-research legend {
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.research-choices {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.research-choice {
+  position: relative;
+  cursor: pointer;
+}
+
+.research-choice input {
+  position: absolute;
+  opacity: 0;
+}
+
+.research-choice span {
+  display: block;
+  padding: 13px 8px;
+  border: 1px solid #dce5f0;
+  border-radius: 10px;
+  background: #f4f7fb;
+  text-align: center;
+  font-weight: 600;
+  transition: background .2s, border-color .2s;
+}
+
+.research-choice input:checked + span {
+  background: #dce9f8;
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.research-choice input:focus-visible + span {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.research-field {
+  display: block;
+  margin: 20px 0;
+}
+
+.research-field strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.research-field select,
+.research-field textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dce5f0;
+  border-radius: 10px;
+  background: white;
+  color: var(--text);
+  font: inherit;
+}
+
+.research-field textarea {
+  resize: vertical;
+}
+
+.research-field select:focus,
+.research-field textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
 }
 
 /* Reset learning progress */
@@ -641,12 +748,12 @@ footer {
   .intro-layout {
     grid-template-columns: 1fr;
   }
-  
+
   .intro-image-wrap {
     justify-content: center;
     padding-right: 0;
   }
-  
+
   .intro-image {
     max-width: 260px;
     height: auto;
@@ -656,42 +763,24 @@ footer {
   .step-content { padding: 16px; }
   .step-status { font-size: 12px; }
   .step-title { font-size: 14px; }
+
+  .research-choices {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
+
+/* Reduced motion */
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .filter-step { animation: none; }
 
   #journey-fill, .button, .chip,
-  .material-card, .back-button {
+  .material-card, .back-button, .reset-button,
+  .research-choice span {
     transition: none;
   }
-}
 
-/* Smooth opening and closing of learning stages */
-
-@supports (interpolate-size: allow-keywords) {
-  .journey-step {
-    interpolate-size: allow-keywords;
-  }
-
-  .journey-step::details-content {
-    height: 0;
-    opacity: 0;
-    overflow: clip;
-    transition:
-      height 250ms ease,
-      opacity 200ms ease,
-      content-visibility 250ms allow-discrete;
-  }
-
-  .journey-step[open]::details-content {
-    height: auto;
-    opacity: 1;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
   .journey-step::details-content {
     transition: none;
   }
