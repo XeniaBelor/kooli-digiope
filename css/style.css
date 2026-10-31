@@ -481,11 +481,16 @@ footer {
 .learning-box {
   margin: 20px 0;
   padding: 18px;
-  background: #edf5ff;
+  background: #dce9f8;
+  border-left: 4px solid var(--accent);
   border-radius: 12px;
+  color: #173b64;
 }
 
-.learning-box p { margin-bottom: 0; }
+.learning-box p { 
+  margin-bottom: 0;
+  color: #334d6d;
+}
 
 .action-button, .secondary-button {
   padding: 12px 20px;
