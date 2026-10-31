@@ -8,7 +8,6 @@
 }
 
 * { box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
 
 body {
@@ -96,10 +95,9 @@ nav {
 
 .button:hover { transform: translateY(-3px); }
 
-/* Catalog and filters */
+/* Catalog */
 
 .catalog, .about { margin-bottom: 65px; }
-
 .about { padding-inline: 15px; }
 
 .catalog h2, .about h2 {
@@ -108,11 +106,7 @@ nav {
 }
 
 .catalog > p, .about p { color: var(--muted); }
-
-.catalog h3 {
-  font-size: 18px;
-  margin: 30px 0 15px;
-}
+.catalog h3 { font-size: 18px; margin: 30px 0 15px; }
 
 .choices {
   display: flex;
@@ -193,7 +187,7 @@ nav {
   color: var(--muted);
 }
 
-/* Topic pages */
+/* Topic header */
 
 .lesson { padding-block: 35px 60px; }
 
@@ -251,7 +245,7 @@ nav {
   font-weight: 700;
 }
 
-/* Interactive activities */
+/* Embedded materials */
 
 .activity {
   padding: 25px;
@@ -269,7 +263,7 @@ nav {
   color: var(--muted);
 }
 
-.activity iframe {
+.activity iframe, .h5p-frame {
   display: block;
   width: 100%;
   border: 0;
@@ -282,64 +276,12 @@ nav {
   margin: auto;
 }
 
-.h5p-frame { min-height: 600px; }
-
-/* Footer */
-
-footer {
-  padding: 30px 15px;
-  text-align: center;
-  background: #172b43;
-  color: #ccd8e7;
+.h5p-frame {
+  min-height: 600px;
+  max-width: 100%;
 }
 
-/* Responsive design */
-
-@media (max-width: 650px) {
-  nav {
-    flex-direction: column;
-    padding: 15px 0;
-  }
-
-  .nav-links { gap: 15px; }
-
-  .hero {
-    min-height: 300px;
-    padding: 40px 20px;
-  }
-
-  .hero p { font-size: 16px; }
-
-  .card-grid {
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
-  }
-
-  .topic-header {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 20px;
-  }
-
-  .topic-cover {
-    max-width: 240px;
-    justify-self: center;
-  }
-
-  .activity { padding: 15px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-
-  .filter-step { animation: none; }
-
-  .button, .chip, .material-card, .back-button {
-    transition: none;
-  }
-}
-
-
-/* Learning journey */
+/* Learning journey tabs and progress */
 
 .journey-tabs {
   display: flex;
@@ -379,7 +321,12 @@ footer {
 }
 
 .journey-overview h2 { margin: 0 0 5px; }
-.journey-overview p { margin: 0; color: var(--muted); }
+
+.journey-overview p,
+.teacher-placeholder p {
+  margin: 0;
+  color: var(--muted);
+}
 
 .journey-overview-top {
   display: flex;
@@ -410,7 +357,7 @@ footer {
   transition: width .3s ease;
 }
 
-/* Learning steps */
+/* Learning journey stages */
 
 .journey-step {
   margin-bottom: 12px;
@@ -418,6 +365,7 @@ footer {
   border: 1px solid #e5ebf2;
   border-radius: 14px;
   overflow: hidden;
+  scroll-margin-top: 95px;
 }
 
 .journey-step summary {
@@ -478,6 +426,8 @@ footer {
 .step-content h3 { margin: 0 0 12px; }
 .step-content p { color: var(--muted); }
 
+/* Information boxes */
+
 .learning-box {
   margin: 20px 0;
   padding: 18px;
@@ -487,10 +437,22 @@ footer {
   color: #173b64;
 }
 
-.learning-box p { 
+.learning-box p {
   margin-bottom: 0;
   color: #334d6d;
 }
+
+.coming-soon {
+  padding: 15px;
+  background: #f3f6fa;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.teacher-placeholder h2 { margin-top: 0; }
+.teacher-placeholder .coming-soon { margin-top: 15px; }
+
+/* Shared buttons and quizzes */
 
 .action-button, .secondary-button {
   padding: 12px 20px;
@@ -513,34 +475,25 @@ footer {
   background: #eaf1fb;
 }
 
-.coming-soon {
-  padding: 15px;
-  background: #f3f6fa;
-  border-radius: 10px;
-  font-size: 14px;
-}
-
-/* Diagnostic questions */
-
-#diagnostic-form fieldset {
+.learning-quiz fieldset {
   margin: 18px 0;
   padding: 20px;
   border: 1px solid #e5ebf2;
   border-radius: 12px;
 }
 
-#diagnostic-form legend {
+.learning-quiz legend {
   padding: 0 6px;
   font-weight: 700;
 }
 
-#diagnostic-form label {
+.learning-quiz label {
   display: block;
   padding: 6px 0;
   cursor: pointer;
 }
 
-#diagnostic-form input {
+.learning-quiz input {
   accent-color: var(--blue);
   margin-right: 8px;
 }
@@ -569,12 +522,50 @@ footer {
   color: #93551e;
 }
 
-.teacher-placeholder h2 { margin-top: 0; }
-.teacher-placeholder p { color: var(--muted); }
+/* Footer */
 
-.journey-step { scroll-margin-top: 95px; }
+footer {
+  padding: 30px 15px;
+  text-align: center;
+  background: #172b43;
+  color: #ccd8e7;
+}
+
+/* Responsive design */
 
 @media (max-width: 650px) {
+  nav {
+    flex-direction: column;
+    padding: 15px 0;
+  }
+
+  .nav-links { gap: 15px; }
+
+  .hero {
+    min-height: 300px;
+    padding: 40px 20px;
+  }
+
+  .hero p { font-size: 16px; }
+
+  .card-grid {
+    grid-template-columns:
+      repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  }
+
+  .topic-header {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .topic-cover {
+    max-width: 240px;
+    justify-self: center;
+  }
+
+  .activity { padding: 15px; }
+
   .journey-overview-top {
     align-items: flex-start;
     flex-direction: column;
@@ -592,36 +583,11 @@ footer {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #journey-fill { transition: none; }
-}
+  html { scroll-behavior: auto; }
+  .filter-step { animation: none; }
 
-.step-content .h5p-frame {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  border: none;
-  border-radius: 10px;
-}
-
-#stage3-quiz fieldset {
-  margin: 18px 0;
-  padding: 20px;
-  border: 1px solid #e5ebf2;
-  border-radius: 12px;
-}
-
-#stage3-quiz legend {
-  padding: 0 6px;
-  font-weight: 700;
-}
-
-#stage3-quiz label {
-  display: block;
-  padding: 6px 0;
-  cursor: pointer;
-}
-
-#stage3-quiz input {
-  accent-color: var(--blue);
-  margin-right: 8px;
+  #journey-fill, .button, .chip,
+  .material-card, .back-button {
+    transition: none;
+  }
 }
