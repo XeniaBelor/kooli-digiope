@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kosmoseõpe | Päikesesüsteem ja planeedid</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f3f5fa;
+      color: #263248;
+    }
+
+    .navbar {
+      background: #fff;
+      box-shadow: 0 2px 12px #19233a10;
+    }
+
+    .navbar-brand {
+      font-weight: 800;
+      color: #6657d9;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #514cc3, #9464dc);
+      color: white;
+      border-radius: 22px;
+      padding: 60px 30px;
+      text-align: center;
+      margin: 32px 0;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+    }
+
+    .activity-card {
+      background: white;
+      border-radius: 18px;
+      margin-bottom: 28px;
+      overflow: hidden;
+      box-shadow: 0 5px 25px #27344c0c;
+    }
+
+    .activity-header {
+      padding: 22px 26px;
+      border-bottom: 1px solid #edf0f5;
+    }
+
+    .activity-header h2 {
+      font-size: 1.3rem;
+      font-weight: 750;
+      margin: 0 0 8px;
+    }
+
+    .embed-area {
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+      background: #fafbff;
+    }
+
+    .scratch-box {
+      width: min(100%, 720px);
+      aspect-ratio: 485 / 402;
+    }
+
+    .scratch-box iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .h5p-box {
+      width: 100%;
+    }
+
+    .h5p-box iframe {
+      width: 100%;
+      max-width: 100%;
+      min-height: 600px;
+      border: 0;
+    }
+
+    .activity-footer {
+      padding: 18px 26px;
+      font-size: 0.95rem;
+      color: #64748b;
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px 15px;
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">KOSMOSEÕPE</a>
+
+      <div class="d-flex gap-3">
+        <a class="nav-link" href="#scratch">Scratch</a>
+        <a class="nav-link" href="#h5p">H5P</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <header class="hero">
+      <h1>Avastame kosmost!</h1>
+      <p class="lead mt-3">
+        Õpi tundma Päikesesüsteemi ja planeete
+        läbi mängude ja põnevate ülesannete.
+      </p>
+      <a href="#scratch" class="btn btn-light btn-lg rounded-pill px-4 mt-3">
+        Alusta õppimist
+      </a>
+    </header>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+
+        <!-- SCRATCH -->
+        <section class="activity-card" id="scratch">
+          <div class="activity-header">
+            <h2>Kosmosekaitsja: Planeetide missioon</h2>
+            <p class="text-muted mb-0">
+              Hävita kosmosekive, kogu punkte
+              ja vasta planeetide küsimustele!
+            </p>
+          </div>
+
+          <div class="embed-area">
+            <div class="scratch-box">
+              <iframe
+                src="https://scratch.mit.edu/projects/PROJECT_ID/embed"
+                title="Kosmosekaitsja"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+
+          <div class="activity-footer">
+            <strong>Juhtimine:</strong>
+            A või vasak nool – vasakule,
+            D või parem nool – paremale,
+            tühik või ülesnool – tulista.
+          </div>
+        </section>
+
+        <!-- H5P -->
+        <section class="activity-card" id="h5p">
+          <div class="activity-header">
+            <h2>Päikesesüsteemi ülesanded</h2>
+            <p class="text-muted mb-0">
+              Kontrolli oma teadmisi Päikesesüsteemi kohta!
+            </p>
+          </div>
+
+          <div class="embed-area">
+            <div class="h5p-box">
+
+              <!-- Asenda H5P_EMBED_URL oma H5P lingiga -->
+              <iframe
+                src="H5P_EMBED_URL"
+                title="Päikesesüsteemi ülesanded"
+                loading="lazy"
+                allowfullscreen>
+              </iframe>
+
+              <!-- Kui H5P annab eraldi
+                   h5p-resizer.js skripti,
+                   lisa see siia. -->
+
+            </div>
+          </div>
+
+          <div class="activity-footer">
+            Vasta küsimustele ja kontrolli oma teadmisi!
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Päikesesüsteem ja planeedid · Loodusõpetus · 4. klass
+    <p class="mt-2 mb-0">
+      Ülikooli õppetöö raames loodud õppematerjal · 2026
+    </p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
