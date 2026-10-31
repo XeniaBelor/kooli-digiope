@@ -135,62 +135,64 @@
     const id = container.dataset.quiz;
     const quiz = config.quizzes[id];
     if (!quiz) return;
-
+  
     const form = document.createElement("form");
     form.className = "learning-quiz";
-
+  
     const feedbackNodes = new Map();
-
+  
     // Questions and answer options
     quiz.questions.forEach((question, index) => {
       const fieldset = document.createElement("fieldset");
       const legend = document.createElement("legend");
-
+  
       legend.textContent = `${index + 1}. ${question.text}`;
       fieldset.append(legend);
-
+  
       Object.entries(question.options).forEach(([value, labelText], i) => {
         const label = document.createElement("label");
         const input = document.createElement("input");
-
+  
         input.type = "radio";
         input.name = question.id;
         input.value = value;
-
+  
         if (i === 0) input.required = true;
-
+  
         label.append(input, document.createTextNode(` ${labelText}`));
         fieldset.append(label);
       });
-
+  
       const feedback = document.createElement("p");
       feedback.className = "answer-feedback";
       feedback.hidden = true;
-
+  
       feedbackNodes.set(question.id, feedback);
       fieldset.append(feedback);
-
+  
       form.append(fieldset);
     });
-
+  
     // Action buttons
     const actions = document.createElement("div");
     actions.className = "quiz-actions";
-
+  
+    // Green button — Check answers
     const submit = document.createElement("button");
     submit.type = "submit";
-    submit.className = "action-button";
+    submit.className = "action-button check-button";
     submit.textContent = "Kontrolli vastuseid";
-
+  
+    // Soft yellow button — Try again
     const retry = document.createElement("button");
     retry.type = "button";
-    retry.className = "secondary-button";
+    retry.className = "secondary-button retry-button";
     retry.textContent = "Proovi uuesti";
     retry.hidden = true;
-
+  
     actions.append(submit, retry);
     form.append(actions);
-
+  
     // Result message
     const result = document.createElement("div");
     result.className = "learning-box";
@@ -198,50 +200,50 @@
     result.setAttribute("aria-live", "polite");
     result.hidden = true;
     form.append(result);
-
-    // Next stage
+  
+    // Blue button — Next stage
     const next = document.createElement("button");
     next.type = "button";
     next.className = "action-button";
     next.textContent = `Edasi ${quiz.step + 1}. etapiga`;
     next.hidden = true;
-
+  
     if (quiz.step < steps.length) {
       form.append(next);
     }
-
+  
     next.addEventListener("click", () => openStep(quiz.step + 1));
-
+  
     // One checking function for every quiz
     function showResults(answers, persist) {
       let score = 0;
-
+  
       quiz.questions.forEach(question => {
         const correct = answers[question.id] === question.correct;
         if (correct) score++;
-
+  
         const feedback = feedbackNodes.get(question.id);
-
+  
         feedback.textContent = correct
           ? `Õige! ${question.explanation}`
           : `Õige vastus: ${question.options[question.correct]}. ${question.explanation}`;
-
+  
         feedback.className =
           `answer-feedback ${correct ? "is-correct" : "is-wrong"}`;
-
+  
         feedback.hidden = false;
       });
-
+  
       const passed = score >= quiz.minCorrect;
-
+  
       result.textContent =
         `${score} / ${quiz.questions.length} õiget vastust. ` +
         (passed ? quiz.successText : quiz.retryText);
-
+  
       result.hidden = false;
       retry.hidden = false;
       next.hidden = !passed;
-
+  
       if (persist) {
         progress.responses[id] = answers;
         progress.done[quiz.step - 1] = passed;
@@ -249,48 +251,48 @@
         updateProgress();
       }
     }
-
+  
     // Submit answers
     form.addEventListener("submit", event => {
       event.preventDefault();
-
+  
       const answers = Object.fromEntries(
         new FormData(form).entries()
       );
-
+  
       showResults(answers, true);
     });
-
+  
     // Retry quiz
     retry.addEventListener("click", () => {
       form.reset();
-
+  
       feedbackNodes.forEach(feedback => {
         feedback.hidden = true;
       });
-
+  
       result.hidden = true;
       retry.hidden = true;
       next.hidden = true;
-
+  
       progress.done[quiz.step - 1] = false;
       delete progress.responses[id];
-
+  
       saveProgress();
       updateProgress();
     });
-
+  
     container.append(form);
-
+  
     // Restore previously submitted answers
     const savedAnswers = progress.responses[id];
-
+  
     if (savedAnswers) {
       form.querySelectorAll('input[type="radio"]').forEach(input => {
         input.checked =
           savedAnswers[input.name] === input.value;
       });
-
+  
       showResults(savedAnswers, false);
     }
   }
