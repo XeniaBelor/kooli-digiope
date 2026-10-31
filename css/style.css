@@ -337,3 +337,255 @@ footer {
     transition: none;
   }
 }
+
+
+/* Learning journey */
+
+.journey-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 6px;
+  margin: 28px 0 20px;
+  border-radius: 14px;
+  background: #e8eef6;
+}
+
+.journey-tab {
+  flex: 1;
+  padding: 13px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.journey-tab.active {
+  background: white;
+  color: var(--blue);
+  box-shadow: 0 2px 8px #20365316;
+}
+
+.journey-panel { margin-bottom: 35px; }
+
+.journey-overview, .teacher-placeholder {
+  padding: 25px;
+  margin-bottom: 22px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px #2036530c;
+}
+
+.journey-overview h2 { margin: 0 0 5px; }
+.journey-overview p { margin: 0; color: var(--muted); }
+
+.journey-overview-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+#journey-count {
+  font-weight: 700;
+  color: var(--blue);
+  white-space: nowrap;
+}
+
+.journey-progress {
+  height: 10px;
+  background: #e6edf4;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+#journey-fill {
+  width: 0;
+  height: 100%;
+  background: var(--green);
+  border-radius: 20px;
+  transition: width .3s ease;
+}
+
+/* Learning steps */
+
+.journey-step {
+  margin-bottom: 12px;
+  background: white;
+  border: 1px solid #e5ebf2;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.journey-step summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.journey-step summary::-webkit-details-marker {
+  display: none;
+}
+
+.journey-step[open] summary {
+  border-bottom: 1px solid #edf0f5;
+}
+
+.step-number {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: #eaf1fb;
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.step-title {
+  flex: 1;
+  font-weight: 700;
+}
+
+.step-status {
+  color: var(--muted);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.journey-step.is-done summary {
+  background: #f0faf4;
+}
+
+.journey-step.is-done .step-number {
+  background: var(--green);
+  color: white;
+}
+
+.journey-step.is-done .step-status {
+  color: #21865b;
+  font-weight: 700;
+}
+
+.step-content { padding: 24px; }
+.step-content h3 { margin: 0 0 12px; }
+.step-content p { color: var(--muted); }
+
+.learning-box {
+  margin: 20px 0;
+  padding: 18px;
+  background: #edf5ff;
+  border-radius: 12px;
+}
+
+.learning-box p { margin-bottom: 0; }
+
+.action-button, .secondary-button {
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.action-button {
+  color: white;
+  background: var(--blue);
+}
+
+.action-button:hover { background: var(--accent); }
+
+.secondary-button {
+  color: var(--blue);
+  background: #eaf1fb;
+}
+
+.coming-soon {
+  padding: 15px;
+  background: #f3f6fa;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+/* Diagnostic questions */
+
+#diagnostic-form fieldset {
+  margin: 18px 0;
+  padding: 20px;
+  border: 1px solid #e5ebf2;
+  border-radius: 12px;
+}
+
+#diagnostic-form legend {
+  padding: 0 6px;
+  font-weight: 700;
+}
+
+#diagnostic-form label {
+  display: block;
+  padding: 6px 0;
+  cursor: pointer;
+}
+
+#diagnostic-form input {
+  accent-color: var(--blue);
+  margin-right: 8px;
+}
+
+.quiz-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.answer-feedback {
+  margin-bottom: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.answer-feedback.is-correct {
+  background: #e8f7ed;
+  color: #206c49;
+}
+
+.answer-feedback.is-wrong {
+  background: #fff3e6;
+  color: #93551e;
+}
+
+.teacher-placeholder h2 { margin-top: 0; }
+.teacher-placeholder p { color: var(--muted); }
+
+.journey-step { scroll-margin-top: 95px; }
+
+@media (max-width: 650px) {
+  .journey-overview-top {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .journey-step summary {
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .step-content { padding: 16px; }
+  .step-status { font-size: 12px; }
+  .step-title { font-size: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #journey-fill { transition: none; }
+}
