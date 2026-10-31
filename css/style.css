@@ -295,6 +295,7 @@ nav {
 .intro-image-wrap {
   display: flex;
   justify-content: flex-end;
+  padding-right: 15px;
 }
 
 .intro-image {
@@ -643,6 +644,7 @@ footer {
   
   .intro-image-wrap {
     justify-content: center;
+    padding-right: 0;
   }
   
   .intro-image {
