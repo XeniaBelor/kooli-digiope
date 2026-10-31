@@ -602,3 +602,26 @@ footer {
   border: none;
   border-radius: 10px;
 }
+
+#stage3-quiz fieldset {
+  margin: 18px 0;
+  padding: 20px;
+  border: 1px solid #e5ebf2;
+  border-radius: 12px;
+}
+
+#stage3-quiz legend {
+  padding: 0 6px;
+  font-weight: 700;
+}
+
+#stage3-quiz label {
+  display: block;
+  padding: 6px 0;
+  cursor: pointer;
+}
+
+#stage3-quiz input {
+  accent-color: var(--blue);
+  margin-right: 8px;
+}
