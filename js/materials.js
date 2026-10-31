@@ -26,7 +26,7 @@ const materials = [
     subject: "Loodusõpetus",
     grade: 4,
     title: "Päikesesüsteem ja planeedid",
-    image: "../../images/loodusopetus/4klass-paikesusteem.png",
+    image: "../images/loodusopetus/4klass-paikesusteem.png",
     url: "materjalid/loodusopetus/4-klass/paikesesusteem.html",
     type: "Scratch · H5P"
   }
