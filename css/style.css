@@ -589,3 +589,11 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   #journey-fill { transition: none; }
 }
+
+.step-content .h5p-frame {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border: none;
+  border-radius: 10px;
+}
