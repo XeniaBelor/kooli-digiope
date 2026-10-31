@@ -70,15 +70,19 @@
   }
 
   // Open a stage
-  function openStep(number) {
-    steps.forEach(step => {
-      step.open = Number(step.dataset.step) === number;
+  function openStep(stepNumber) {
+    const step = steps[stepNumber - 1];
+    if (!step) return;
+  
+    step.open = true;
+  
+    const summary = step.querySelector("summary");
+    const top = summary.getBoundingClientRect().top + window.scrollY - 90;
+  
+    window.scrollTo({
+      top,
+      behavior: "smooth"
     });
-
-    updateProgress();
-
-    document.querySelector(`.journey-step[data-step="${number}"]`)
-      ?.scrollIntoView({ block: "start" });
   }
 
   // Learner / teacher tabs
