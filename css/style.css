@@ -582,6 +582,35 @@ footer {
   .step-title { font-size: 14px; }
 }
 
+/* Reset learning progress */
+
+.journey-reset {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.reset-button {
+  padding: 12px 22px;
+  border: 1px solid #e7aaa5;
+  border-radius: 10px;
+  background: #fff0ee;
+  color: #a62b24;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.reset-button:hover {
+  background: #fbd8d4;
+}
+
+.journey-reset p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .filter-step { animation: none; }
