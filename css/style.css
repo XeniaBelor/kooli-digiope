@@ -281,6 +281,33 @@ nav {
   max-width: 100%;
 }
 
+.intro-layout {
+  display: grid;
+  grid-template-columns: 1.5fr 0.9fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.intro-text {
+  min-width: 0;
+}
+
+.intro-image-wrap {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.intro-image {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 4px 18px #20365312;
+  background: #eef3fa;
+}
+
 /* Learning journey tabs and progress */
 
 .journey-tabs {
@@ -522,6 +549,39 @@ nav {
   color: #93551e;
 }
 
+/* Reset learning progress */
+
+.journey-reset {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 30px;
+  padding-right: 12px;
+  text-align: right;
+}
+
+.reset-button {
+  padding: 12px 22px;
+  border: 1px solid #e7aaa5;
+  border-radius: 10px;
+  background: #fff0ee;
+  color: #a62b24;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.reset-button:hover {
+  background: #fbd8d4;
+}
+
+.journey-reset p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
 /* Footer */
 
 footer {
@@ -577,42 +637,23 @@ footer {
     gap: 10px;
   }
 
+  .intro-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .intro-image-wrap {
+    justify-content: center;
+  }
+  
+  .intro-image {
+    max-width: 260px;
+    height: auto;
+    aspect-ratio: 3 / 4;
+  }
+
   .step-content { padding: 16px; }
   .step-status { font-size: 12px; }
   .step-title { font-size: 14px; }
-}
-
-/* Reset learning progress */
-
-.journey-reset {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  margin-top: 30px;
-  padding-right: 12px;
-  text-align: right;
-}
-
-.reset-button {
-  padding: 12px 22px;
-  border: 1px solid #e7aaa5;
-  border-radius: 10px;
-  background: #fff0ee;
-  color: #a62b24;
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background .2s;
-}
-
-.reset-button:hover {
-  background: #fbd8d4;
-}
-
-.journey-reset p {
-  margin: 10px 0 0;
-  color: var(--muted);
-  font-size: 13px;
 }
 
 @media (prefers-reduced-motion: reduce) {
