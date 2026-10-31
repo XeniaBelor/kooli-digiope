@@ -150,8 +150,8 @@ nav {
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 22px;
+  grid-template-columns: repeat(auto-fill, 220px);
+  gap: 20px;
 }
 
 .material-card, .activity, .about {
@@ -174,7 +174,7 @@ nav {
 .material-card img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
 }
 
