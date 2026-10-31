@@ -83,10 +83,9 @@
         </summary>
 
         <div class="step-content">
-          <h3>Tere tulemast kosmosereisile!</h3>
+          <h3>Tere tulemast kosmosereisile! 🚀 </h3>
           <p>
-            Kas oled kunagi mõelnud, kui suur on maailmaruum?
-            Või miks planeedid tiirlevad ümber Päikese?
+            Kas oled kunagi mõelnud, kui suur on maailmaruum? Või miks planeedid tiirlevad ümber Päikese?
           </p>
           <p>
             Sellel kosmosereisil õpid tundma Päikesesüsteemi,
@@ -105,7 +104,7 @@
 
           <p>
             Liigu etappide vahel omas tempos.
-            Kui midagi on keeruline, võid alati tagasi tulla.
+            Kui midagi on keeruline, võid alati tagasi tulla. ⏱️
           </p>
 
           <button id="start-journey" class="action-button" type="button">
@@ -229,6 +228,57 @@
             Kui oled Päikesesüsteemi uurinud, kontrolli
             oma teadmisi järgmises ülesandes.
           </p>
+          
+          <h3>Kontrolli oma teadmisi!</h3>
+          <p>
+            Vasta kolmele küsimusele. Etapi läbimiseks
+            vasta õigesti vähemalt kahele küsimusele.
+          </p>
+          
+          <form id="stage3-quiz">
+            <fieldset>
+              <legend>1. Mille ümber tiirlevad Päikesesüsteemi planeedid?</legend>
+              <label><input type="radio" name="s3q1" value="maa" required> Maa ümber</label>
+              <label><input type="radio" name="s3q1" value="paike"> Päikese ümber</label>
+              <label><input type="radio" name="s3q1" value="kuu"> Kuu ümber</label>
+              <p class="answer-feedback" data-stage3-feedback="s3q1" hidden></p>
+            </fieldset>
+          
+            <fieldset>
+              <legend>2. Mitmes planeet Päikesest on Maa?</legend>
+              <label><input type="radio" name="s3q2" value="esimene" required> Esimene</label>
+              <label><input type="radio" name="s3q2" value="kolmas"> Kolmas</label>
+              <label><input type="radio" name="s3q2" value="viies"> Viies</label>
+              <p class="answer-feedback" data-stage3-feedback="s3q2" hidden></p>
+            </fieldset>
+          
+            <fieldset>
+              <legend>3. Milline on Päikesesüsteemi kõige suurem planeet?</legend>
+              <label><input type="radio" name="s3q3" value="saturn" required> Saturn</label>
+              <label><input type="radio" name="s3q3" value="jupiter"> Jupiter</label>
+              <label><input type="radio" name="s3q3" value="neptuun"> Neptuun</label>
+              <p class="answer-feedback" data-stage3-feedback="s3q3" hidden></p>
+            </fieldset>
+          
+            <div class="quiz-actions">
+              <button class="action-button" type="submit">
+                Kontrolli vastuseid
+              </button>
+              <button id="stage3-retry" class="secondary-button"
+                      type="button" hidden>
+                Proovi uuesti
+              </button>
+            </div>
+          
+            <div id="stage3-result" class="learning-box"
+                 role="status" aria-live="polite" hidden></div>
+          
+            <button id="stage3-next" class="action-button"
+                    type="button" hidden>
+              Edasi 4. etapiga
+            </button>
+          </form>
+
         </div>
       </details>
      
