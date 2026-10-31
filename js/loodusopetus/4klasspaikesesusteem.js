@@ -105,6 +105,49 @@ window.lessonConfig = {
           explanation: "Jupiter on Päikesesüsteemi kõige suurem planeet."
         }
       ]
-    }
+    },
+    
+    // 4. ETAPP — Planeedi uurimine
+    window.lessonConfig.researchActivities = {
+      planetPassport: {
+        step: 4,
+        choiceLabel: "Millist planeeti soovid uurida?",
+        checkField: "order",
+        successText: "Planeedi pass on salvestatud! Etapp läbitud!",
+    
+        choices: [
+          { value: "merkuur", label: "Merkuur", correct: "1" },
+          { value: "veenus", label: "Veenus", correct: "2" },
+          { value: "maa", label: "Maa", correct: "3" },
+          { value: "marss", label: "Marss", correct: "4" },
+          { value: "jupiter", label: "Jupiter", correct: "5" },
+          { value: "saturn", label: "Saturn", correct: "6" },
+          { value: "uraan", label: "Uraan", correct: "7" },
+          { value: "neptuun", label: "Neptuun", correct: "8" }
+        ],
+    
+        fields: [
+          {
+            name: "order",
+            type: "select",
+            label: "Mitmes planeet Päikesest see on?",
+            options: ["1", "2", "3", "4", "5", "6", "7", "8"]
+          },
+          {
+            name: "feature",
+            type: "textarea",
+            label: "Mille poolest on sinu planeet eriline?",
+            placeholder: "Kirjelda planeeti oma sõnadega...",
+            minLength: 10
+          },
+          {
+            name: "fact",
+            type: "textarea",
+            label: "Kirjuta üks huvitav fakt oma planeedi kohta.",
+            placeholder: "Sain teada, et...",
+            minLength: 10
+          }
+        ]
+      } 
   }
 };
