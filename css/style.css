@@ -99,6 +99,10 @@ nav {
 
 .catalog, .about { margin-bottom: 65px; }
 
+.about {
+  padding-inline: 30px;
+}
+
 .catalog h2, .about h2 {
   font-size: 30px;
   margin-bottom: 5px;
