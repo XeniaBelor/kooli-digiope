@@ -26,6 +26,24 @@ a { color: inherit; text-decoration: none; }
 
 [hidden] { display: none !important; }
 
+.check-button {
+  background: var(--green);
+  color: white;
+}
+
+.check-button:hover {
+  background: #237d59;
+}
+
+.retry-button {
+  background: #f4e7a1;
+  color: #6e5800;
+}
+
+.retry-button:hover {
+  background: #ecd98a;
+}
+
 /* Navigation */
 
 .site-header {
