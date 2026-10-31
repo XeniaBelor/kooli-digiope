@@ -71,18 +71,28 @@
 
   // Open a stage
   function openStep(stepNumber) {
-    const step = steps[stepNumber - 1];
-    if (!step) return;
+    const target = steps.find(
+      step => Number(step.dataset.step) === stepNumber
+    );
   
-    step.open = true;
+    if (!target) return;
   
-    const summary = step.querySelector("summary");
-    const top = summary.getBoundingClientRect().top + window.scrollY - 90;
-  
-    window.scrollTo({
-      top,
-      behavior: "smooth"
+    // Close other stages and open the selected one
+    steps.forEach(step => {
+      step.open = step === target;
     });
+  
+    updateProgress();
+  
+    // Wait until the accordion animation finishes
+    window.setTimeout(() => {
+      target.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+        block: "start"
+      });
+    }, 320);
   }
 
   // Learner / teacher tabs
@@ -474,7 +484,7 @@
   document.querySelectorAll("[data-research]").forEach(buildResearch);
 
   // Loading for h5p
-  document.querySelectorAll(".js-embed-frame").forEach(frame => {
+  document.querySelectorAll(".embed-shell iframe").forEach(frame => {
   frame.addEventListener("load", () => {
     const shell = frame.closest(".embed-shell");
     if (shell) {
