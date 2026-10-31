@@ -585,8 +585,12 @@ footer {
 /* Reset learning progress */
 
 .journey-reset {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   margin-top: 30px;
-  text-align: center;
+  padding-right: 12px;
+  text-align: right;
 }
 
 .reset-button {
