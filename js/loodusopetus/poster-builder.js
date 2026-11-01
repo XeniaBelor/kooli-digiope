@@ -4,7 +4,7 @@
   const root = document.querySelector("#poster-builder");
   if (!root) return;
 
-  const imagePath = "../../../images/loodusopetus/poster/";
+const imagePath = new URL( "../../images/loodusopetus/poster/", document.currentScript.src).href;
 
   const planets = [
     { id: "merkuur", name: "Merkuur", image: 1 },
@@ -203,7 +203,11 @@
   function renderControls() {
     createButtons(
       elements.planets,
-      planets.map(p => ({ value: p.id, label: p.name })),
+      planets.map(p => ({
+        value: p.id,
+        label: p.name,
+        image: imageUrl("planeet", p.image)
+      })),
       state.planet,
       value => {
         if (state.planet !== value) {
