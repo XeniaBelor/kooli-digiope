@@ -263,92 +263,105 @@
         </summary>
       
         <div class="step-content">
-      
           <h3>Meie planeediplakat</h3>
       
           <p>
             Koostage koos paarilisega ühe planeedi kohta plakat.
-            Valige planeet, sobiv tutvustus, kolm õiget fakti
-            ning kujundage oma plakat.
+            Valige planeedi nimi, leidke sobiv planeedipilt,
+            valige kolm fakti ja kujundage plakat.
           </p>
       
           <div class="learning-box">
             <strong>Sinu ülesanne</strong>
             <p>
-              Arutage paarilisega oma valikuid.
-              Leidke kolm õiget fakti, valige plakatil kasutatavad
-              värvid ja kaunistused ning lisage mõlema autori eesnimed.
+              Arutage paarilisega, milline pilt ja millised faktid
+              sobivad teie valitud planeedi kohta.
+              Lisage plakatille mõlema autori eesnimed.
+              Teine meeskond kontrollib teie tööd järgmises etapis.
             </p>
           </div>
       
-          <!-- POSTER BUILDER -->
           <div class="poster-builder" id="poster-builder">
-      
-            <!-- LEFT SIDE: CONTROLS -->
             <div class="poster-controls">
       
-              <div class="poster-control-group poster-section">
-                <h4>1. Valige planeet</h4>
-      
+              <div class="poster-control-group">
+                <h4>1. Valige planeedi nimi</h4>
                 <div id="poster-planets"></div>
               </div>
       
-              <div class="poster-control-group poster-section">
-                <h4>2. Valige lühike tutvustus</h4>
+              <div class="poster-control-group">
+                <h4>2. Valige planeedi pilt</h4>
+                <p>
+                  Vaadake pilte ja leidke oma planeedile sobiv pilt.
+                </p>
       
+                <div class="poster-image-picker">
+                  <button
+                    id="poster-image-prev"
+                    type="button"
+                    class="poster-image-arrow"
+                    aria-label="Eelmine pilt">
+                    &#8592;
+                  </button>
+      
+                  <img
+                    id="poster-image-choice"
+                    class="poster-image-choice"
+                    alt="Planeedi pildi eelvaade">
+      
+                  <button
+                    id="poster-image-next"
+                    type="button"
+                    class="poster-image-arrow"
+                    aria-label="Järgmine pilt">
+                    &#8594;
+                  </button>
+                </div>
+      
+                <button
+                  id="poster-image-select"
+                  type="button"
+                  class="secondary-button poster-image-select">
+                  Vali see pilt
+                </button>
+      
+                <p id="poster-image-status"
+                   class="poster-image-status"></p>
+              </div>
+      
+              <div class="poster-control-group">
+                <h4>3. Valige lühike tutvustus</h4>
                 <div id="poster-subtitles"></div>
               </div>
       
-              <div class="poster-control-group poster-section">
-                <h4>3. Valige kolm õiget fakti</h4>
-      
+              <div class="poster-control-group">
+                <h4>4. Valige kolm fakti</h4>
                 <p>
-                  Millised väited sobivad teie valitud planeedi kohta?
-                  Valige täpselt kolm õiget fakti.
+                  Millised väited sobivad teie planeedi kohta?
+                  Valige kolm fakti.
                 </p>
       
-                <div
-                  id="poster-fact-options"
-                  class="poster-option-list poster-fact-options">
-                </div>
+                <div id="poster-fact-options"></div>
       
-                <p
-                  id="poster-fact-count"
-                  class="poster-counter poster-fact-counter">
+                <p id="poster-fact-count"
+                   class="poster-fact-counter">
                   Valitud: 0 / 3
                 </p>
               </div>
       
-              <div class="poster-control-group poster-section">
-                <h4>4. Valige taust</h4>
-      
-                <p>
-                  Valige plakatile sobiv taustavärv.
-                </p>
-      
-                <div
-                  id="poster-backgrounds"
-                  class="poster-options-grid">
-                </div>
+              <div class="poster-control-group">
+                <h4>5. Valige taust</h4>
+                <div id="poster-backgrounds"></div>
               </div>
       
-              <div class="poster-control-group poster-section">
-                <h4>5. Valige kaunistused</h4>
-      
-                <p>
-                  Valige kuni kolm kaunistust.
-                  Kaunistused ilmuvad plakatile üksteise peale.
-                </p>
-      
-                <div
-                  id="poster-decorations"
-                  class="poster-options-grid">
-                </div>
+              <div class="poster-control-group">
+                <h4>6. Valige kaunistused</h4>
+                <p>Võite valida kuni kolm kaunistust.</p>
+                <div id="poster-decorations"></div>
               </div>
       
-              <div class="poster-control-group poster-section">
-                <h4>6. Kes on plakati autorid?</h4>
-      
+              <div class="poster-control-group">
+                <h4>7. Kes on plakati autorid?</h4>
                 <label for="poster-authors">
                   Kirjutage mõlema õpilase eesnimed.
                 </label>
@@ -366,7 +379,7 @@
                 id="poster-save"
                 type="button"
                 class="action-button check-button">
-                Kontrolli ja salvesta plakat
+                Salvesta plakat
               </button>
       
               <div
@@ -377,17 +390,22 @@
                 hidden>
               </div>
       
+              <button
+                id="poster-next"
+                type="button"
+                class="action-button"
+                data-complete-step="5"
+                data-next-step="6"
+                hidden>
+                Edasi 6. etapiga
+              </button>
             </div>
       
-            <div class="poster-preview-area poster-preview-panel">
-      
+            <div class="poster-preview-area">
               <h4>Teie plakat</h4>
       
               <div class="poster-preview-wrap">
-      
-                <div
-                  class="poster-preview"
-                  id="poster-preview">
+                <div class="poster-preview" id="poster-preview">
       
                   <img
                     id="poster-bg"
@@ -408,39 +426,25 @@
                     hidden>
       
                   <div class="poster-head">
-      
-                    <h3
-                      id="poster-title"
-                      class="poster-title">
+                    <h3 id="poster-title" class="poster-title">
                       Merkuur
                     </h3>
       
-                    <p
-                      id="poster-subtitle"
-                      class="poster-subtitle">
-                    </p>
-      
+                    <p id="poster-subtitle"
+                       class="poster-subtitle"></p>
                   </div>
       
-                  <ul
-                    id="poster-facts"
-                    class="poster-facts">
-                  </ul>
+                  <ul id="poster-facts"
+                      class="poster-facts"></ul>
       
-                  <div
-                    id="poster-team"
-                    class="poster-authors">
+                  <div id="poster-team"
+                       class="poster-authors">
                     Autorid: ...
                   </div>
-      
                 </div>
-      
               </div>
-      
             </div>
-      
           </div>
-      
         </div>
       </details>
       
