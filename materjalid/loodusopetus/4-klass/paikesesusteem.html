@@ -3,371 +3,465 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Päikesesüsteem ja planeedid | Digiõppevara</title>
+
   <link rel="stylesheet" href="../../../css/style.css">
-  <script src="../../../js/loodusopetus/4klasspaikesesusteem.js" defer></script>
+  <link rel="stylesheet" href="../../../css/loodusopetus/4-klass/paikesesusteem-poster-review.css">
+  <link rel="stylesheet" href="../../../css/loodusopetus/4-klass/paikesesusteem-final-stage.css">
+
+  <script src="../../../js/loodusopetus/4-klass/paikesesusteem-config.js" defer></script>
   <script src="../../../js/lesson.js" defer></script>
-  <script src="../../../js/loodusopetus/poster-builder.js" defer></script>
-  <link rel="stylesheet" href="../../../css/loodusopetus/poster-review.css">
-  <script src="../../../js/loodusopetus/poster-review.js" defer></script>
+  <script src="../../../js/loodusopetus/4-klass/paikesesusteem-poster-builder.js" defer></script>
+  <script src="../../../js/loodusopetus/4-klass/paikesesusteem-poster-review.js" defer></script>
+  <script src="../../../js/loodusopetus/4-klass/paikesesusteem-final-stage.js" defer></script>
 </head>
+
 <body>
   <header class="site-header">
     <nav class="container">
-      <a class="logo" href="../../../index.html">Digiõppevara</a>
+      <a class="logo" href="../../../index.html">
+        Digiõppevara
+      </a>
+
       <div class="nav-links">
-        <a href="../../../index.html#materjalid">Õppematerjalid</a>
-        <a href="../../../index.html#projektist">Projektist</a>
+        <a href="../../../index.html#materjalid">
+          Õppematerjalid
+        </a>
+
+        <a href="../../../index.html#projektist">
+          Projektist
+        </a>
       </div>
     </nav>
   </header>
 
   <main class="container lesson">
-    <a class="back-button" href="../../../index.html#materjalid">
+
+    <a
+      class="back-button"
+      href="../../../index.html#materjalid">
       ← Tagasi õppematerjalide juurde
     </a>
 
     <section class="topic-header">
-      <img class="topic-cover"
-           src="../../../images/loodusopetus/4klass-paikesesusteem.png"
-           alt="Päikesesüsteem ja planeedid">
+      <img
+        class="topic-cover"
+        src="../../../images/loodusopetus/4klass-paikesesusteem.png"
+        alt="Päikesesüsteem ja planeedid">
+
       <div class="topic-info">
-        <span class="topic-meta">Loodusõpetus · 4. klass</span>
+        <span class="topic-meta">
+          Loodusõpetus · 4. klass
+        </span>
+
         <h1>Päikesesüsteem ja planeedid</h1>
+
         <p>
-          Avasta Päikesesüsteemi ja planeetide põnev maailm!
-          Õpi mängides, lahenda ülesandeid ja pane oma teadmised proovile.
+          Avasta Päikesesüsteemi põnev maailm!
+          Uuri planeete, lahenda ülesandeid,
+          loo kosmoseplakat ja osale kosmosemissioonil.
         </p>
       </div>
     </section>
 
-    <!-- Vaated -->
-    <div class="journey-tabs" aria-label="Õppematerjali vaated">
-      <button class="journey-tab active" type="button"
-              data-view="learner" aria-pressed="true">Õppijale</button>
-      <button class="journey-tab" type="button"
-              data-view="teacher" aria-pressed="false">Õpetajale</button>
+    <div
+      class="journey-tabs"
+      aria-label="Õppematerjali vaated">
+
+      <button
+        type="button"
+        class="journey-tab active"
+        data-view="learner"
+        aria-pressed="true">
+        Õppijale
+      </button>
+
+      <button
+        type="button"
+        class="journey-tab"
+        data-view="teacher"
+        aria-pressed="false">
+        Õpetajale
+      </button>
     </div>
 
-    <!-- ÕPPIJALE -->
     <section id="learner-view" class="journey-panel">
 
       <div class="journey-overview">
         <div class="journey-overview-top">
           <div>
-            <h2>Minu kosmosereis 🚀🧑‍🚀 </h2>
-            <p>Läbi kaheksa etappi ja avasta Päikesesüsteem!</p>
+            <h2>Minu kosmosereis 🚀</h2>
+
+            <p>
+              Läbi kaheksa etappi ja avasta Päikesesüsteem!
+            </p>
           </div>
-          <span id="journey-count">0 / 8 läbitud</span>
+
+          <span id="journey-count">
+            0 / 8 läbitud
+          </span>
         </div>
 
-        <div class="journey-progress" role="progressbar"
-             aria-label="Õpiteekonna läbimine"
-             aria-valuemin="0" aria-valuemax="8" aria-valuenow="0">
+        <div
+          class="journey-progress"
+          role="progressbar"
+          aria-label="Õpiteekonna läbimine"
+          aria-valuemin="0"
+          aria-valuemax="8"
+          aria-valuenow="0">
           <div id="journey-fill"></div>
         </div>
       </div>
 
-      <!-- 1. ETAPP -->
-      <details class="journey-step" data-step="1" open>
+      <details
+        class="journey-step"
+        data-step="1"
+        open>
+
         <summary>
           <span class="step-number">1</span>
-          <span class="step-title">Tere, kosmoseuurija!</span>
+          <span class="step-title">
+            Tere, kosmoseuurija!
+          </span>
           <span class="step-status">Pooleli</span>
         </summary>
-      
+
         <div class="step-content">
           <div class="intro-layout">
-      
+
             <div class="intro-text">
               <h3>Tere tulemast kosmosereisile!</h3>
-      
+
               <p>
-                Kas oled kunagi mõelnud, kui suur on maailmaruum?
-                Või miks planeedid tiirlevad ümber Päikese?
+                Kas oled kunagi mõelnud,
+                miks planeedid tiirlevad ümber Päikese
+                ja mille poolest nad üksteisest erinevad?
               </p>
-      
+
               <p>
-                Sellel kosmosereisil õpid tundma Päikesesüsteemi,
-                uurid planeete, täidad põnevaid ülesandeid
-                ja osaled kosmosemissioonil.
+                Sellel reisil õpid tundma Päikesesüsteemi,
+                uurid planeete, lood koos paarilisega
+                plakati ja mängid kosmosemängu.
               </p>
-      
+
               <div class="learning-box">
                 <strong>Mida sa õpid?</strong>
+
                 <p>
-                  Õpid nimetama kaheksat planeeti, kirjeldama nende
-                  järjestust ja põhiomadusi ning selgitama,
-                  kuidas planeedid ümber Päikese tiirlevad.
+                  Õpid nimetama kaheksat planeeti,
+                  järjestama neid Päikesest alates
+                  ja kirjeldama nende põhiomadusi.
                 </p>
               </div>
-      
+
               <p>
-                Liigu etappide vahel omas tempos.
-                Kui midagi on keeruline, võid alati tagasi tulla.
+                Liigu omas tempos.
+                Kui midagi on keeruline,
+                võid alati eelmise etapi juurde tagasi tulla.
               </p>
-      
-              <button class="action-button" type="button"
-                      data-complete-step="1" data-next-step="2">
+
+              <button
+                class="action-button"
+                type="button"
+                data-complete-step="1"
+                data-next-step="2">
                 Alusta kosmosereisi
               </button>
             </div>
-      
+
             <div class="intro-image-wrap">
               <img
                 src="../../../images/loodusopetus/4klass-1etapp.png"
                 alt="Kosmoseuurijad"
                 class="intro-image"
                 loading="eager"
-                fetchpriority="high"
                 decoding="async">
             </div>
-      
+
           </div>
         </div>
       </details>
 
-      <!-- 2. ETAPP -->
       <details class="journey-step" data-step="2">
         <summary>
           <span class="step-number">2</span>
-          <span class="step-title">Mida ma juba tean?</span>
+          <span class="step-title">
+            Mida ma juba tean?
+          </span>
           <span class="step-status">Alustamata</span>
         </summary>
 
         <div class="step-content">
-          <h3>Kui palju sa kosmosest juba tead?</h3>
+          <h3>Minu esimesed kosmoseteadmised</h3>
+
           <p>
-            Vasta neljale küsimusele. Ära muretse, kui sa mõnda
-            vastust veel ei tea! Pärast saad õigeid vastuseid vaadata.
+            Vasta neljale küsimusele ja vaata,
+            mida sa Päikesesüsteemist juba tead.
           </p>
+
+          <div class="learning-box">
+            <strong>Sinu ülesanne</strong>
+
+            <p>
+              Vali igale küsimusele üks vastus.
+              See on teadmiste proov, mitte kontrolltöö.
+              Eksimine on lubatud!
+            </p>
+          </div>
 
           <div data-quiz="diagnostic"></div>
         </div>
       </details>
 
-      <!-- 3. ETAPP -->
       <details class="journey-step" data-step="3">
         <summary>
           <span class="step-number">3</span>
-          <span class="step-title">Avastame Päikesesüsteemi!</span>
+          <span class="step-title">
+            Avastame Päikesesüsteemi!
+          </span>
           <span class="step-status">Alustamata</span>
         </summary>
 
         <div class="step-content">
-          <h3>Avastame Päikesesüsteemi!</h3>
+          <h3>Mis kuulub Päikesesüsteemi?</h3>
 
           <p>
-            Päikesesüsteemi keskmes asub Päike, mille ümber
-            tiirleb kaheksa planeeti. Lisaks planeetidele
-            kuuluvad Päikesesüsteemi ka kuud, asteroidid
-            ja teised taevakehad.
+            Päikesesüsteemi keskmes on Päike.
+            Selle ümber tiirleb kaheksa planeeti.
+            Päikesesüsteemi kuuluvad ka kuud,
+            asteroidid ja teised taevakehad.
           </p>
 
           <div class="learning-box">
-            <strong>Sinu ülesanne</strong>
+            <strong>Uurime Päikesesüsteemi! 🔭</strong>
+
             <p>
-              Uuri interaktiivset Päikesesüsteemi!
-              Klõpsa Päikesel, planeetidel ja Kuul ning
-              loe nende kohta huvitavaid fakte.
+              Klõpsa interaktiivsel pildil
+              erinevatel taevakehadel
+              ja loe nende kohta huvitavaid fakte.
             </p>
           </div>
-    
-      <div class="embed-shell is-loading">
-        <div class="embed-loader">Ülesanne laadib...</div>
-          <iframe
-            class="h5p-frame"
-            src="https://sisuloome.e-koolikott.ee/h5p/29036/embed"
-            title="Avasta Päikesesüsteem"
-            width="100%"
-            height="768"
-            loading="lazy"
-            lang="et"
-            allowfullscreen>
-          </iframe>
-      </div>
 
-          <h3>Kontrolli oma teadmisi!</h3>
+          <div class="embed-shell is-loading">
+            <div class="embed-loader">
+              Ülesanne laadib...
+            </div>
+
+            <iframe
+              class="h5p-frame"
+              src="https://sisuloome.e-koolikott.ee/h5p/29036/embed"
+              title="Avasta Päikesesüsteem"
+              width="100%"
+              height="768"
+              loading="lazy"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <h3>Kontrolli, mida teada said!</h3>
+
           <p>
-            Vasta kolmele küsimusele. Etapi läbimiseks
-            vasta õigesti vähemalt kahele küsimusele.
+            Vasta kolmele küsimusele.
+            Etapi läbimiseks pead vastama õigesti
+            vähemalt kahele küsimusele.
           </p>
 
           <div data-quiz="stage3"></div>
         </div>
       </details>
 
-
-      <!-- 4. ETAPP -->
       <details class="journey-step" data-step="4">
         <summary>
           <span class="step-number">4</span>
-          <span class="step-title">Tutvume planeetidega</span>
+          <span class="step-title">
+            Tutvume planeetidega
+          </span>
           <span class="step-status">Alustamata</span>
         </summary>
-      
+
         <div class="step-content">
-          <h3>Planeetide saladused</h3>
+          <h3>Planeetide saladused 🪐</h3>
+
           <p>
-            Igal planeedil on oma erilised omadused.
-            Uuri planeete, võrdle neid ja saa teada,
-            mille poolest nad üksteisest erinevad.
+            Iga planeet on erinev.
+            Mõni on väga kuum, mõni külm,
+            mõnel on rõngad ja mõnel kuud.
           </p>
-      
+
           <div class="learning-box">
-            <strong>1. ülesanne: Leia õige kirjeldus!</strong>
+            <strong>Leia planeedile õige kirjeldus!</strong>
+
             <p>
               Lohista iga planeedi juurde sobiv kirjeldus.
-              Kontrolli oma vastuseid ja vajadusel proovi uuesti.
+              Kontrolli vastuseid ja vajaduse korral
+              proovi uuesti.
             </p>
           </div>
-    
-      <div class="embed-shell is-loading">
-        <div class="embed-loader">Ülesanne laadib...</div>
-          <iframe
-            class="h5p-frame"
-            src="https://sisuloome.e-koolikott.ee/h5p/29039/embed"
-            title="Leia planeedile õige kirjeldus!"
-            width="100%"
-            height="954"
-            lang="et"
-            loading="lazy"
-            allowfullscreen>
-          </iframe>
-        </div>
-          
+
+          <div class="embed-shell is-loading">
+            <div class="embed-loader">
+              Ülesanne laadib...
+            </div>
+
+            <iframe
+              class="h5p-frame"
+              src="https://sisuloome.e-koolikott.ee/h5p/29039/embed"
+              title="Leia planeedile õige kirjeldus"
+              width="100%"
+              height="954"
+              loading="lazy"
+              allowfullscreen>
+            </iframe>
+          </div>
+
           <h3>Minu planeedi pass</h3>
+
           <p>
-            Nüüd on sinu kord olla kosmoseuurija!
-            Vali üks planeet, mis sind kõige rohkem huvitab.
-            Uuri selle kohta infot ja täida planeedi pass.
+            Vali üks planeet, mida soovid lähemalt uurida.
+            Täida selle kohta väike planeedi pass.
           </p>
-      
+
           <div class="learning-box">
-            <strong>2. ülesanne: Uuri oma planeeti!</strong>
+            <strong>Uuri oma planeeti!</strong>
+
             <p>
-              Vali planeet, leia selle kohta huvitavaid fakte
-              ja kirjuta vastused oma sõnadega.
-              Seejärel kontrolli oma tööd.
+              Märgi, mitmes planeet see Päikesest on,
+              ja kirjuta üks huvitav asi,
+              mida sa selle planeedi kohta teada said.
             </p>
           </div>
-      
+
           <div data-research="planetPassport"></div>
         </div>
       </details>
 
-      <!-- 5. ETAPP -->
       <details class="journey-step" data-step="5">
         <summary>
           <span class="step-number">5</span>
-          <span class="step-title">Loome kosmoseplakati!</span>
+          <span class="step-title">
+            Loome kosmoseplakati!
+          </span>
           <span class="step-status">Alustamata</span>
         </summary>
-      
+
         <div class="step-content">
           <h3>Meie planeediplakat</h3>
-      
+
           <p>
-            Koostage koos paarilisega ühe planeedi kohta plakat.
-            Valige planeedi nimi, leidke sobiv planeedipilt,
-            valige kolm fakti ja kujundage plakat.
+            Nüüd on aeg koos paarilisega plakat luua!
+            Valige planeet, leidke sellele sobiv pilt
+            ja lisage kolm fakti.
           </p>
-      
+
           <div class="learning-box">
-            <strong>Sinu ülesanne</strong>
+            <strong>Sinu ülesanne 🎨</strong>
+
             <p>
-              Arutage paarilisega, milline pilt ja millised faktid
-              sobivad teie valitud planeedi kohta.
-              Lisage plakatille mõlema autori eesnimed.
-              Teine meeskond kontrollib teie tööd järgmises etapis.
+              Valige planeedi nimi ja pilt eraldi.
+              Otsustage, millised kolm fakti on õiged,
+              ning kujundage plakat.
+              Lisage mõlema autori eesnimed.
+              Järgmises etapis kontrollib teie tööd teine paar.
             </p>
           </div>
-      
+
           <div class="poster-builder" id="poster-builder">
+
             <div class="poster-controls">
-      
+
               <div class="poster-control-group">
                 <h4>1. Valige planeedi nimi</h4>
                 <div id="poster-planets"></div>
               </div>
-      
+
               <div class="poster-control-group">
                 <h4>2. Valige planeedi pilt</h4>
+
                 <p>
-                  Vaadake pilte ja leidke oma planeedile sobiv pilt.
+                  Sirvige pilte ja leidke sobiv planeet.
                 </p>
-      
+
                 <div class="poster-image-picker">
+
                   <button
                     id="poster-image-prev"
                     type="button"
                     class="poster-image-arrow"
-                    aria-label="Eelmine pilt">
+                    aria-label="Eelmine planeedi pilt">
                     &#8592;
                   </button>
-      
+
                   <img
                     id="poster-image-choice"
                     class="poster-image-choice"
                     alt="Planeedi pildi eelvaade">
-      
+
                   <button
                     id="poster-image-next"
                     type="button"
                     class="poster-image-arrow"
-                    aria-label="Järgmine pilt">
+                    aria-label="Järgmine planeedi pilt">
                     &#8594;
                   </button>
+
                 </div>
-      
+
                 <button
                   id="poster-image-select"
                   type="button"
                   class="secondary-button poster-image-select">
                   Vali see pilt
                 </button>
-      
-                <p id="poster-image-status"
-                   class="poster-image-status"></p>
+
+                <p
+                  id="poster-image-status"
+                  class="poster-image-status"></p>
               </div>
-      
+
               <div class="poster-control-group">
                 <h4>3. Valige lühike tutvustus</h4>
                 <div id="poster-subtitles"></div>
               </div>
-      
+
               <div class="poster-control-group">
                 <h4>4. Valige kolm fakti</h4>
+
                 <p>
                   Millised väited sobivad teie planeedi kohta?
-                  Valige kolm fakti.
                 </p>
-      
+
                 <div id="poster-fact-options"></div>
-      
-                <p id="poster-fact-count"
-                   class="poster-fact-counter">
+
+                <p
+                  id="poster-fact-count"
+                  class="poster-fact-counter">
                   Valitud: 0 / 3
                 </p>
               </div>
-      
+
               <div class="poster-control-group">
                 <h4>5. Valige taust</h4>
                 <div id="poster-backgrounds"></div>
               </div>
-      
+
               <div class="poster-control-group">
                 <h4>6. Valige kaunistused</h4>
-                <p>Võite valida kuni kolm kaunistust.</p>
+
+                <p>
+                  Võite valida kuni kolm kaunistust.
+                </p>
+
                 <div id="poster-decorations"></div>
               </div>
-      
+
               <div class="poster-control-group">
                 <h4>7. Kes on plakati autorid?</h4>
+
                 <label for="poster-authors">
                   Kirjutage mõlema õpilase eesnimed.
                 </label>
-      
+
                 <input
                   id="poster-authors"
                   class="poster-text-input"
@@ -376,22 +470,21 @@
                   autocomplete="off"
                   placeholder="Näiteks Mari ja Karl">
               </div>
-      
+
               <button
                 id="poster-save"
                 type="button"
                 class="action-button check-button">
                 Salvesta plakat
               </button>
-      
+
               <div
                 id="poster-message"
                 class="learning-box"
                 role="status"
                 aria-live="polite"
-                hidden>
-              </div>
-      
+                hidden></div>
+
               <button
                 id="poster-next"
                 type="button"
@@ -401,159 +494,173 @@
                 hidden>
                 Edasi 6. etapiga
               </button>
+
             </div>
-      
+
             <div class="poster-preview-area">
               <h4>Teie plakat</h4>
-      
+
               <div class="poster-preview-wrap">
-                <div class="poster-preview" id="poster-preview">
-      
+
+                <div
+                  class="poster-preview"
+                  id="poster-preview">
+
                   <img
                     id="poster-bg"
                     class="poster-layer poster-bg"
-                    alt=""
-                    decoding="async">
-      
+                    alt="">
+
                   <img
                     id="poster-planet"
                     class="poster-layer poster-planet"
-                    alt=""
-                    decoding="async">
-      
+                    alt="">
+
                   <img
                     id="poster-decor"
                     class="poster-layer poster-decor"
                     alt=""
                     hidden>
-      
+
                   <div class="poster-head">
-                    <h3 id="poster-title" class="poster-title">
+
+                    <h3
+                      id="poster-title"
+                      class="poster-title">
                       Merkuur
                     </h3>
-      
-                    <p id="poster-subtitle"
-                       class="poster-subtitle"></p>
+
+                    <p
+                      id="poster-subtitle"
+                      class="poster-subtitle"></p>
+
                   </div>
-      
-                  <ul id="poster-facts"
-                      class="poster-facts"></ul>
-      
-                  <div id="poster-team"
-                       class="poster-authors">
+
+                  <ul
+                    id="poster-facts"
+                    class="poster-facts"></ul>
+
+                  <div
+                    id="poster-team"
+                    class="poster-authors">
                     Autorid: ...
                   </div>
+
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </details>
-      
-      <!-- 6. ETAPP -->
+
       <details class="journey-step" data-step="6">
         <summary>
           <span class="step-number">6</span>
-          <span class="step-title">Kosmoseplakatite näitus</span>
+          <span class="step-title">
+            Kosmoseplakatite näitus
+          </span>
           <span class="step-status">Alustamata</span>
         </summary>
-      
+
         <div class="step-content">
-          <h3>Uurime teise meeskonna plakatit!</h3>
-      
+          <h3>Uurime teise paari plakatit!</h3>
+
           <p>
-            Vahetage teise paariga arvutid. Vaadake nende
-            koostatud planeediplakatit ja arutage,
+            Vahetage teise paariga arvutid.
+            Vaadake nende plakatit ja arutage,
             kas pilt ning faktid sobivad valitud planeedi kohta.
           </p>
-      
+
           <div class="learning-box">
-            <strong>Sinu ülesanne</strong>
+            <strong>Sinu ülesanne 🔍</strong>
+
             <p>
-              Hinnake paarilisega teise meeskonna plakatit.
+              Andke teise paari plakatile tagasisidet.
               Esmalt vastake küsimustele oma teadmiste põhjal.
-              Pärast tagasiside salvestamist saate kontrollida,
-              kas plakatil leidub vigu.
+              Alles seejärel vaadake automaatse kontrolli tulemusi.
             </p>
           </div>
-      
+
           <div id="poster-review" class="poster-review">
-      
+
             <div
               id="poster-review-empty"
               class="learning-box poster-review-empty"
               hidden>
               Sellel arvutil ei ole veel salvestatud plakatit.
-              Kõigepealt tuleb läbida 5. etapp ja plakat salvestada.
+              Kõigepealt tuleb 5. etapis plakat salvestada.
             </div>
-      
+
             <div
               id="poster-review-layout"
               class="poster-review-layout"
               hidden>
-      
+
               <div class="poster-review-poster">
-                <h4>Teise meeskonna plakat</h4>
-      
+                <h4>Teise paari plakat</h4>
+
                 <div
                   id="poster-review-preview"
                   class="poster-preview poster-review-preview">
-      
+
                   <img
                     id="poster-review-bg"
                     class="poster-layer poster-bg"
                     alt="">
-      
+
                   <img
                     id="poster-review-planet"
                     class="poster-layer poster-planet"
                     alt="">
-      
+
                   <div id="poster-review-decorations"></div>
-      
+
                   <div class="poster-head">
+
                     <h3
                       id="poster-review-title"
                       class="poster-title"></h3>
-      
+
                     <p
                       id="poster-review-subtitle"
                       class="poster-review-subtitle"></p>
+
                   </div>
-      
+
                   <ul
                     id="poster-review-facts"
                     class="poster-facts"></ul>
-      
+
                   <div
                     id="poster-review-authors"
                     class="poster-authors"></div>
-      
+
                 </div>
               </div>
-      
+
               <div class="poster-review-side">
-      
+
                 <section
                   id="poster-review-form-panel"
                   class="poster-review-card">
-      
-                  <h4>Anna tagasisidet!</h4>
-      
+
+                  <h4>Andke plakatile tagasisidet!</h4>
+
                   <p>
-                    Arutage küsimusi koos paarilisega.
-                    Valige vastused enne automaatset kontrolli.
+                    Arutage küsimusi paarilisega
+                    ja valige sobivad vastused.
                   </p>
-      
+
                   <form
                     id="poster-review-form"
                     class="poster-review-form">
-      
+
                     <fieldset>
                       <legend>
                         1. Kas planeedi nimi ja pilt sobivad kokku?
                       </legend>
-      
+
                       <label>
                         <input
                           type="radio"
@@ -562,7 +669,7 @@
                           required>
                         Jah
                       </label>
-      
+
                       <label>
                         <input
                           type="radio"
@@ -571,12 +678,12 @@
                         Vajab parandamist
                       </label>
                     </fieldset>
-      
+
                     <fieldset>
                       <legend>
-                        2. Kas kõik kolm fakti sobivad selle planeedi kohta?
+                        2. Kas kõik kolm fakti on õiged?
                       </legend>
-      
+
                       <label>
                         <input
                           type="radio"
@@ -585,7 +692,7 @@
                           required>
                         Jah
                       </label>
-      
+
                       <label>
                         <input
                           type="radio"
@@ -594,12 +701,12 @@
                         Vajab parandamist
                       </label>
                     </fieldset>
-      
+
                     <fieldset>
                       <legend>
-                        3. Kas plakat on selge ja hästi loetav?
+                        3. Kas plakatit on lihtne lugeda?
                       </legend>
-      
+
                       <label>
                         <input
                           type="radio"
@@ -608,7 +715,7 @@
                           required>
                         Jah
                       </label>
-      
+
                       <label>
                         <input
                           type="radio"
@@ -617,12 +724,12 @@
                         Vajab parandamist
                       </label>
                     </fieldset>
-      
+
                     <div class="poster-review-field">
                       <label for="poster-review-reviewers">
                         Hindajate eesnimed
                       </label>
-      
+
                       <input
                         id="poster-review-reviewers"
                         name="reviewers"
@@ -631,12 +738,12 @@
                         placeholder="Näiteks Mari ja Karl"
                         required>
                     </div>
-      
+
                     <div class="poster-review-field">
                       <label for="poster-review-comment">
-                        Mida soovitate muuta? (soovi korral)
+                        Mida soovitate muuta? (Soovi korral)
                       </label>
-      
+
                       <textarea
                         id="poster-review-comment"
                         name="comment"
@@ -644,50 +751,53 @@
                         rows="3"
                         placeholder="Meie soovitus..."></textarea>
                     </div>
-      
+
                     <button
                       type="submit"
                       class="action-button check-button">
                       Salvesta tagasiside ja kontrolli
                     </button>
-      
+
                   </form>
                 </section>
-      
+
                 <section
                   id="poster-review-results"
                   class="poster-review-card"
                   hidden>
-      
-                  <h4>Teise meeskonna tagasiside</h4>
+
+                  <h4>Teise paari tagasiside</h4>
+
                   <div id="poster-review-peer"></div>
-      
+
                   <h4 class="poster-review-subheading">
                     Automaatne kontroll
                   </h4>
-      
+
                   <div
                     id="poster-review-check"
                     role="status"
                     aria-live="polite"></div>
-      
+
                   <div class="learning-box">
                     <strong>Etapp läbitud!</strong>
+
                     <p>
                       Tagasiside on salvestatud.
-                      Plakati autorid saavad nüüd teie hinnangut
-                      ja kontrolli tulemusi vaadata.
+                      Plakati autorid saavad nüüd
+                      teie hinnangut vaadata.
                     </p>
                   </div>
-      
+
                   <div class="poster-review-actions">
+
                     <button
                       id="poster-review-edit"
                       type="button"
                       class="secondary-button">
                       Muuda tagasisidet
                     </button>
-      
+
                     <button
                       id="poster-review-next"
                       type="button"
@@ -696,57 +806,59 @@
                       data-next-step="7">
                       Edasi 7. etapiga
                     </button>
+
                   </div>
                 </section>
-      
+
               </div>
             </div>
+
           </div>
         </div>
       </details>
 
-      <!-- 7. ETAPP -->
       <details class="journey-step" data-step="7">
         <summary>
           <span class="step-number">7</span>
-          <span class="step-title">Kontrollime oma teadmisi!</span>
+          <span class="step-title">
+            Kontrollime oma teadmisi!
+          </span>
           <span class="step-status">Alustamata</span>
         </summary>
-      
+
         <div class="step-content">
-      
           <h3>Kosmosekaitsja: Planeetide missioon</h3>
-      
+
           <p>
-            Oled jõudnud kosmosemissiooni järgmisse etappi!
-            Nüüd saad oma teadmised proovile panna
-            põnevas Scratchi mängus.
+            Oled jõudnud kosmosemänguni!
+            Kas oled valmis oma teadmisi proovile panema?
           </p>
-      
+
           <div class="learning-box">
-            <strong>Sinu ülesanne</strong>
+            <strong>Sinu ülesanne 🚀</strong>
+
             <p>
-              Alusta mängu ja tutvu reeglitega.
+              Alusta Scratchi mängu ja tutvu reeglitega.
               Juhi kosmoselaeva, väldi takistusi
-              ning vasta planeetide kohta käivatele küsimustele.
-              Püüa missioon edukalt lõpetada!
+              ja vasta planeetide kohta käivatele küsimustele.
             </p>
           </div>
-      
+
           <div class="activity">
             <iframe
               class="scratch-frame"
               src="https://scratch.mit.edu/projects/1391647707/embed"
               title="Kosmosekaitsja: Planeetide missioon"
               width="485"
+              height="402"
               loading="lazy"
               scrolling="no"
               allowfullscreen>
             </iframe>
           </div>
-      
+
           <p>
-            Kui mäng ei avane, saad seda mängida
+            Kui mäng ei avane, saad selle käivitada
             <a
               href="https://scratch.mit.edu/projects/1391647707"
               target="_blank"
@@ -754,16 +866,16 @@
               Scratchi veebilehel
             </a>.
           </p>
-      
+
           <div class="learning-box">
             <strong>Mõtle korraks!</strong>
+
             <p>
-              Millistele küsimustele oli lihtne vastata?
-              Millised planeedid vajavad veel kordamist?
-              Vajadusel mängi uuesti.
+              Millisele küsimusele oli kõige lihtsam vastata?
+              Milline planeet vajab veel kordamist?
             </p>
           </div>
-      
+
           <button
             type="button"
             class="action-button"
@@ -771,56 +883,266 @@
             data-next-step="8">
             Edasi 8. etapiga
           </button>
-      
         </div>
       </details>
 
-      <!-- 8. ETAPP -->
       <details class="journey-step" data-step="8">
         <summary>
           <span class="step-number">8</span>
-          <span class="step-title">Minu järgmine kosmoseseiklus</span>
+          <span class="step-title">
+            Viimane kosmoseväljakutse!
+          </span>
           <span class="step-status">Alustamata</span>
         </summary>
 
         <div class="step-content">
-          <h3>Mida ma õppisin?</h3>
+          <h3>Viimane kosmosemissioon! 🌟</h3>
+
           <p>
-            Mõtle oma õpiteekonnale. Vali, kas soovid midagi
-            korrata või hoopis mõnda kosmoseteemat
-            põhjalikumalt uurida.
+            Oled peaaegu kogu kosmosereisi läbinud.
+            Nüüd ootavad sind viimased ülesanded!
           </p>
-          <p class="coming-soon">
-            Enesehindamise ülesanne lisatakse siia.
-          </p>
+
+          <div class="learning-box">
+            <strong>Sinu ülesanne</strong>
+
+            <p>
+              Kõigepealt korda planeete mälumänguga.
+              Seejärel lahenda kolm kosmosemissiooni
+              arvutusülesannet ja kontrolli vastuseid.
+            </p>
+          </div>
+
+          <div class="final-mission">
+
+            <section class="final-card">
+              <h4>Meenutame planeete!</h4>
+
+              <p>
+                Leia mälumängus kokku sobivad paarid.
+                Meenuta planeetide nimesid ja välimust.
+              </p>
+
+              <div
+                id="final-memory-slot"
+                class="final-memory-placeholder">
+                Siia lisatakse H5P planeetide mälumäng.
+              </div>
+            </section>
+
+            <section class="final-card">
+              <h4>Kosmosemissiooni ülesanded</h4>
+
+              <p>
+                Loe tähelepanelikult, arvuta
+                ja kirjuta vastused.
+                Kui eksid, saad uuesti proovida.
+              </p>
+
+              <form id="final-mission">
+
+                <div class="final-math-task">
+                  <h5>Missioon 1. Astronaudi seljakott</h5>
+
+                  <p>
+                    Seljakott võib kaaluda kuni
+                    <strong>20 kg</strong>.
+                    Skafander kaalub 7 kg,
+                    toit 4 kg, vesi 5 kg
+                    ja tööriistad 3 kg.
+                  </p>
+
+                  <label for="final-bag">
+                    Mitu kilogrammi võib seljakotti
+                    veel lisada?
+                  </label>
+
+                  <div class="final-answer">
+                    <input
+                      id="final-bag"
+                      name="bag"
+                      type="number"
+                      min="0"
+                      step="1"
+                      required>
+                    <span>kg</span>
+                  </div>
+
+                  <p
+                    id="final-result-bag"
+                    class="final-feedback"
+                    hidden></p>
+                </div>
+
+                <div class="final-math-task">
+                  <h5>Missioon 2. Hapnikuvaru</h5>
+
+                  <p>
+                    Kaks astronauti vajavad kumbki
+                    2 liitrit hapnikku minutis.
+                    Missioon kestab 30 minutit.
+                    Ühes balloonis on 50 liitrit hapnikku.
+                  </p>
+
+                  <label for="final-oxygen">
+                    Mitu täis ballooni tuleb kaasa võtta?
+                  </label>
+
+                  <div class="final-answer">
+                    <input
+                      id="final-oxygen"
+                      name="oxygen"
+                      type="number"
+                      min="0"
+                      step="1"
+                      required>
+                    <span>ballooni</span>
+                  </div>
+
+                  <p
+                    id="final-result-oxygen"
+                    class="final-feedback"
+                    hidden></p>
+                </div>
+
+                <div class="final-math-task">
+                  <h5>Missioon 3. Kosmosemissiooni eelarve</h5>
+
+                  <p>
+                    Sul on <strong>500 eurot</strong>.
+                    Sidevahend maksab 145 €,
+                    päikesepaneel 125 €,
+                    toiduvaru 90 € ja kaamera 160 €.
+                  </p>
+
+                  <label for="final-budget">
+                    Kui ostad kõik neli eset,
+                    mitu eurot jääb puudu?
+                  </label>
+
+                  <div class="final-answer">
+                    <input
+                      id="final-budget"
+                      name="budget"
+                      type="number"
+                      min="0"
+                      step="1"
+                      required>
+                    <span>€</span>
+                  </div>
+
+                  <p
+                    id="final-result-budget"
+                    class="final-feedback"
+                    hidden></p>
+                </div>
+
+                <div class="final-actions">
+
+                  <button
+                    id="final-check"
+                    type="button"
+                    class="action-button check-button">
+                    Kontrolli vastuseid
+                  </button>
+
+                  <button
+                    id="final-finish"
+                    type="button"
+                    class="action-button"
+                    hidden>
+                    Lõpeta kosmosereis
+                  </button>
+
+                </div>
+
+                <p id="final-total" hidden></p>
+
+              </form>
+            </section>
+
+            <div
+              id="final-success"
+              class="final-success"
+              role="status"
+              aria-live="polite"
+              hidden>
+
+              <h3>Palju õnne, kosmoseuurija!</h3>
+
+              <p>
+                Oled jõudnud oma kosmosereisi lõppu!
+                Nüüd tunned paremini Päikesesüsteemi
+                ja selle kaheksat planeeti.
+              </p>
+
+              <strong>Järgmiste avastusteni!</strong>
+
+            </div>
+          </div>
         </div>
       </details>
-  
+
       <div class="journey-reset">
-        <button id="reset-journey" class="reset-button" type="button">
+        <button
+          id="reset-journey"
+          class="reset-button"
+          type="button">
           Alusta õpiteekonda uuesti
         </button>
-        <p>Kõik salvestatud vastused ja edusammud kustutatakse.</p>
+
+        <p>
+          Kõik salvestatud vastused ja edusammud kustutatakse.
+        </p>
       </div>
-      
+
     </section>
 
-    <!-- ÕPETAJALE -->
-    <section id="teacher-view" class="journey-panel" hidden>
+    <section
+      id="teacher-view"
+      class="journey-panel"
+      hidden>
+
       <div class="teacher-placeholder">
         <h2>Õpiteekonna kirjeldus õpetajale</h2>
+
         <p>
-          Siia lisame õpiteekonna eesmärgid, õpiväljundid,
-          õppetegevuste metoodilise kirjelduse, hindamise
-          ja diferentseerimise võimalused.
+          Õppematerjal on mõeldud 4. klassi
+          loodusõpetuse teema
+          „Päikesesüsteem ja planeedid“ õppimiseks.
+          Õpilased tutvuvad Päikesesüsteemiga,
+          uurivad planeete, teevad paaristööd
+          ja kinnistavad teadmisi mänguliste ülesannetega.
         </p>
-        <p class="coming-soon">Õpetaja vaade on koostamisel.</p>
+
+        <p>
+          Teisel etapil selgitatakse välja eelteadmised.
+          Kolmandas ja neljandas etapis õpitakse
+          interaktiivsete ülesannete abil.
+          Viiendas etapis koostatakse paaristööna plakat
+          ning kuuendas etapis antakse teise paari tööle tagasisidet.
+          Seitsmendas etapis kasutatakse Scratchi mängu.
+          Kaheksas etapp sisaldab kordamist ja
+          arvutusülesandeid.
+        </p>
+
+        <p>
+          Õpilaste edusammud salvestatakse
+          kasutatava arvuti veebilehitsejasse.
+          Plakatite vastastikuseks hindamiseks
+          vahetavad paarid arvuteid.
+          Töid ei saadeta automaatselt õpetajale.
+        </p>
       </div>
+
     </section>
+
   </main>
 
   <footer>
-    <p>Digiõppevara · Digitaalsed õppematerjalid · 2026</p>
+    <p>
+      Digiõppevara · Digitaalsed õppematerjalid · 2026
+    </p>
   </footer>
 
   <script src="https://sisuloome.e-koolikott.ee/sites/default/files/h5p/h5p-core/js/h5p-resizer.js"></script>
