@@ -1,49 +1,72 @@
 (() => {
-  const root = document.querySelector("#poster-review");
+  const step = document.querySelector(
+    '.journey-step[data-step="6"]'
+  );
+
   const data = window.paikesesusteemData;
-  if (!root || !data) return;
+  const storageKey = window.lessonConfig?.storageKey;
 
-  const storageKey = window.lessonConfig.storageKey;
-  const el = id => root.querySelector(`#${id}`);
+  if (!step || !data || !storageKey) return;
 
-  const empty = el("poster-review-empty");
-  const layout = el("poster-review-layout");
-  const formPanel = el("poster-review-form-panel");
-  const form = el("poster-review-form");
-  const resultPanel = el("poster-review-results");
-  const peer = el("poster-review-peer");
-  const check = el("poster-review-check");
+  const el = id => step.querySelector(`#${id}`);
 
-  if (
-    !empty || !layout || !formPanel ||
-    !form || !resultPanel || !peer || !check
-  ) return;
+  const nodes = {
+    poster: el("review-poster"),
+    bg: el("review-bg"),
+    planet: el("review-planet"),
+    title: el("review-title"),
+    subtitle: el("review-subtitle"),
+    facts: el("review-facts"),
+    team: el("review-team"),
+    form: el("poster-review-form"),
+    names: el("review-names"),
+    comment: el("review-comment"),
+    message: el("review-message"),
+    next: el("review-next")
+  };
+
+  if (Object.values(nodes).some(node => !node)) return;
+
+  nodes.names.required = true;
 
   let currentPoster = null;
   let currentSignature = "";
 
   function getProgress() {
     try {
-      return JSON.parse(
+      const value = JSON.parse(
         localStorage.getItem(storageKey) || "{}"
       );
+
+      return value && typeof value === "object"
+        ? value
+        : {};
     } catch {
       return {};
     }
   }
 
-  function addLine(parent, heading, value, status = "") {
-    const line = document.createElement("div");
-    line.className = `poster-review-line ${status}`;
+  function imageNumber(value, max) {
+    const number = Number(value);
 
-    const title = document.createElement("strong");
-    title.textContent = heading;
+    return Number.isInteger(number) &&
+      number >= 1 &&
+      number <= max
+        ? number
+        : null;
+  }
 
-    const text = document.createElement("p");
-    text.textContent = value;
+  function setImage(element, type, number, max) {
+    const valid = imageNumber(number, max);
 
-    line.append(title, text);
-    parent.append(line);
+    if (!valid) {
+      element.hidden = true;
+      element.removeAttribute("src");
+      return;
+    }
+
+    element.src = data.imageUrl(type, valid);
+    element.hidden = false;
   }
 
   function renderPoster(poster) {
@@ -51,36 +74,24 @@
       item => item.id === poster.planet
     );
 
-    el("poster-review-title").textContent =
-      planet?.name || "Planeet";
+    nodes.title.textContent = planet?.name || "Planeet";
+    nodes.subtitle.textContent = poster.subtitle || "";
+    nodes.team.textContent =
+      `Autorid: ${poster.authors || "..."}`;
 
-    el("poster-review-subtitle").textContent =
-      poster.subtitle || "";
-
-    el("poster-review-bg").src = data.imageUrl(
+    setImage(
+      nodes.bg,
       "taust",
-      Number(poster.background) || 6
+      poster.background || 6,
+      7
     );
 
-    const image = el("poster-review-planet");
-    const imageNumber = Number(poster.planetImage);
-
-    if (
-      Number.isInteger(imageNumber) &&
-      imageNumber >= 1 &&
-      imageNumber <= 8
-    ) {
-      image.src = data.imageUrl("planeet", imageNumber);
-      image.hidden = false;
-    } else {
-      image.removeAttribute("src");
-      image.hidden = true;
-    }
-
-    const decorationContainer =
-      el("poster-review-decorations");
-
-    decorationContainer.replaceChildren();
+    setImage(
+      nodes.planet,
+      "planeet",
+      poster.planetImage,
+      8
+    );
 
     const decorations = Array.isArray(poster.decorations)
       ? poster.decorations
@@ -88,196 +99,221 @@
         ? [poster.decoration]
         : [];
 
-    decorations.forEach(value => {
-      const number = Number(value);
+    for (let i = 1; i <= 3; i++) {
+      const decoration = el(`review-decor-${i}`);
 
-      if (
-        !Number.isInteger(number) ||
-        number < 1 ||
-        number > 8
-      ) return;
+      if (!decoration) continue;
 
-      const layer = document.createElement("img");
-      layer.className = "poster-layer poster-decor";
-      layer.src = data.imageUrl("kaunistus", number);
-      layer.alt = "";
+      setImage(
+        decoration,
+        "kaunistus",
+        decorations[i - 1],
+        8
+      );
+    }
 
-      decorationContainer.append(layer);
-    });
+    nodes.facts.replaceChildren();
 
-    const list = el("poster-review-facts");
-    list.replaceChildren();
+    const facts = Array.isArray(poster.factTexts) &&
+      poster.factTexts.length
+        ? poster.factTexts
+        : (poster.facts || []).map(index =>
+            data.facts[poster.planet]?.[Number(index)]?.[0]
+          );
 
-    const factTexts = Array.isArray(poster.factTexts)
-      ? poster.factTexts
-      : (poster.facts || []).map(
-          index => data.facts[poster.planet]?.[Number(index)]?.[0]
-        );
-
-    factTexts.forEach(value => {
-      if (!value) return;
+    facts.forEach(fact => {
+      if (!fact) return;
 
       const item = document.createElement("li");
       item.className = "poster-fact";
-      item.textContent = String(value);
-      list.append(item);
-    });
+      item.textContent = String(fact);
 
-    el("poster-review-authors").textContent =
-      `Autorid: ${poster.authors || ""}`;
+      nodes.facts.append(item);
+    });
   }
 
-  function displayReview(review) {
-    formPanel.hidden = true;
-    resultPanel.hidden = false;
+  function addFeedback(title, description, status = "") {
+    const line = document.createElement("div");
+    line.className = `review-feedback-item ${status}`;
 
-    peer.replaceChildren();
-    check.replaceChildren();
+    const heading = document.createElement("strong");
+    heading.textContent = title;
 
-    addLine(peer, "Hindajad", review.reviewers);
+    const text = document.createElement("p");
+    text.textContent = description;
 
-    addLine(
-      peer,
-      "Kas planeedi nimi ja pilt sobivad kokku?",
-      review.image === "jah" ? "Jah" : "Vajab parandamist"
-    );
+    line.append(heading, text);
+    nodes.message.append(line);
+  }
 
-    addLine(
-      peer,
-      "Kas kõik kolm fakti on õiged?",
-      review.facts === "jah" ? "Jah" : "Vajab parandamist"
-    );
+  function showMessage(text) {
+    nodes.message.replaceChildren();
+    nodes.message.textContent = text;
+    nodes.message.className = "learning-box";
+    nodes.message.hidden = false;
+  }
 
-    addLine(
-      peer,
-      "Kas plakatit on lihtne lugeda?",
-      review.design === "jah" ? "Jah" : "Vajab parandamist"
-    );
-
-    if (review.comment) {
-      addLine(peer, "Meeskonna soovitus", review.comment);
-    }
-
+  function checkPoster(poster) {
     const expectedPlanet = data.planets.find(
-      planet => planet.id === currentPoster.planet
+      planet => planet.id === poster.planet
     );
 
     const picturedPlanet = data.planets.find(
-      planet =>
-        planet.image === Number(currentPoster.planetImage)
+      planet => planet.image === Number(poster.planetImage)
     );
 
-    if (
+    const imageCorrect = Boolean(
       expectedPlanet &&
       picturedPlanet?.id === expectedPlanet.id
-    ) {
-      addLine(
-        check,
-        "Planeedi pilt",
-        "Pilt sobib planeedi nimega.",
-        "is-correct"
-      );
-    } else {
-      addLine(
-        check,
-        "Planeedi pilt",
-        `Pilt ei sobi pealkirjaga. Pealkiri: ${
-          expectedPlanet?.name || "–"
-        }. Valitud pilt: ${
-          picturedPlanet?.name || "tundmatu planeet"
-        }.`,
-        "is-wrong"
-      );
-    }
+    );
 
-    const indices = Array.isArray(currentPoster.facts)
-      ? currentPoster.facts.map(Number)
+    addFeedback(
+      "Planeedi nime ja pildi kontroll",
+      imageCorrect
+        ? "Planeedi nimi ja pilt sobivad kokku."
+        : "Planeedi nimi ja pilt ei sobi kokku.",
+      imageCorrect ? "is-correct" : "is-wrong"
+    );
+
+    const selected = Array.isArray(poster.facts)
+      ? poster.facts.map(Number)
       : [];
 
-    const bank = data.facts[currentPoster.planet] || [];
+    const factBank = data.facts[poster.planet] || [];
 
-    const texts = Array.isArray(currentPoster.factTexts)
-      ? currentPoster.factTexts
-      : [];
-
-    const mistakes = indices
-      .map((index, position) => ({
-        correct: bank[index]?.[1] === true,
-        text:
-          texts[position] ||
-          bank[index]?.[0] ||
-          `Väide ${position + 1}`
-      }))
-      .filter(item => !item.correct);
-
-    if (indices.length === 3 && mistakes.length === 0) {
-      addLine(
-        check,
-        "Planeedi faktid",
-        "Kõik kolm fakti sobivad valitud planeedi kohta.",
-        "is-correct"
-      );
-    } else {
-      addLine(
-        check,
-        "Planeedi faktid",
-        "Mõni fakt vajab parandamist.",
-        "is-wrong"
+    const validIndices = selected.length === 3 &&
+      new Set(selected).size === 3 &&
+      selected.every(index =>
+        Number.isInteger(index) &&
+        index >= 0 &&
+        index < factBank.length
       );
 
-      mistakes.forEach(item => {
-        addLine(
-          check,
-          "Kontrolli seda väidet",
-          item.text,
-          "is-wrong"
-        );
+    const correctFacts = validIndices &&
+      selected.every(index => factBank[index]?.[1] === true);
+
+    addFeedback(
+      "Planeedi faktide kontroll",
+      correctFacts
+        ? "Kõik kolm valitud fakti on õiged."
+        : "Mõni valitud fakt on vale või fakte ei ole kolm.",
+      correctFacts ? "is-correct" : "is-wrong"
+    );
+
+    if (validIndices && !correctFacts) {
+      selected.forEach(index => {
+        const fact = factBank[index];
+
+        if (fact && fact[1] !== true) {
+          addFeedback(
+            "Kontrolli seda väidet",
+            fact[0],
+            "is-wrong"
+          );
+        }
       });
-
-      if (indices.length !== 3) {
-        addLine(
-          check,
-          "Faktide arv",
-          "Plakatil peab olema kolm fakti.",
-          "is-wrong"
-        );
-      }
     }
   }
 
   function fillForm(review) {
-    el("poster-review-reviewers").value =
-      review.reviewers || "";
+    nodes.names.value = review.reviewers || "";
+    nodes.comment.value = review.comment || "";
 
-    el("poster-review-comment").value =
-      review.comment || "";
-
-    ["image", "facts", "design"].forEach(name => {
-      form.querySelectorAll(`input[name="${name}"]`)
+    ["match", "facts", "design"].forEach(name => {
+      nodes.form
+        .querySelectorAll(`input[name="${name}"]`)
         .forEach(input => {
           input.checked = input.value === review[name];
         });
     });
   }
 
+  function displayReview(review) {
+    nodes.message.replaceChildren();
+    nodes.message.className = "review-results";
+
+    addFeedback(
+      "Tagasiside salvestatud",
+      `Hindajad: ${review.reviewers}`,
+      "is-correct"
+    );
+
+    const matchText = review.match === "jah"
+      ? "Jah"
+      : "Vajab parandamist";
+
+    const factsText = review.facts === "jah"
+      ? "Jah"
+      : "Vajab parandamist";
+
+    const designLabels = {
+      vaga: "Väga meeldib",
+      meeldib: "Meeldib",
+      parem: "Võiks veel parem olla"
+    };
+
+    addFeedback(
+      "Kas planeedi nimi ja pilt sobivad kokku?",
+      matchText
+    );
+
+    addFeedback(
+      "Kas kõik kolm fakti on õiged?",
+      factsText
+    );
+
+    addFeedback(
+      "Kuidas teile see plakat meeldib?",
+      designLabels[review.design] || "Vastamata"
+    );
+
+    if (review.comment) {
+      addFeedback("Meie soovitus", review.comment);
+    }
+
+    if (currentPoster) {
+      checkPoster(currentPoster);
+    }
+
+    nodes.message.hidden = false;
+    nodes.next.hidden = false;
+  }
+
   function loadPoster() {
     const progress = getProgress();
     const poster = progress.responses?.poster;
 
-    if (
-      !poster ||
-      !data.planets.some(planet => planet.id === poster.planet)
-    ) {
+    const validPoster = poster &&
+      data.planets.some(item => item.id === poster.planet);
+
+    if (!validPoster) {
       currentPoster = null;
       currentSignature = "";
 
-      empty.hidden = false;
-      layout.hidden = true;
+      nodes.poster.hidden = true;
+      nodes.next.hidden = true;
+
+      nodes.form
+        .querySelectorAll("input, textarea, button")
+        .forEach(input => {
+          input.disabled = true;
+        });
+
+      showMessage(
+        "Plakatit ei leitud. Avage see etapp arvutis, " +
+        "kus plakat koostati ja salvestati."
+      );
+
       return;
     }
 
-    empty.hidden = true;
-    layout.hidden = false;
+    nodes.poster.hidden = false;
+
+    nodes.form
+      .querySelectorAll("input, textarea, button")
+      .forEach(input => {
+        input.disabled = false;
+      });
 
     const signature = JSON.stringify(poster);
 
@@ -289,29 +325,34 @@
 
     const review = progress.responses?.posterReview;
 
-    if (review?.posterSignature === currentSignature) {
+    if (
+      review &&
+      review.posterSignature === currentSignature
+    ) {
       fillForm(review);
       displayReview(review);
     } else {
-      form.reset();
-      formPanel.hidden = false;
-      resultPanel.hidden = true;
+      nodes.form.reset();
+      nodes.message.hidden = true;
+      nodes.next.hidden = true;
     }
   }
 
-  form.addEventListener("submit", event => {
+  nodes.form.addEventListener("submit", event => {
     event.preventDefault();
 
-    if (!currentPoster || !form.reportValidity()) return;
+    if (!currentPoster || !nodes.form.reportValidity()) {
+      return;
+    }
 
-    const values = new FormData(form);
+    const values = new FormData(nodes.form);
 
     const review = {
       posterSignature: currentSignature,
       reviewers: String(
         values.get("reviewers") || ""
       ).trim(),
-      image: String(values.get("image") || ""),
+      match: String(values.get("match") || ""),
       facts: String(values.get("facts") || ""),
       design: String(values.get("design") || ""),
       comment: String(values.get("comment") || "").trim()
@@ -319,9 +360,13 @@
 
     if (
       !review.reviewers ||
-      [review.image, review.facts, review.design]
-        .some(value => !["jah", "ei"].includes(value))
-    ) return;
+      !["jah", "vajab"].includes(review.match) ||
+      !["jah", "vajab"].includes(review.facts) ||
+      !["vaga", "meeldib", "parem"].includes(review.design)
+    ) {
+      showMessage("Palun vastake kõigile küsimustele.");
+      return;
+    }
 
     document.dispatchEvent(
       new CustomEvent("lesson:save-response", {
@@ -336,18 +381,32 @@
     displayReview(review);
   });
 
-  el("poster-review-edit").addEventListener("click", () => {
-    formPanel.hidden = false;
-    resultPanel.hidden = true;
-    form.querySelector("input")?.focus();
+  nodes.form.addEventListener("input", () => {
+    nodes.next.hidden = true;
+    nodes.message.hidden = true;
   });
 
-  root.closest(".journey-step")
-    ?.addEventListener("toggle", event => {
-      if (event.currentTarget.open) {
-        loadPoster();
-      }
+  nodes.next.addEventListener("click", () => {
+    const nextStep = document.querySelector(
+      '.journey-step[data-step="7"]'
+    );
+
+    if (!nextStep) return;
+
+    step.open = false;
+    nextStep.open = true;
+
+    nextStep.scrollIntoView({
+      behavior: window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches ? "auto" : "smooth",
+      block: "start"
     });
+  });
+
+  step.addEventListener("toggle", () => {
+    if (step.open) loadPoster();
+  });
 
   document.addEventListener("lesson:save-response", event => {
     if (event.detail?.id === "poster") {
