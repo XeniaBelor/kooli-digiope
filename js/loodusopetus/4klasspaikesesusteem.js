@@ -31,11 +31,11 @@ window.lessonConfig = {
           id: "q2",
           text: "Mitu planeeti on Päikesesüsteemis?",
           options: {
-            "8": "8",
-            "7": "7",
-            "9": "9"
+            kaheksa: "8",
+            seitse: "7",
+            uheksa: "9"
           },
-          correct: "8",
+          correct: "kaheksa",
           explanation: "Päikesesüsteemis on kaheksa planeeti."
         },
         {
