@@ -70,45 +70,45 @@
       Number(answers[task.name]) === task.correct;
   }
 
-  function showResults(answers) {
-    let correctCount = 0;
 
-    tasks.forEach(task => {
-      const result = document.querySelector(
-        `#final-result-${task.name}`
-      );
+function showResults(answers) {
+  let correctCount = 0;
 
-      if (!result) return;
+  tasks.forEach(task => {
+    const result = document.querySelector(
+      `#final-result-${task.name}`
+    );
 
-      const correct = isCorrect(task, answers);
+    if (!result) return;
 
-      if (correct) correctCount++;
+    const correct = isCorrect(task, answers);
 
-      result.className = correct
-        ? "final-feedback is-correct"
-        : "final-feedback is-wrong";
+    if (correct) correctCount++;
 
-      result.textContent = correct
-        ? `Õige vastus! ${task.explanation}`
-        : "Vastus ei ole veel õige. " +
-          "Kontrolli arvutust ja proovi uuesti.";
+    result.className = correct
+      ? "final-feedback is-correct"
+      : "final-feedback is-wrong";
 
-      result.hidden = false;
-    });
+    result.textContent = correct
+      ? `Õige vastus! ${task.explanation}`
+      : `Õige vastus on ${task.correct}. ${task.explanation}`;
 
-    const allCorrect = correctCount === tasks.length;
+    result.hidden = false;
+  });
 
-    total.textContent = allCorrect
-      ? "Kõik 3 vastust on õiged! " +
-        "Võid kosmosereisi lõpetada."
-      : `Õigeid vastuseid: ${correctCount} / 3. ` +
-        "Paranda valed vastused ja kontrolli uuesti.";
+  const allCorrect = correctCount === tasks.length;
 
-    total.hidden = false;
-    finishButton.hidden = !allCorrect;
+  total.textContent = allCorrect
+    ? "Kõik 3 vastust on õiged! " +
+      "Võid kosmosereisi lõpetada."
+    : `Õigeid vastuseid: ${correctCount} / 3. ` +
+      "Paranda valed vastused ja kontrolli uuesti.";
 
-    return allCorrect;
-  }
+  total.hidden = false;
+  finishButton.hidden = !allCorrect;
+
+  return allCorrect;
+}
 
   function resetResults() {
     finishButton.hidden = true;
