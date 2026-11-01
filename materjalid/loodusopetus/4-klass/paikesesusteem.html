@@ -557,266 +557,117 @@
       <details class="journey-step" data-step="6">
         <summary>
           <span class="step-number">6</span>
-          <span class="step-title">
-            Kosmoseplakatite näitus
-          </span>
+          <span class="step-title">Vaatame plakateid ja anname tagasisidet!</span>
           <span class="step-status">Alustamata</span>
         </summary>
-
+      
         <div class="step-content">
-          <h3>Uurime teise paari plakatit!</h3>
-
+          <h3>Teise paari plakati hindamine</h3>
+      
           <p>
-            Vahetage teise paariga arvutid.
-            Vaadake nende plakatit ja arutage,
-            kas pilt ning faktid sobivad valitud planeedi kohta.
+            Vaadake teise paari plakatit ja arutage, kas pilt ning faktid sobivad
+            valitud planeedi kohta.
           </p>
-
+      
           <div class="learning-box">
-            <strong>Sinu ülesanne 🔍</strong>
-
+            <strong>Sinu ülesanne 🔎</strong>
             <p>
-              Andke teise paari plakatile tagasisidet.
-              Esmalt vastake küsimustele oma teadmiste põhjal.
-              Alles seejärel vaadake automaatse kontrolli tulemusi.
+              Andke teise paari plakatile tagasisidet. Kõigepealt vastake küsimustele
+              oma teadmiste põhjal ja seejärel kirjutage lühike soovitus.
             </p>
           </div>
-
-          <div id="poster-review" class="poster-review">
-
-            <div
-              id="poster-review-empty"
-              class="learning-box poster-review-empty"
-              hidden>
-              Sellel arvutil ei ole veel salvestatud plakatit.
-              Kõigepealt tuleb 5. etapis plakat salvestada.
-            </div>
-
-            <div
-              id="poster-review-layout"
-              class="poster-review-layout"
-              hidden>
-
-              <div class="poster-review-poster">
-                <h4>Teise paari plakat</h4>
-
-                <div
-                  id="poster-review-preview"
-                  class="poster-preview poster-review-preview">
-
-                  <img
-                    id="poster-review-bg"
-                    class="poster-layer poster-bg"
-                    alt="">
-
-                  <img
-                    id="poster-review-planet"
-                    class="poster-layer poster-planet"
-                    alt="">
-
-                  <div id="poster-review-decorations"></div>
-
+      
+          <div class="review-layout">
+            <!-- LEFT: poster -->
+            <div class="review-poster-column">
+              <h4>Teise paari plakat</h4>
+      
+              <div class="review-poster-wrap">
+                <div id="review-poster" class="poster-preview poster-preview--review">
+                  <img id="review-bg" class="poster-layer poster-bg" alt="">
+                  <img id="review-planet" class="poster-layer poster-planet" alt="">
+      
+                  <img id="review-decor-1" class="poster-layer poster-decor decor-1" alt="">
+                  <img id="review-decor-2" class="poster-layer poster-decor decor-2" alt="">
+                  <img id="review-decor-3" class="poster-layer poster-decor decor-3" alt="">
+      
                   <div class="poster-head">
-
-                    <h3
-                      id="poster-review-title"
-                      class="poster-title"></h3>
-
-                    <p
-                      id="poster-review-subtitle"
-                      class="poster-review-subtitle"></p>
-
+                    <h3 id="review-title">Planeet</h3>
+                    <p id="review-subtitle"></p>
                   </div>
-
-                  <ul
-                    id="poster-review-facts"
-                    class="poster-facts"></ul>
-
-                  <div
-                    id="poster-review-authors"
-                    class="poster-authors"></div>
-
+      
+                  <ul id="review-facts" class="poster-facts"></ul>
+      
+                  <div id="review-team" class="poster-team">Autorid: ...</div>
                 </div>
               </div>
-
-              <div class="poster-review-side">
-
-                <section
-                  id="poster-review-form-panel"
-                  class="poster-review-card">
-
-                  <h4>Andke plakatile tagasisidet!</h4>
-
-                  <p>
-                    Arutage küsimusi paarilisega
-                    ja valige sobivad vastused.
-                  </p>
-
-                  <form
-                    id="poster-review-form"
-                    class="poster-review-form">
-
-                    <fieldset>
-                      <legend>
-                        1. Kas planeedi nimi ja pilt sobivad kokku?
-                      </legend>
-
-                      <label>
-                        <input
-                          type="radio"
-                          name="image"
-                          value="jah"
-                          required>
-                        Jah
-                      </label>
-
-                      <label>
-                        <input
-                          type="radio"
-                          name="image"
-                          value="ei">
-                        Vajab parandamist
-                      </label>
-                    </fieldset>
-
-                    <fieldset>
-                      <legend>
-                        2. Kas kõik kolm fakti on õiged?
-                      </legend>
-
-                      <label>
-                        <input
-                          type="radio"
-                          name="facts"
-                          value="jah"
-                          required>
-                        Jah
-                      </label>
-
-                      <label>
-                        <input
-                          type="radio"
-                          name="facts"
-                          value="ei">
-                        Vajab parandamist
-                      </label>
-                    </fieldset>
-
-                    <fieldset>
-                      <legend>
-                        3. Kas plakatit on lihtne lugeda?
-                      </legend>
-
-                      <label>
-                        <input
-                          type="radio"
-                          name="design"
-                          value="jah"
-                          required>
-                        Jah
-                      </label>
-
-                      <label>
-                        <input
-                          type="radio"
-                          name="design"
-                          value="ei">
-                        Vajab parandamist
-                      </label>
-                    </fieldset>
-
-                    <div class="poster-review-field">
-                      <label for="poster-review-reviewers">
-                        Hindajate eesnimed
-                      </label>
-
-                      <input
-                        id="poster-review-reviewers"
-                        name="reviewers"
-                        type="text"
-                        maxlength="60"
-                        placeholder="Näiteks Mari ja Karl"
-                        required>
-                    </div>
-
-                    <div class="poster-review-field">
-                      <label for="poster-review-comment">
-                        Mida soovitate muuta? (Soovi korral)
-                      </label>
-
-                      <textarea
-                        id="poster-review-comment"
-                        name="comment"
-                        maxlength="180"
-                        rows="3"
-                        placeholder="Meie soovitus..."></textarea>
-                    </div>
-
-                    <button
-                      type="submit"
-                      class="action-button check-button">
-                      Salvesta tagasiside ja kontrolli
-                    </button>
-
-                  </form>
-                </section>
-
-                <section
-                  id="poster-review-results"
-                  class="poster-review-card"
-                  hidden>
-
-                  <h4>Teise paari tagasiside</h4>
-
-                  <div id="poster-review-peer"></div>
-
-                  <h4 class="poster-review-subheading">
-                    Automaatne kontroll
-                  </h4>
-
-                  <div
-                    id="poster-review-check"
-                    role="status"
-                    aria-live="polite"></div>
-
-                  <div class="learning-box">
-                    <strong>Etapp läbitud!</strong>
-
-                    <p>
-                      Tagasiside on salvestatud.
-                      Plakati autorid saavad nüüd
-                      teie hinnangut vaadata.
-                    </p>
-                  </div>
-
-                  <div class="poster-review-actions">
-
-                    <button
-                      id="poster-review-edit"
-                      type="button"
-                      class="secondary-button">
-                      Muuda tagasisidet
-                    </button>
-
-                    <button
-                      id="poster-review-next"
-                      type="button"
-                      class="action-button"
-                      data-complete-step="6"
-                      data-next-step="7">
-                      Edasi 7. etapiga
-                    </button>
-
-                  </div>
-                </section>
-
-              </div>
             </div>
-
+      
+            <!-- RIGHT: form -->
+            <div class="review-form-column">
+              <h4>Andke plakatile tagasisidet</h4>
+      
+              <p class="review-intro">
+                Arutage küsimusi paarilisega ja valige sobivad vastused.
+              </p>
+      
+              <form id="poster-review-form" class="review-form">
+                <fieldset class="review-question">
+                  <legend>1. Kas planeedi nimi ja pilt sobivad kokku?</legend>
+                  <label><input type="radio" name="match" value="jah" required> Jah</label>
+                  <label><input type="radio" name="match" value="vajab"> Vajab parandamist</label>
+                </fieldset>
+      
+                <fieldset class="review-question">
+                  <legend>2. Kas kõik kolm fakti on õiged?</legend>
+                  <label><input type="radio" name="facts" value="jah" required> Jah</label>
+                  <label><input type="radio" name="facts" value="vajab"> Vajab parandamist</label>
+                </fieldset>
+      
+                <fieldset class="review-question">
+                  <legend>3. Kuidas teile see plakat meeldib?</legend>
+                  <label><input type="radio" name="design" value="vaga" required> Väga meeldib</label>
+                  <label><input type="radio" name="design" value="meeldib"> Meeldib</label>
+                  <label><input type="radio" name="design" value="parem"> Võiks veel parem olla</label>
+                </fieldset>
+      
+                <div class="review-question">
+                  <label for="review-names"><strong>Hindajate eesnimed</strong></label>
+                  <input
+                    id="review-names"
+                    name="reviewers"
+                    type="text"
+                    maxlength="60"
+                    placeholder="Näiteks Mari ja Karl">
+                </div>
+      
+                <div class="review-question">
+                  <label for="review-comment"><strong>Meie soovitus 💬</strong></label>
+                  <textarea
+                    id="review-comment"
+                    name="comment"
+                    rows="4"
+                    maxlength="220"
+                    placeholder="Kirjutage lühike soovitus või kiitus..."></textarea>
+                </div>
+      
+                <div class="review-actions">
+                  <button type="submit" class="action-button check-button">
+                    Salvesta tagasiside
+                  </button>
+      
+                  <button type="button" id="review-next" class="action-button" hidden>
+                    Edasi 7. etapiga
+                  </button>
+                </div>
+      
+                <div id="review-message" class="learning-box" hidden></div>
+              </form>
+            </div>
           </div>
         </div>
       </details>
-
+      
       <details class="journey-step" data-step="7">
         <summary>
           <span class="step-number">7</span>
