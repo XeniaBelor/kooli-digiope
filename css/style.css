@@ -148,7 +148,10 @@ nav {
   color: var(--text);
   font: inherit;
   cursor: pointer;
-  transition: background .2s, color .2s, transform .2s;
+  transition:
+    background .2s,
+    color .2s,
+    transform .2s;
 }
 
 .chip:hover {
@@ -195,7 +198,9 @@ nav {
 
 .material-card {
   display: block;
-  transition: transform .2s, box-shadow .2s;
+  transition:
+    transform .2s,
+    box-shadow .2s;
 }
 
 .material-card:hover {
@@ -248,7 +253,9 @@ nav {
   background: var(--green);
   border-radius: 10px;
   font-weight: 600;
-  transition: background .2s, transform .2s;
+  transition:
+    background .2s,
+    transform .2s;
 }
 
 .back-button:hover {
@@ -638,12 +645,18 @@ nav {
   background: #eaf1fb;
 }
 
+.secondary-button:hover {
+  background: #dce9f8;
+}
+
 .action-button.check-button {
   background: rgba(46, 157, 114, .12);
   border: 1px solid #58a984;
   color: #206f4d;
   border-radius: 12px;
-  transition: background .2s ease, border-color .2s ease;
+  transition:
+    background .2s ease,
+    border-color .2s ease;
 }
 
 .action-button.check-button:hover {
@@ -656,7 +669,9 @@ nav {
   border: 1px solid #dfa43f;
   color: #916018;
   border-radius: 12px;
-  transition: background .2s ease, border-color .2s ease;
+  transition:
+    background .2s ease,
+    border-color .2s ease;
 }
 
 .secondary-button.retry-button:hover {
@@ -746,7 +761,9 @@ nav {
   background: #f4f7fb;
   text-align: center;
   font-weight: 600;
-  transition: background .2s, border-color .2s;
+  transition:
+    background .2s,
+    border-color .2s;
 }
 
 .research-choice input:checked + span {
@@ -793,7 +810,9 @@ nav {
 
 .poster-builder {
   display: grid;
-  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  grid-template-columns:
+    minmax(0, .8fr)
+    minmax(0, 1.2fr);
   gap: 22px;
   align-items: start;
   margin-top: 24px;
@@ -896,7 +915,8 @@ nav {
   color: var(--muted);
 }
 
-#poster-next {
+#poster-next,
+#poster-save {
   align-self: flex-start;
 }
 
@@ -1058,7 +1078,7 @@ nav {
 .poster-head {
   position: absolute;
   z-index: 4;
-  top: 0%;
+  top: 0;
   left: 0;
   right: 0;
   padding: 6.5% 7% 10%;
@@ -1080,7 +1100,8 @@ nav {
   text-shadow: 0 2px 8px #10244366;
 }
 
-.poster-head #poster-subtitle {
+.poster-head #poster-subtitle,
+.poster-review-subtitle {
   position: static;
   margin: 0;
   color: #ffffff;
@@ -1093,12 +1114,12 @@ nav {
 .poster-facts {
   position: absolute;
   z-index: 4;
-  bottom: 15%;
-  left: 22%;
-  right: 22%;
+  bottom: 9%;
+  left: 7%;
+  right: 7%;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 7px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1136,10 +1157,6 @@ nav {
 
 #poster-message {
   margin: 2px 0 0;
-}
-
-#poster-save {
-  align-self: flex-start;
 }
 
 .journey-reset {
@@ -1279,7 +1296,8 @@ footer {
     font-size: clamp(25px, 7vw, 38px);
   }
 
-  .poster-head #poster-subtitle {
+  .poster-head #poster-subtitle,
+  .poster-review-subtitle {
     font-size: clamp(13px, 3.6vw, 18px);
   }
 
@@ -1308,10 +1326,7 @@ footer {
     scroll-behavior: auto;
   }
 
-  .filter-step {
-    animation: none;
-  }
-
+  .filter-step,
   .embed-loader {
     animation: none;
   }
