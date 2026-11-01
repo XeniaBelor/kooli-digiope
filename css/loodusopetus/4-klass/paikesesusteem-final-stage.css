@@ -1,1 +1,153 @@
+.final-mission {
+  display: grid;
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.final-card {
+  padding: 20px;
+  border: 1px solid #dce5f0;
+  border-radius: 15px;
+  background: #f8fbff;
+}
+
+.final-card h4 {
+  margin: 0 0 10px;
+  font-size: 19px;
+  color: var(--text);
+}
+
+.final-card p {
+  margin: 0 0 15px;
+}
+
+.final-memory-placeholder {
+  display: grid;
+  place-items: center;
+  min-height: 150px;
+  padding: 20px;
+  border: 2px dashed #c9d8ea;
+  border-radius: 12px;
+  background: white;
+  text-align: center;
+  color: var(--muted);
+}
+
+.final-math-task {
+  padding: 18px;
+  border: 1px solid #e1e9f3;
+  border-radius: 12px;
+  background: white;
+}
+
+.final-math-task h5 {
+  margin: 0 0 12px;
+  color: var(--blue);
+  font-size: 16px;
+}
+
+.final-math-task p {
+  margin: 0 0 14px;
+}
+
+.final-math-task label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.final-answer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.final-answer input {
+  width: 150px;
+  max-width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #c9d8ea;
+  border-radius: 10px;
+  background: white;
+  color: var(--text);
+  font: inherit;
+}
+
+.final-answer input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.final-answer span {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.final-feedback {
+  margin: 12px 0 0 !important;
+  padding: 11px 13px;
+  border-radius: 9px;
+  font-size: 14px;
+}
+
+.final-feedback.is-correct {
+  background: #e7f6ed;
+  color: #206f4d;
+}
+
+.final-feedback.is-wrong {
+  background: #fff2e4;
+  color: #88531c;
+}
+
+#final-total {
+  margin: 0;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.final-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.final-success {
+  padding: 30px 24px;
+  border: 1px solid #b6ddc8;
+  border-radius: 16px;
+  background: #f0faf4;
+  text-align: center;
+}
+
+.final-success h3 {
+  margin: 0 0 12px;
+  color: #206f4d;
+  font-size: 26px;
+}
+
+.final-success p {
+  max-width: 600px;
+  margin: 0 auto 12px;
+  color: #365b48;
+}
+
+.final-success strong {
+  color: #206f4d;
+}
+
+@media (max-width: 650px) {
+  .final-card {
+    padding: 14px;
+  }
+
+  .final-math-task {
+    padding: 14px;
+  }
+
+  .final-success {
+    padding: 24px 16px;
+  }
+}
 
