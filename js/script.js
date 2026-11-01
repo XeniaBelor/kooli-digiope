@@ -11,11 +11,10 @@ function makeButtons(items, container, selected, onClick, label) {
 
   items.forEach(item => {
     const button = document.createElement("button");
-
     button.type = "button";
     button.className = item === selected ? "chip selected" : "chip";
     button.textContent = label(item);
-    button.setAttribute("aria-pressed", item === selected);
+    button.setAttribute("aria-pressed", String(item === selected));
 
     button.addEventListener("click", () => onClick(item));
     container.append(button);
@@ -23,25 +22,41 @@ function makeButtons(items, container, selected, onClick, label) {
 }
 
 function showSubjects() {
-  makeButtons(subjects, subjectsBox, selectedSubject, subject => {
-    selectedSubject = subject;
-    showSubjects();
-    showMaterials();
-  }, subject => subject);
+  makeButtons(
+    subjects,
+    subjectsBox,
+    selectedSubject,
+    subject => {
+      selectedSubject = subject;
+      showSubjects();
+      showMaterials();
+    },
+    subject => subject
+  );
 }
 
 function showGrades() {
-  const grades = Array.from({ length: 9 }, (_, i) => i + 1);
+  const grades = Array.from(
+    { length: 9 },
+    (_, index) => index + 1
+  );
 
-  makeButtons(grades, gradesBox, selectedGrade, grade => {
-    selectedGrade = grade;
-    showGrades();
-    showMaterials();
-  }, grade => `${grade}. klass`);
+  makeButtons(
+    grades,
+    gradesBox,
+    selectedGrade,
+    grade => {
+      selectedGrade = grade;
+      showGrades();
+      showMaterials();
+    },
+    grade => `${grade}. klass`
+  );
 }
 
 function showMaterials() {
   resultsSection.hidden = !selectedSubject || !selectedGrade;
+
   if (resultsSection.hidden) return;
 
   cardsBox.replaceChildren();
@@ -54,7 +69,9 @@ function showMaterials() {
   if (!found.length) {
     const message = document.createElement("p");
     message.className = "empty";
-    message.textContent = "Selle klassi jaoks pole veel materjale lisatud.";
+    message.textContent =
+      "Selle klassi jaoks pole veel materjale lisatud.";
+
     cardsBox.append(message);
     return;
   }
@@ -79,7 +96,8 @@ function showMaterials() {
     title.textContent = material.title;
 
     const details = document.createElement("p");
-    details.textContent = `${material.subject} · ${material.grade}. klass`;
+    details.textContent =
+      `${material.subject} · ${material.grade}. klass`;
 
     body.append(type, title, details);
     card.append(image, body);
@@ -89,3 +107,4 @@ function showMaterials() {
 
 showSubjects();
 showGrades();
+showMaterials();
