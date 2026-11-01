@@ -25,9 +25,12 @@
 
   const subtitles = [
     "Avastame ühe põneva planeedi!",
-    "Kolm huvitavat fakti meie planeedist.",
+    "Kolm huvitavat fakti planeedist.",
     "Meie avastusretk Päikesesüsteemis.",
-    "Mis teeb selle planeedi eriliseks?"
+    "Mis teeb selle planeedi eriliseks?",
+    "Avastame kosmose saladusi!",
+    "Üks planeet, palju põnevaid avastusi!",
+    "Lähme koos planeeti avastama!"
   ];
 
   const backgrounds = [
