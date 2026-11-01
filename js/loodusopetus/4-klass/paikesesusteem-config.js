@@ -1,6 +1,6 @@
 (() => {
   const imageBase = new URL(
-    "../../../images/loodusopetus/poster/",
+    "../../../images/loodusopetus/4-klass/paikesesusteem/",
     document.currentScript.src
   ).href;
 
