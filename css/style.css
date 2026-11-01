@@ -1348,3 +1348,130 @@ footer {
     transition: none;
   }
 }
+
+
+/* ÕPETAJA VAADE */
+
+.teacher-placeholder h2 {
+  margin: 0 0 18px;
+  color: var(--blue);
+}
+
+.teacher-section {
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid #e5ebf2;
+}
+
+.teacher-section h3 {
+  margin: 0 0 12px;
+  color: var(--blue);
+  font-size: 19px;
+}
+
+.teacher-placeholder p + p,
+.teacher-section p + p {
+  margin-top: 12px;
+}
+
+.teacher-route {
+  margin: 12px 0 20px !important;
+  padding: 14px 18px;
+  background: #eef4fc;
+  border-radius: 12px;
+  color: var(--blue) !important;
+  font-weight: 600;
+  line-height: 1.8;
+}
+
+/* LISAMATERJALID */
+
+.teacher-resources {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.teacher-resource {
+  display: block;
+  padding: 16px 18px;
+  background: #f5f8fd;
+  border: 1px solid #dce6f3;
+  border-radius: 12px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.teacher-resource:hover {
+  background: #eaf2ff;
+  border-color: var(--accent);
+}
+
+.teacher-resource:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.teacher-resource strong {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--blue);
+  font-size: 15px;
+}
+
+.teacher-resource span {
+  display: block;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* ÕPPEMATERJALI TAUST JA AUTORID */
+
+.project-credit {
+  margin: 24px 0 35px;
+  padding: 22px 26px;
+  background: white;
+  border: 1px solid #e1e9f3;
+  border-left: 4px solid var(--blue);
+  border-radius: 14px;
+  box-shadow: 0 4px 18px #2036530c;
+}
+
+.project-credit h3 {
+  margin: 0 0 10px;
+  color: var(--blue);
+  font-size: 17px;
+}
+
+.project-credit p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.project-credit p + p {
+  margin-top: 10px;
+}
+
+.project-credit strong {
+  color: var(--text);
+}
+
+/* VÄIKSEMAD EKRAANID */
+
+@media (max-width: 700px) {
+  .teacher-resources {
+    grid-template-columns: 1fr;
+  }
+
+  .teacher-placeholder,
+  .project-credit {
+    padding: 20px;
+  }
+
+  .teacher-route {
+    font-size: 14px;
+  }
+}
