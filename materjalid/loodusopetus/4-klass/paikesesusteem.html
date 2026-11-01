@@ -252,29 +252,132 @@
           <div data-research="planetPassport"></div>
         </div>
       </details>
-
-
+      
       <!-- 5. ETAPP -->
       <details class="journey-step" data-step="5">
         <summary>
           <span class="step-number">5</span>
-          <span class="step-title">Kosmosemissioon</span>
+          <span class="step-title">Loome kosmoseplakati!</span>
           <span class="step-status">Alustamata</span>
         </summary>
-
-        <div class="poster-preview">
-          <img class="poster-layer poster-bg" src="...">
-          <img class="poster-layer poster-planet" src="...">
-          <img class="poster-layer poster-decor" src="...">
-        
-          <div class="poster-text">
-            <h3>Planeedi saladused</h3>
-            <ul>
-              <li>🔴 Marss on punane planeet.</li>
-              <li>🌍 Marss on neljas planeet.</li>
-              <li>🚀 Marsile saadetakse kulgureid.</li>
-            </ul>
-            <p class="poster-team">Töö tegid: ...</p>
+      
+        <div class="step-content">
+          <h3>Meie planeediplakat</h3>
+      
+          <p>
+            Koosta koos paarilisega ühe planeedi kohta plakat.
+            Valige planeet, sobiv tekst, kolm õiget fakti
+            ja kujundage oma plakat.
+          </p>
+      
+          <div class="learning-box">
+            <strong>Sinu ülesanne</strong>
+            <p>
+              Arutage paarilisega oma valikuid.
+              Valige kolm õiget fakti ja lisage plakatile
+              mõlema autori eesnimed.
+            </p>
+          </div>
+      
+          <div class="poster-builder" id="poster-builder">
+      
+            <!-- LEFT: CONTROLS -->
+            <div class="poster-controls">
+      
+              <div class="poster-control-group">
+                <h4>1. Valige planeet</h4>
+                <div id="poster-planets"
+                     class="poster-option-grid"></div>
+              </div>
+      
+              <div class="poster-control-group">
+                <h4>2. Valige lühike tutvustus</h4>
+                <div id="poster-subtitles"
+                     class="poster-option-list"></div>
+              </div>
+      
+              <div class="poster-control-group">
+                <h4>3. Valige kolm õiget fakti</h4>
+                <p>Millised väited sobivad teie planeedi kohta?</p>
+                <div id="poster-fact-options"
+                     class="poster-option-list"></div>
+                <p id="poster-fact-count"
+                   class="poster-counter">Valitud: 0 / 3</p>
+              </div>
+      
+              <div class="poster-control-group">
+                <h4>4. Valige taust</h4>
+                <div id="poster-backgrounds"
+                     class="poster-option-grid"></div>
+              </div>
+      
+              <div class="poster-control-group">
+                <h4>5. Valige kaunistus</h4>
+                <div id="poster-decorations"
+                     class="poster-option-grid"></div>
+              </div>
+      
+              <div class="poster-control-group">
+                <h4>6. Kes on plakati autorid?</h4>
+                <label for="poster-authors">
+                  Kirjutage mõlema õpilase eesnimed
+                </label>
+                <input
+                  id="poster-authors"
+                  type="text"
+                  maxlength="60"
+                  placeholder="Näiteks Mari ja Karl">
+              </div>
+      
+              <button
+                id="poster-save"
+                type="button"
+                class="action-button check-button">
+                Kontrolli ja salvesta plakat
+              </button>
+      
+              <div id="poster-message"
+                   class="learning-box"
+                   role="status"
+                   aria-live="polite"
+                   hidden></div>
+            </div>
+      
+            <!-- RIGHT: LIVE POSTER -->
+            <div class="poster-preview-area">
+              <h4>Teie plakat</h4>
+      
+              <div class="poster-preview"
+                   id="poster-preview">
+      
+                <img id="poster-bg"
+                     class="poster-layer poster-bg"
+                     alt="">
+      
+                <img id="poster-planet"
+                     class="poster-layer poster-planet"
+                     alt="">
+      
+                <img id="poster-decor"
+                     class="poster-layer poster-decor"
+                     alt="">
+      
+                <div class="poster-head">
+                  <h3 id="poster-title">Merkuur</h3>
+                  <p id="poster-subtitle"></p>
+                </div>
+      
+                <ul id="poster-facts"
+                    class="poster-facts"></ul>
+      
+                <div id="poster-team"
+                     class="poster-team">
+                  Autorid: ...
+                </div>
+      
+              </div>
+            </div>
+      
           </div>
         </div>
       </details>
