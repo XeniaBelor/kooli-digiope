@@ -220,15 +220,39 @@
     renderImageChoice();
     markChanged();
   }
-
+  function renderImageChoice() {
+    elements.imageChoice.src =
+      data.imageUrl("planeet", imageCursor);
+  
+    elements.imageChoice.alt = "Planeedi pildi eelvaade";
+  
+    const isSelected = state.planetImage === imageCursor;
+  
+    elements.imageStatus.textContent = isSelected
+      ? "See planeedi pilt on valitud."
+      : "Pildi valimiseks vajuta nuppu „Vali see pilt“.";
+  
+    elements.imageSelect.disabled = isSelected;
+  }
+  
+  function browseImage(number) {
+    imageCursor = number;
+    renderImageChoice();
+  }
+  
   elements.imagePrev.addEventListener("click", () => {
-    chooseImage(imageCursor === 1 ? 8 : imageCursor - 1);
+    browseImage(imageCursor === 1 ? 8 : imageCursor - 1);
   });
-
+  
   elements.imageNext.addEventListener("click", () => {
-    chooseImage(imageCursor === 8 ? 1 : imageCursor + 1);
+    browseImage(imageCursor === 8 ? 1 : imageCursor + 1);
   });
-
+  
+  elements.imageSelect.addEventListener("click", () => {
+    state.planetImage = imageCursor;
+    renderImageChoice();
+    markChanged();
+});
   elements.imageSelect.addEventListener("click", () => {
     chooseImage(imageCursor);
   });
