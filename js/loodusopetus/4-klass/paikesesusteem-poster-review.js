@@ -227,54 +227,69 @@
         });
     });
   }
-
+  
   function displayReview(review) {
     nodes.message.replaceChildren();
     nodes.message.className = "review-results";
-
+  
+    // Kinnitus, et tagasiside on salvestatud
     addFeedback(
       "Tagasiside salvestatud",
       `Hindajad: ${review.reviewers}`,
       "is-correct"
     );
-
-    const matchText = review.match === "jah"
-      ? "Jah"
-      : "Vajab parandamist";
-
-    const factsText = review.facts === "jah"
-      ? "Jah"
-      : "Vajab parandamist";
-
-    const designLabels = {
-      vaga: "Väga meeldib",
-      meeldib: "Meeldib",
-      parem: "Võiks veel parem olla"
-    };
-
-    addFeedback(
-      "Kas planeedi nimi ja pilt sobivad kokku?",
-      matchText
-    );
-
-    addFeedback(
-      "Kas kõik kolm fakti on õiged?",
-      factsText
-    );
-
-    addFeedback(
-      "Kuidas teile see plakat meeldib?",
-      designLabels[review.design] || "Vastamata"
-    );
-
-    if (review.comment) {
-      addFeedback("Meie soovitus", review.comment);
-    }
-
+  
+    const savedCard = nodes.message.lastElementChild;
+  
+    // Plakati automaatkontroll
     if (currentPoster) {
       checkPoster(currentPoster);
     }
-
+  
+    // Eemaldame õigete vastuste teated
+    for (const card of [...nodes.message.children]) {
+      if (
+        card !== savedCard &&
+        !card.classList.contains("is-wrong")
+      ) {
+        card.remove();
+      }
+    }
+  
+    // Eemaldame üldise veateate, kui konkreetsed
+    // valed faktid on juba eraldi välja toodud
+    const cards = [...nodes.message.children];
+  
+    const hasWrongFacts = cards.some(card =>
+      card.querySelector("strong")?.textContent ===
+      "Kontrolli seda väidet"
+    );
+  
+    if (hasWrongFacts) {
+      cards.forEach(card => {
+        if (
+          card.querySelector("strong")?.textContent ===
+          "Planeedi faktide kontroll"
+        ) {
+          card.remove();
+        }
+      });
+    }
+  
+    // Kui automaatkontroll vigu ei leidnud
+    if (nodes.message.children.length === 1) {
+      addFeedback(
+        "Plakati kontroll",
+        "Automaatkontrollis vigu ei leitud.",
+        "is-correct"
+      );
+    }
+  
+    // Teise paari kirjutatud soovitus
+    if (review.comment) {
+      addFeedback("Meie soovitus", review.comment);
+    }
+  
     nodes.message.hidden = false;
     nodes.next.hidden = false;
   }
