@@ -78,7 +78,6 @@
     imageChoice: el("poster-image-choice"),
     imagePrev: el("poster-image-prev"),
     imageNext: el("poster-image-next"),
-    imageSelect: el("poster-image-select"),
     imageStatus: el("poster-image-status"),
     subtitles: el("poster-subtitles"),
     facts: el("poster-fact-options"),
@@ -220,55 +219,33 @@
     renderImageChoice();
     markChanged();
   }
+
+  
   function renderImageChoice() {
     elements.imageChoice.src =
       data.imageUrl("planeet", imageCursor);
   
     elements.imageChoice.alt = "Planeedi pildi eelvaade";
-  
-    const isSelected = state.planetImage === imageCursor;
-  
-    elements.imageStatus.textContent = isSelected
-      ? "See planeedi pilt on valitud."
-      : "Pildi valimiseks vajuta nuppu „Vali see pilt“.";
-  
-    elements.imageSelect.disabled = isSelected;
+    elements.imageStatus.textContent = state.planetImage
+      ? "Planeedi pilt on valitud."
+      : "Vali sobiv planeedi pilt.";
   }
   
-  function browseImage(number) {
+  function chooseImage(number) {
     imageCursor = number;
+    state.planetImage = number;
+  
     renderImageChoice();
+    markChanged();
   }
   
   elements.imagePrev.addEventListener("click", () => {
-    browseImage(imageCursor === 1 ? 8 : imageCursor - 1);
+    chooseImage(imageCursor === 1 ? 8 : imageCursor - 1);
   });
   
   elements.imageNext.addEventListener("click", () => {
-    browseImage(imageCursor === 8 ? 1 : imageCursor + 1);
+    chooseImage(imageCursor === 8 ? 1 : imageCursor + 1);
   });
-  
-  elements.imageSelect.addEventListener("click", () => {
-    state.planetImage = imageCursor;
-    renderImageChoice();
-    markChanged();
-});
-  elements.imageSelect.addEventListener("click", () => {
-    chooseImage(imageCursor);
-  });
-
-  createSelect(
-    elements.subtitles,
-    data.subtitles.map(text => ({
-      value: text,
-      label: text
-    })),
-    state.subtitle,
-    value => {
-      state.subtitle = value;
-      markChanged();
-    }
-  );
 
   function renderFacts() {
     const dropdown = createDropdown(
