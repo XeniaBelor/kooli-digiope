@@ -1426,53 +1426,44 @@ footer {
   color: var(--muted);
 }
 
-/* ÕPPEMATERJALI TAUST JA AUTORID */
+/* ÕPPEMATERJALI AUTORID – TAGASIHOIDLIK KUJUNDUS */
 
 .project-credit {
-  margin: 24px 0 35px;
-  padding: 22px 26px;
-  background: white;
-  border: 1px solid #e1e9f3;
-  border-left: 4px solid var(--blue);
-  border-radius: 14px;
-  box-shadow: 0 4px 18px #2036530c;
+  margin: 24px 0 28px;
+  padding: 16px 0 0;
+  background: transparent;
+  border: none;
+  border-top: 1px solid #dce4ed;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .project-credit h3 {
-  margin: 0 0 10px;
-  color: var(--blue);
-  font-size: 17px;
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #75849a;
 }
 
 .project-credit p {
   margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.7;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #8491a3;
 }
 
 .project-credit p + p {
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .project-credit strong {
-  color: var(--text);
+  color: #66758a;
+  font-weight: 600;
 }
 
-/* VÄIKSEMAD EKRAANID */
-
 @media (max-width: 700px) {
-  .teacher-resources {
-    grid-template-columns: 1fr;
-  }
-
-  .teacher-placeholder,
   .project-credit {
-    padding: 20px;
-  }
-
-  .teacher-route {
-    font-size: 14px;
+    padding: 16px 0 0;
   }
 }
 
