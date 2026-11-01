@@ -1,11 +1,18 @@
-// Poster builder for the learning journey
-
 (() => {
   const root = document.querySelector("#poster-builder");
   if (!root) return;
 
-const imagePath = new URL( "../../images/loodusopetus/poster/", document.currentScript.src).href;
+  // Image paths are relative to this JavaScript file
+  const imagePath = new URL(
+    "../../images/loodusopetus/poster/",
+    document.currentScript.src
+  ).href;
 
+  function imageUrl(type, number) {
+    return `${imagePath}4-klass_poster-${type}${number}.webp`;
+  }
+
+  // Planets
   const planets = [
     { id: "merkuur", name: "Merkuur", image: 1 },
     { id: "veenus", name: "Veenus", image: 2 },
@@ -17,6 +24,7 @@ const imagePath = new URL( "../../images/loodusopetus/poster/", document.current
     { id: "neptuun", name: "Neptuun", image: 8 }
   ];
 
+  // Short introductions
   const subtitles = [
     "Avastame ühe põneva planeedi!",
     "Kolm huvitavat fakti meie planeedist.",
@@ -24,102 +32,301 @@ const imagePath = new URL( "../../images/loodusopetus/poster/", document.current
     "Mis teeb selle planeedi eriliseks?"
   ];
 
-  // Each planet has 3 correct and 3 incorrect statements.
-  // Planet names are intentionally omitted from the statements.
+  // Poster backgrounds
+  const backgrounds = [
+    { number: 1, name: "Punane", color: "#c54a50" },
+    { number: 2, name: "Oranž", color: "#d77a24" },
+    { number: 3, name: "Kollane", color: "#a88100" },
+    { number: 4, name: "Roheline", color: "#26834e" },
+    { number: 5, name: "Helesinine", color: "#197eac" },
+    { number: 6, name: "Sinine", color: "#2764c1" },
+    { number: 7, name: "Violetne", color: "#7851b6" }
+  ];
+
+  // Three correct and three incorrect facts per planet
   const factBank = {
     merkuur: [
-      { text: "See on Päikesesüsteemi kõige väiksem planeet.", correct: true },
-      { text: "Sellel planeedil on suured rõngad.", correct: false },
-      { text: "See asub Päikesele kõige lähemal.", correct: true },
-      { text: "Sellel planeedil on kaks kuud.", correct: false },
-      { text: "Sellel planeedil ei ole kuusid.", correct: true },
-      { text: "See on Päikesesüsteemi kõige suurem planeet.", correct: false }
+      {
+        text: "See on Päikesesüsteemi kõige väiksem planeet. 🪨",
+        correct: true
+      },
+      {
+        text: "Sellel planeedil on suured rõngad. 🪐",
+        correct: false
+      },
+      {
+        text: "See asub Päikesele kõige lähemal. ☀️",
+        correct: true
+      },
+      {
+        text: "Sellel planeedil on kaks kuud. 🌙",
+        correct: false
+      },
+      {
+        text: "Sellel planeedil ei ole kuusid. 🔭",
+        correct: true
+      },
+      {
+        text: "See on Päikesesüsteemi kõige suurem planeet. 🌍",
+        correct: false
+      }
     ],
 
     veenus: [
-      { text: "See on Päikesest teine planeet.", correct: true },
-      { text: "See on Päikesesüsteemi kõige väiksem planeet.", correct: false },
-      { text: "See on Päikesesüsteemi kõige kuumem planeet.", correct: true },
-      { text: "Sellel planeedil elavad inimesed.", correct: false },
-      { text: "Sellel planeedil ei ole kuusid.", correct: true },
-      { text: "See asub Päikesest kõige kaugemal.", correct: false }
+      {
+        text: "See on Päikesest teine planeet. ☀️",
+        correct: true
+      },
+      {
+        text: "See on Päikesesüsteemi kõige väiksem planeet. 🪨",
+        correct: false
+      },
+      {
+        text: "See on Päikesesüsteemi kõige kuumem planeet. 🔥",
+        correct: true
+      },
+      {
+        text: "Sellel planeedil elavad inimesed. 🏠",
+        correct: false
+      },
+      {
+        text: "Sellel planeedil ei ole kuusid. 🔭",
+        correct: true
+      },
+      {
+        text: "See asub Päikesest kõige kaugemal. 🌌",
+        correct: false
+      }
     ],
 
     maa: [
-      { text: "See on Päikesest kolmas planeet.", correct: true },
-      { text: "See on Päikesesüsteemi kõige suurem planeet.", correct: false },
-      { text: "Sellel planeedil on üks looduslik kaaslane.", correct: true },
-      { text: "See on Päikesest teine planeet.", correct: false },
-      { text: "See on ainus teadaolev planeet, kus leidub elu.", correct: true },
-      { text: "See on tuntud suurte rõngaste poolest.", correct: false }
+      {
+        text: "See on Päikesest kolmas planeet. ☀️",
+        correct: true
+      },
+      {
+        text: "See on Päikesesüsteemi kõige suurem planeet. 🌍",
+        correct: false
+      },
+      {
+        text: "Sellel planeedil on üks looduslik kaaslane. 🌙",
+        correct: true
+      },
+      {
+        text: "See on Päikesest teine planeet. 🔭",
+        correct: false
+      },
+      {
+        text: "See on ainus teadaolev planeet, kus leidub elu. 🌱",
+        correct: true
+      },
+      {
+        text: "See on tuntud suurte rõngaste poolest. 🪐",
+        correct: false
+      }
     ],
 
     marss: [
-      { text: "Seda tuntakse punase planeedina.", correct: true },
-      { text: "See on Päikesele kõige lähemal.", correct: false },
-      { text: "See on Päikesest neljas planeet.", correct: true },
-      { text: "See on Päikesesüsteemi kõige kuumem planeet.", correct: false },
-      { text: "Sellel planeedil on kaks kuud.", correct: true },
-      { text: "Sellel planeedil on vedela veega ookeanid.", correct: false }
+      {
+        text: "Seda tuntakse punase planeedina. 🔴",
+        correct: true
+      },
+      {
+        text: "See asub Päikesele kõige lähemal. ☀️",
+        correct: false
+      },
+      {
+        text: "See on Päikesest neljas planeet. 🔭",
+        correct: true
+      },
+      {
+        text: "See on Päikesesüsteemi kõige kuumem planeet. 🔥",
+        correct: false
+      },
+      {
+        text: "Sellel planeedil on kaks kuud. 🌙",
+        correct: true
+      },
+      {
+        text: "Sellel planeedil on vedela veega ookeanid. 🌊",
+        correct: false
+      }
     ],
 
     jupiter: [
-      { text: "See on Päikesesüsteemi kõige suurem planeet.", correct: true },
-      { text: "Sellel planeedil ei ole kuusid.", correct: false },
-      { text: "See on gaasihiid.", correct: true },
-      { text: "See on Päikesele kõige lähem planeet.", correct: false },
-      { text: "Selle atmosfääris asub Suur Punane Laik.", correct: true },
-      { text: "Sellel on tahke kivine pind.", correct: false }
+      {
+        text: "See on Päikesesüsteemi kõige suurem planeet. 🌍",
+        correct: true
+      },
+      {
+        text: "Sellel planeedil ei ole kuusid. 🌙",
+        correct: false
+      },
+      {
+        text: "See on gaasihiid. ☁️",
+        correct: true
+      },
+      {
+        text: "See asub Päikesele kõige lähemal. ☀️",
+        correct: false
+      },
+      {
+        text: "Selle atmosfääris asub Suur Punane Laik. 🌪️",
+        correct: true
+      },
+      {
+        text: "Sellel planeedil on tahke kivine pind. 🪨",
+        correct: false
+      }
     ],
 
     saturn: [
-      { text: "See on tuntud oma suurte rõngaste poolest.", correct: true },
-      { text: "See on Päikesest kolmas planeet.", correct: false },
-      { text: "See on gaasihiid.", correct: true },
-      { text: "Sellel planeedil ei ole kuusid.", correct: false },
-      { text: "See on Päikesest kuues planeet.", correct: true },
-      { text: "See on Päikesesüsteemi kõige väiksem planeet.", correct: false }
+      {
+        text: "See on tuntud oma suurte rõngaste poolest. 🪐",
+        correct: true
+      },
+      {
+        text: "See on Päikesest kolmas planeet. ☀️",
+        correct: false
+      },
+      {
+        text: "See on gaasihiid. ☁️",
+        correct: true
+      },
+      {
+        text: "Sellel planeedil ei ole kuusid. 🌙",
+        correct: false
+      },
+      {
+        text: "See on Päikesest kuues planeet. 🔭",
+        correct: true
+      },
+      {
+        text: "See on Päikesesüsteemi kõige väiksem planeet. 🪨",
+        correct: false
+      }
     ],
 
     uraan: [
-      { text: "See on Päikesest seitsmes planeet.", correct: true },
-      { text: "See on Päikesesüsteemi kõige kuumem planeet.", correct: false },
-      { text: "See pöörleb peaaegu külili.", correct: true },
-      { text: "See on Päikesele kõige lähem planeet.", correct: false },
-      { text: "See on jäähiid.", correct: true },
-      { text: "Sellel planeedil ei ole kuusid.", correct: false }
+      {
+        text: "See on Päikesest seitsmes planeet. ☀️",
+        correct: true
+      },
+      {
+        text: "See on Päikesesüsteemi kõige kuumem planeet. 🔥",
+        correct: false
+      },
+      {
+        text: "See pöörleb peaaegu külili. 🔄",
+        correct: true
+      },
+      {
+        text: "See asub Päikesele kõige lähemal. 🔭",
+        correct: false
+      },
+      {
+        text: "See on jäähiid. ❄️",
+        correct: true
+      },
+      {
+        text: "Sellel planeedil ei ole kuusid. 🌙",
+        correct: false
+      }
     ],
 
     neptuun: [
-      { text: "See on Päikesest kaheksas planeet.", correct: true },
-      { text: "See on Päikesele kõige lähem planeet.", correct: false },
-      { text: "See on jäähiid.", correct: true },
-      { text: "See on Päikesesüsteemi kõige väiksem planeet.", correct: false },
-      { text: "See asub Päikesest kõige kaugemal.", correct: true },
-      { text: "Sellel planeedil ei ole kuusid.", correct: false }
+      {
+        text: "See on Päikesest kaheksas planeet. ☀️",
+        correct: true
+      },
+      {
+        text: "See asub Päikesele kõige lähemal. 🔭",
+        correct: false
+      },
+      {
+        text: "See on jäähiid. ❄️",
+        correct: true
+      },
+      {
+        text: "See on Päikesesüsteemi kõige väiksem planeet. 🪨",
+        correct: false
+      },
+      {
+        text: "See asub Päikesest kõige kaugemal. 🌌",
+        correct: true
+      },
+      {
+        text: "Sellel planeedil ei ole kuusid. 🌙",
+        correct: false
+      }
     ]
   };
 
+  // Progress storage
   const storageKey =
     window.lessonConfig?.storageKey || "digiope-paikesesusteem";
 
   let savedPoster = null;
 
   try {
-    const savedProgress = JSON.parse(localStorage.getItem(storageKey));
-    savedPoster = savedProgress?.responses?.poster || null;
+    const progress = JSON.parse(
+      localStorage.getItem(storageKey) || "{}"
+    );
+
+    savedPoster = progress.responses?.poster || null;
   } catch {
     savedPoster = null;
   }
 
+  function validNumber(value, min, max, fallback) {
+    const number = Number(
+      String(value ?? "").replace(/\D/g, "")
+    );
+
+    return Number.isInteger(number) &&
+      number >= min && number <= max
+      ? number
+      : fallback;
+  }
+
+  // Support old saved posters
+  let savedDecorations = [];
+
+  if (Array.isArray(savedPoster?.decorations)) {
+    savedDecorations = savedPoster.decorations;
+  } else if (savedPoster?.decoration) {
+    savedDecorations = [savedPoster.decoration];
+  }
+
+  savedDecorations = [
+    ...new Set(
+      savedDecorations
+        .map(value => validNumber(value, 1, 8, 0))
+        .filter(Boolean)
+    )
+  ].slice(0, 3);
+
   const state = {
     planet: savedPoster?.planet || "merkuur",
-    subtitle: savedPoster?.subtitle || subtitles[0],
+
+    subtitle: subtitles.includes(savedPoster?.subtitle)
+      ? savedPoster.subtitle
+      : subtitles[0],
+
     facts: Array.isArray(savedPoster?.facts)
-      ? [...savedPoster.facts]
+      ? [...new Set(
+          savedPoster.facts.map(Number).filter(
+            n => Number.isInteger(n) && n >= 0 && n < 6
+          )
+        )].slice(0, 3)
       : [],
-    background: savedPoster?.background || 1,
-    decoration: savedPoster?.decoration ?? 1,
+
+    background: validNumber(
+      savedPoster?.background, 1, 7, 6
+    ),
+
+    decorations: savedDecorations,
+
     authors: savedPoster?.authors || ""
   };
 
@@ -128,195 +335,335 @@ const imagePath = new URL( "../../images/loodusopetus/poster/", document.current
     state.facts = [];
   }
 
+  // Existing HTML elements
   const elements = {
-    planets: document.querySelector("#poster-planets"),
-    subtitles: document.querySelector("#poster-subtitles"),
-    facts: document.querySelector("#poster-fact-options"),
-    backgrounds: document.querySelector("#poster-backgrounds"),
-    decorations: document.querySelector("#poster-decorations"),
-    authors: document.querySelector("#poster-authors"),
-    count: document.querySelector("#poster-fact-count"),
-    title: document.querySelector("#poster-title"),
-    subtitle: document.querySelector("#poster-subtitle"),
-    list: document.querySelector("#poster-facts"),
-    team: document.querySelector("#poster-team"),
-    bg: document.querySelector("#poster-bg"),
-    planetImage: document.querySelector("#poster-planet"),
-    decor: document.querySelector("#poster-decor"),
-    save: document.querySelector("#poster-save"),
-    message: document.querySelector("#poster-message")
+    planets: root.querySelector("#poster-planets"),
+    subtitles: root.querySelector("#poster-subtitles"),
+    facts: root.querySelector("#poster-fact-options"),
+    backgrounds: root.querySelector("#poster-backgrounds"),
+    decorations: root.querySelector("#poster-decorations"),
+    authors: root.querySelector("#poster-authors"),
+    count: root.querySelector("#poster-fact-count"),
+    title: root.querySelector("#poster-title"),
+    subtitle: root.querySelector("#poster-subtitle"),
+    list: root.querySelector("#poster-facts"),
+    team: root.querySelector("#poster-team"),
+    bg: root.querySelector("#poster-bg"),
+    planetImage: root.querySelector("#poster-planet"),
+    oldDecor: root.querySelector("#poster-decor"),
+    preview: root.querySelector("#poster-preview"),
+    save: root.querySelector("#poster-save"),
+    message: root.querySelector("#poster-message")
   };
 
-  function imageUrl(type, number) {
-    return `${imagePath}4-klass_poster-${type}${number}.webp`;
-  }
+  // Make existing HTML compatible with the CSS classes
+  root.querySelectorAll(".poster-control-group").forEach(group => {
+    group.classList.add("poster-section");
+  });
 
-  function showMessage(text, success) {
-    elements.message.textContent = text;
+  root.querySelector(".poster-preview-area")
+    ?.classList.add("poster-preview-panel");
+
+  elements.planets.classList.remove("poster-option-grid");
+  elements.subtitles.classList.remove("poster-option-list");
+
+  elements.facts.classList.add("poster-fact-options");
+
+  elements.backgrounds.classList.remove("poster-option-grid");
+  elements.backgrounds.classList.add("poster-options-grid");
+
+  elements.decorations.classList.remove("poster-option-grid");
+  elements.decorations.classList.add("poster-options-grid");
+
+  elements.count.classList.add("poster-fact-counter");
+  elements.authors.classList.add("poster-text-input");
+
+  elements.title.classList.add("poster-title");
+  elements.subtitle.classList.add("poster-subtitle");
+  elements.team.classList.add("poster-authors");
+
+  elements.list.style.listStyle = "none";
+  elements.list.style.margin = "0";
+  elements.list.style.padding = "0";
+
+  // Hide the old single-decoration image
+  elements.oldDecor.hidden = true;
+  elements.oldDecor.removeAttribute("src");
+
+  // Counter for decorations
+  const decorationCounter = document.createElement("p");
+  decorationCounter.className = "poster-fact-counter";
+  elements.decorations.after(decorationCounter);
+
+  // Message area
+  function showMessage(message, success) {
+    elements.message.textContent = message;
     elements.message.className = success
       ? "learning-box"
       : "answer-feedback is-wrong";
+
     elements.message.hidden = false;
   }
 
-  function changed() {
+  function markChanged() {
     elements.message.hidden = true;
     renderPoster();
   }
 
-  // Generate selection buttons
-  function createButtons(target, options, currentValue, onSelect) {
-    target.replaceChildren();
+  // Create select menus
+  function createSelect(target, options, selected, onChange, label) {
+    const select = document.createElement("select");
+    select.className = "poster-select";
+    select.setAttribute("aria-label", label);
 
-    options.forEach(option => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "poster-option";
-
-      const active = option.value === currentValue;
-
-      button.classList.toggle("is-selected", active);
-      button.setAttribute("aria-pressed", String(active));
-
-      if (option.image) {
-        const img = document.createElement("img");
-        img.src = option.image;
-        img.alt = "";
-        img.loading = "lazy";
-        button.append(img);
-      }
-
-      const text = document.createElement("span");
-      text.textContent = option.label;
-      button.append(text);
-
-      button.addEventListener("click", () => {
-        onSelect(option.value);
-        renderControls();
-        changed();
-      });
-
-      target.append(button);
+    options.forEach(item => {
+      const option = document.createElement("option");
+      option.value = item.value;
+      option.textContent = item.label;
+      select.append(option);
     });
+
+    select.value = selected;
+
+    select.addEventListener("change", () => {
+      onChange(select.value);
+      markChanged();
+    });
+
+    target.replaceChildren(select);
   }
 
-  function renderControls() {
-    createButtons(
-      elements.planets,
-      planets.map(p => ({
-        value: p.id,
-        label: p.name,
-        image: imageUrl("planeet", p.image)
-      })),
-      state.planet,
-      value => {
-        if (state.planet !== value) {
-          state.planet = value;
-          state.facts = [];
-        }
+  // 1. Planet selection
+  createSelect(
+    elements.planets,
+    planets.map(p => ({
+      value: p.id,
+      label: p.name
+    })),
+    state.planet,
+    value => {
+      if (state.planet !== value) {
+        state.planet = value;
+        state.facts = [];
+        renderFacts();
       }
-    );
+    },
+    "Valige planeet"
+  );
 
-    createButtons(
-      elements.subtitles,
-      subtitles.map(text => ({ value: text, label: text })),
-      state.subtitle,
-      value => { state.subtitle = value; }
-    );
+  // 2. Introduction selection
+  createSelect(
+    elements.subtitles,
+    subtitles.map(text => ({
+      value: text,
+      label: text
+    })),
+    state.subtitle,
+    value => {
+      state.subtitle = value;
+    },
+    "Valige lühike tutvustus"
+  );
 
-    createButtons(
-      elements.backgrounds,
-      Array.from({ length: 7 }, (_, i) => ({
-        value: i + 1,
-        label: `Taust ${i + 1}`,
-        image: imageUrl("taust", i + 1)
-      })),
-      state.background,
-      value => { state.background = value; }
-    );
-
-    createButtons(
-      elements.decorations,
-      [
-        { value: 0, label: "Ilma kaunistuseta" },
-        ...Array.from({ length: 8 }, (_, i) => ({
-          value: i + 1,
-          label: `Kaunistus ${i + 1}`
-        }))
-      ],
-      state.decoration,
-      value => { state.decoration = value; }
-    );
-
-    renderFactChoices();
-  }
-
-  // Display 6 choices for the selected planet
-  function renderFactChoices() {
+  // 3. Fact selection
+  function renderFacts() {
     elements.facts.replaceChildren();
 
-    const choices = factBank[state.planet];
+    factBank[state.planet].forEach((fact, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "poster-option facts-option";
 
-    choices.forEach((fact, index) => {
-      const label = document.createElement("label");
-      label.className = "poster-fact-option";
+      const selected = state.facts.includes(index);
 
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.value = String(index);
-      checkbox.checked = state.facts.includes(index);
+      button.classList.toggle("fact-selected", selected);
+      button.setAttribute("aria-pressed", String(selected));
+      button.textContent = fact.text;
 
-      label.classList.toggle("is-selected", checkbox.checked);
-
-      const text = document.createElement("span");
-      text.textContent = fact.text;
-
-      checkbox.addEventListener("change", () => {
-        if (checkbox.checked && state.facts.length >= 3) {
-          checkbox.checked = false;
-          showMessage("Saad valida ainult kolm fakti.", false);
-          return;
-        }
-
-        if (checkbox.checked) {
-          state.facts.push(index);
-        } else {
+      button.addEventListener("click", () => {
+        if (state.facts.includes(index)) {
           state.facts = state.facts.filter(i => i !== index);
+        } else {
+          if (state.facts.length >= 3) {
+            showMessage(
+              "Saate valida ainult kolm fakti.",
+              false
+            );
+            return;
+          }
+
+          state.facts.push(index);
         }
 
-        renderFactChoices();
-        changed();
+        renderFacts();
+        markChanged();
       });
 
-      label.append(checkbox, text);
-      elements.facts.append(label);
+      elements.facts.append(button);
     });
 
-    elements.count.textContent = `Valitud: ${state.facts.length} / 3`;
+    elements.count.textContent =
+      `Valitud: ${state.facts.length} / 3`;
   }
 
-  // Update the poster immediately after every change
+  // 4. Background selection
+  function renderBackgrounds() {
+    elements.backgrounds.replaceChildren();
+
+    backgrounds.forEach(bg => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "poster-option small-label";
+
+      const selected = state.background === bg.number;
+
+      button.classList.toggle("selected", selected);
+      button.setAttribute("aria-pressed", String(selected));
+
+      button.textContent = bg.name;
+      button.style.color = bg.color;
+
+      button.addEventListener("click", () => {
+        state.background = bg.number;
+        renderBackgrounds();
+        markChanged();
+      });
+
+      elements.backgrounds.append(button);
+    });
+  }
+
+  // 5. Decoration selection — maximum 3
+  function renderDecorations() {
+    elements.decorations.replaceChildren();
+
+    const noneButton = document.createElement("button");
+    noneButton.type = "button";
+    noneButton.className = "poster-option small-label";
+    noneButton.textContent = "Ilma kaunistuseta";
+
+    const noDecorations = state.decorations.length === 0;
+
+    noneButton.classList.toggle("selected", noDecorations);
+    noneButton.setAttribute(
+      "aria-pressed",
+      String(noDecorations)
+    );
+
+    noneButton.addEventListener("click", () => {
+      state.decorations = [];
+      renderDecorations();
+      markChanged();
+    });
+
+    elements.decorations.append(noneButton);
+
+    for (let number = 1; number <= 8; number++) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "poster-option small-label";
+      button.textContent = `Kaunistus ${number}`;
+
+      const selected = state.decorations.includes(number);
+
+      button.classList.toggle("selected", selected);
+      button.setAttribute("aria-pressed", String(selected));
+
+      button.addEventListener("click", () => {
+        if (state.decorations.includes(number)) {
+          state.decorations = state.decorations.filter(
+            item => item !== number
+          );
+        } else {
+          if (state.decorations.length >= 3) {
+            showMessage(
+              "Saate valida kuni kolm kaunistust.",
+              false
+            );
+            return;
+          }
+
+          state.decorations.push(number);
+        }
+
+        renderDecorations();
+        markChanged();
+      });
+
+      elements.decorations.append(button);
+    }
+
+    decorationCounter.textContent =
+      `Valitud: ${state.decorations.length} / 3`;
+  }
+
+  // 6. Authors
+  elements.authors.value = state.authors;
+
+  elements.authors.addEventListener("input", () => {
+    state.authors = elements.authors.value;
+    markChanged();
+  });
+
+  // Update images only when their paths change
+  function setImage(img, url) {
+    if (img.getAttribute("src") !== url) {
+      img.src = url;
+    }
+  }
+
+  // Render overlapping decorations
+  let lastDecorationSignature = null;
+
+  function renderDecorationLayers() {
+    const signature = state.decorations.join(",");
+
+    if (signature === lastDecorationSignature) return;
+
+    lastDecorationSignature = signature;
+
+    elements.preview
+      .querySelectorAll("[data-poster-decoration]")
+      .forEach(img => img.remove());
+
+    const heading = elements.preview.querySelector(".poster-head");
+
+    state.decorations.forEach(number => {
+      const image = document.createElement("img");
+      image.className = "poster-layer poster-decor";
+      image.dataset.posterDecoration = String(number);
+      image.src = imageUrl("kaunistus", number);
+      image.alt = "";
+      image.decoding = "async";
+
+      elements.preview.insertBefore(image, heading);
+    });
+  }
+
+  // Live poster preview
   function renderPoster() {
     const planet = planets.find(p => p.id === state.planet);
 
     elements.title.textContent = planet.name;
     elements.subtitle.textContent = state.subtitle;
 
-    elements.bg.src = imageUrl("taust", state.background);
-    elements.planetImage.src = imageUrl("planeet", planet.image);
+    setImage(
+      elements.bg,
+      imageUrl("taust", state.background)
+    );
 
-    if (state.decoration === 0) {
-      elements.decor.hidden = true;
-      elements.decor.removeAttribute("src");
-    } else {
-      elements.decor.hidden = false;
-      elements.decor.src = imageUrl("kaunistus", state.decoration);
-    }
+    setImage(
+      elements.planetImage,
+      imageUrl("planeet", planet.image)
+    );
+
+    renderDecorationLayers();
 
     elements.list.replaceChildren();
 
     if (state.facts.length === 0) {
       const placeholder = document.createElement("li");
+      placeholder.className = "poster-fact";
       placeholder.textContent = "Valige kolm huvitavat fakti.";
       elements.list.append(placeholder);
     } else {
@@ -325,7 +672,9 @@ const imagePath = new URL( "../../images/loodusopetus/poster/", document.current
         if (!fact) return;
 
         const item = document.createElement("li");
+        item.className = "poster-fact";
         item.textContent = fact.text;
+
         elements.list.append(item);
       });
     }
@@ -335,10 +684,13 @@ const imagePath = new URL( "../../images/loodusopetus/poster/", document.current
       : "Autorid: ...";
   }
 
-  // Save only when all three facts are correct
+  // Check and save
   elements.save.addEventListener("click", () => {
     if (state.facts.length !== 3) {
-      showMessage("Valige täpselt kolm fakti.", false);
+      showMessage(
+        "Valige täpselt kolm fakti.",
+        false
+      );
       return;
     }
 
@@ -348,18 +700,23 @@ const imagePath = new URL( "../../images/loodusopetus/poster/", document.current
 
     if (!allCorrect) {
       showMessage(
-        "Mõni valitud fakt ei sobi selle planeedi kohta. Uurige veel ja proovige uuesti.",
+        "Mõni valitud fakt ei sobi selle planeedi kohta. " +
+        "Uurige veel ja proovige uuesti.",
         false
       );
       return;
     }
 
     if (!state.authors.trim()) {
-      showMessage("Kirjutage plakati autorite eesnimed.", false);
+      showMessage(
+        "Kirjutage plakati autorite eesnimed.",
+        false
+      );
       elements.authors.focus();
       return;
     }
 
+    // Saved structure for stage 6
     const posterData = {
       planet: state.planet,
       subtitle: state.subtitle,
@@ -368,18 +725,20 @@ const imagePath = new URL( "../../images/loodusopetus/poster/", document.current
         index => factBank[state.planet][index].text
       ),
       background: state.background,
-      decoration: state.decoration,
+      decorations: [...state.decorations],
       authors: state.authors.trim()
     };
 
-    // Save through the existing learning journey
-    document.dispatchEvent(new CustomEvent("lesson:save-response", {
-      detail: {
-        id: "poster",
-        step: 5,
-        value: posterData
-      }
-    }));
+    // Existing lesson.js saves the poster and completes stage 5
+    document.dispatchEvent(
+      new CustomEvent("lesson:save-response", {
+        detail: {
+          id: "poster",
+          step: 5,
+          value: posterData
+        }
+      })
+    );
 
     showMessage(
       "Plakat on salvestatud! Etapp läbitud!",
@@ -387,17 +746,16 @@ const imagePath = new URL( "../../images/loodusopetus/poster/", document.current
     );
   });
 
-  elements.authors.value = state.authors;
-
-  elements.authors.addEventListener("input", () => {
-    state.authors = elements.authors.value;
-    changed();
-  });
-
-  renderControls();
+  // Initialize
+  renderFacts();
+  renderBackgrounds();
+  renderDecorations();
   renderPoster();
 
   if (savedPoster) {
-    showMessage("Salvestatud plakat on avatud.", true);
+    showMessage(
+      "Salvestatud plakat on avatud.",
+      true
+    );
   }
 })();
