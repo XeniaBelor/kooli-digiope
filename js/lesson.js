@@ -381,38 +381,47 @@
         label.append(title, control);
         form.append(label);
       });
-    
+
       // Feedback and buttons
-      const feedback = document.createElement("p");
-      feedback.className = "answer-feedback";
+      const feedback = document.createElement("div");
+      feedback.className = "learning-box";
       feedback.setAttribute("role", "status");
       feedback.setAttribute("aria-live", "polite");
       feedback.hidden = true;
-    
+
       const actions = document.createElement("div");
       actions.className = "quiz-actions";
-    
+
+      // Green outlined button — Check and save
       const submit = document.createElement("button");
       submit.type = "submit";
-      submit.className = "action-button";
+      submit.className = "action-button check-button";
       submit.textContent = "Kontrolli ja salvesta";
-    
+
+      actions.append(submit);
+      form.append(actions);
+
+      // Result message below the check button
+      form.append(feedback);
+
+      // Blue button — Next stage, below the result
       const next = document.createElement("button");
       next.type = "button";
-      next.className = "secondary-button";
+      next.className = "action-button";
       next.textContent = `Edasi ${activity.step + 1}. etapiga`;
       next.hidden = true;
-    
-      actions.append(submit);
-      if (activity.step < steps.length) actions.append(next);
-    
-      form.append(actions, feedback);
+
+      if (activity.step < steps.length) {
+        form.append(next);
+      }
+
       container.append(form);
-    
+
       function showFeedback(message, correct) {
         feedback.textContent = message;
-        feedback.className =
-          `answer-feedback ${correct ? "is-correct" : "is-wrong"}`;
+        feedback.className = correct
+          ? "learning-box"
+          : "answer-feedback is-wrong";
         feedback.hidden = false;
       }
     
