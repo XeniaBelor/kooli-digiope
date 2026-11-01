@@ -127,6 +127,29 @@
     });
   });
 
+  // Save custom activities in the learning journey
+  document.addEventListener("lesson:save-response", event => {
+    const { id, step, value } = event.detail || {};
+    const number = Number(step);
+  
+    if (
+      typeof id !== "string" ||
+      !id ||
+      !Number.isInteger(number) ||
+      number < 1 ||
+      number > steps.length ||
+      value == null
+    ) {
+      return;
+    }
+  
+    progress.responses[id] = value;
+    progress.done[number - 1] = true;
+  
+    saveProgress();
+    updateProgress();
+  });
+
   // Simple completion buttons
   document.querySelectorAll("[data-complete-step]").forEach(button => {
     button.addEventListener("click", () => {
