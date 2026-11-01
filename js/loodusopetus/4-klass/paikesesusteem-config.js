@@ -134,7 +134,7 @@
         questions: [
           {
             id: "q1",
-            text: "Mis on Päike?",
+            text: "Mis on Päike? ☀️",
             options: {
               planeet: "Planeet",
               kaaslane: "Kuu",
@@ -146,7 +146,7 @@
           },
           {
             id: "q2",
-            text: "Mitu planeeti on Päikesesüsteemis?",
+            text: "Mitu planeeti on Päikesesüsteemis? 🪐",
             options: {
               kaheksa: "8",
               seitse: "7",
@@ -158,7 +158,7 @@
           },
           {
             id: "q3",
-            text: "Milline planeet on Päikesele kõige lähemal?",
+            text: "Milline planeet on Päikesele kõige lähemal? 🔍",
             options: {
               maa: "Maa",
               merkuur: "Merkuur",
@@ -170,7 +170,7 @@
           },
           {
             id: "q4",
-            text: "Mis tiirleb ümber Maa?",
+            text: "Mis tiirleb ümber Maa? 🌕",
             options: {
               kuu: "Kuu",
               paike: "Päike",
@@ -193,7 +193,7 @@
         questions: [
           {
             id: "s3q1",
-            text: "Mille ümber tiirlevad Päikesesüsteemi planeedid?",
+            text: "Mille ümber tiirlevad Päikesesüsteemi planeedid? 🪐",
             options: {
               maa: "Maa ümber",
               kuu: "Kuu ümber",
@@ -205,7 +205,7 @@
           },
           {
             id: "s3q2",
-            text: "Mis on asteroid?",
+            text: "Mis on asteroid? ☄️",
             options: {
               kivine: "Väike kivine taevakeha",
               taht: "Suur helendav täht",
@@ -217,7 +217,7 @@
           },
           {
             id: "s3q3",
-            text: "Milline neist ei ole planeet?",
+            text: "Milline neist ei ole planeet? 🌑",
             options: {
               saturn: "Saturn",
               kuu: "Kuu",
@@ -234,7 +234,7 @@
     researchActivities: {
       planetPassport: {
         step: 4,
-        choiceLabel: "Millist planeeti soovid uurida?",
+        choiceLabel: "Millist planeeti soovid uurida? 🚀",
         checkField: "order",
         successText:
           "Planeedi pass on salvestatud! Etapp läbitud!",
@@ -247,13 +247,13 @@
           {
             name: "order",
             type: "select",
-            label: "Mitmes planeet Päikesest see on?",
+            label: "Mitmes planeet Päikesest see on? 📍",
             options: ["1", "2", "3", "4", "5", "6", "7", "8"]
           },
           {
             name: "feature",
             type: "textarea",
-            label: "Kirjuta üks huvitav asi oma planeedi kohta.",
+            label: "Kirjuta üks huvitav asi oma planeedi kohta. ✍️",
             placeholder: "Sain teada, et ...",
             minLength: 8
           }
