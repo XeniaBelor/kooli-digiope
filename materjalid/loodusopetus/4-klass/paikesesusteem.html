@@ -253,7 +253,7 @@
           <div data-research="planetPassport"></div>
         </div>
       </details>
-      
+
       <!-- 5. ETAPP -->
       <details class="journey-step" data-step="5">
         <summary>
@@ -263,70 +263,102 @@
         </summary>
       
         <div class="step-content">
+      
           <h3>Meie planeediplakat</h3>
       
           <p>
-            Koosta koos paarilisega ühe planeedi kohta plakat.
-            Valige planeet, sobiv tekst, kolm õiget fakti
-            ja kujundage oma plakat.
+            Koostage koos paarilisega ühe planeedi kohta plakat.
+            Valige planeet, sobiv tutvustus, kolm õiget fakti
+            ning kujundage oma plakat.
           </p>
       
           <div class="learning-box">
             <strong>Sinu ülesanne</strong>
             <p>
               Arutage paarilisega oma valikuid.
-              Valige kolm õiget fakti ja lisage plakatile
-              mõlema autori eesnimed.
+              Leidke kolm õiget fakti, valige plakatil kasutatavad
+              värvid ja kaunistused ning lisage mõlema autori eesnimed.
             </p>
           </div>
       
+          <!-- POSTER BUILDER -->
           <div class="poster-builder" id="poster-builder">
       
-            <!-- LEFT: CONTROLS -->
+            <!-- LEFT SIDE: CONTROLS -->
             <div class="poster-controls">
       
-              <div class="poster-control-group">
+              <div class="poster-control-group poster-section">
                 <h4>1. Valige planeet</h4>
-                <div id="poster-planets"
-                     class="poster-option-grid"></div>
+      
+                <div id="poster-planets"></div>
               </div>
       
-              <div class="poster-control-group">
+              <div class="poster-control-group poster-section">
                 <h4>2. Valige lühike tutvustus</h4>
-                <div id="poster-subtitles"
-                     class="poster-option-list"></div>
+      
+                <div id="poster-subtitles"></div>
               </div>
       
-              <div class="poster-control-group">
+              <div class="poster-control-group poster-section">
                 <h4>3. Valige kolm õiget fakti</h4>
-                <p>Millised väited sobivad teie planeedi kohta?</p>
-                <div id="poster-fact-options"
-                     class="poster-option-list"></div>
-                <p id="poster-fact-count"
-                   class="poster-counter">Valitud: 0 / 3</p>
+      
+                <p>
+                  Millised väited sobivad teie valitud planeedi kohta?
+                  Valige täpselt kolm õiget fakti.
+                </p>
+      
+                <div
+                  id="poster-fact-options"
+                  class="poster-option-list poster-fact-options">
+                </div>
+      
+                <p
+                  id="poster-fact-count"
+                  class="poster-counter poster-fact-counter">
+                  Valitud: 0 / 3
+                </p>
               </div>
       
-              <div class="poster-control-group">
+              <div class="poster-control-group poster-section">
                 <h4>4. Valige taust</h4>
-                <div id="poster-backgrounds"
-                     class="poster-option-grid"></div>
+      
+                <p>
+                  Valige plakatile sobiv taustavärv.
+                </p>
+      
+                <div
+                  id="poster-backgrounds"
+                  class="poster-options-grid">
+                </div>
               </div>
       
-              <div class="poster-control-group">
-                <h4>5. Valige kaunistus</h4>
-                <div id="poster-decorations"
-                     class="poster-option-grid"></div>
+              <div class="poster-control-group poster-section">
+                <h4>5. Valige kaunistused</h4>
+      
+                <p>
+                  Valige kuni kolm kaunistust.
+                  Kaunistused ilmuvad plakatile üksteise peale.
+                </p>
+      
+                <div
+                  id="poster-decorations"
+                  class="poster-options-grid">
+                </div>
               </div>
       
-              <div class="poster-control-group">
+              <div class="poster-control-group poster-section">
                 <h4>6. Kes on plakati autorid?</h4>
+      
                 <label for="poster-authors">
-                  Kirjutage mõlema õpilase eesnimed
+                  Kirjutage mõlema õpilase eesnimed.
                 </label>
+      
                 <input
                   id="poster-authors"
+                  class="poster-text-input"
                   type="text"
                   maxlength="60"
+                  autocomplete="off"
                   placeholder="Näiteks Mari ja Karl">
               </div>
       
@@ -337,52 +369,81 @@
                 Kontrolli ja salvesta plakat
               </button>
       
-              <div id="poster-message"
-                   class="learning-box"
-                   role="status"
-                   aria-live="polite"
-                   hidden></div>
+              <div
+                id="poster-message"
+                class="learning-box"
+                role="status"
+                aria-live="polite"
+                hidden>
+              </div>
+      
             </div>
       
-            <!-- RIGHT: LIVE POSTER -->
-            <div class="poster-preview-area">
+            <div class="poster-preview-area poster-preview-panel">
+      
               <h4>Teie plakat</h4>
       
-              <div class="poster-preview"
-                   id="poster-preview">
+              <div class="poster-preview-wrap">
       
-                <img id="poster-bg"
-                     class="poster-layer poster-bg"
-                     alt="">
+                <div
+                  class="poster-preview"
+                  id="poster-preview">
       
-                <img id="poster-planet"
-                     class="poster-layer poster-planet"
-                     alt="">
+                  <img
+                    id="poster-bg"
+                    class="poster-layer poster-bg"
+                    alt=""
+                    decoding="async">
       
-                <img id="poster-decor"
-                     class="poster-layer poster-decor"
-                     alt="">
+                  <img
+                    id="poster-planet"
+                    class="poster-layer poster-planet"
+                    alt=""
+                    decoding="async">
       
-                <div class="poster-head">
-                  <h3 id="poster-title">Merkuur</h3>
-                  <p id="poster-subtitle"></p>
-                </div>
+                  <img
+                    id="poster-decor"
+                    class="poster-layer poster-decor"
+                    alt=""
+                    hidden>
       
-                <ul id="poster-facts"
-                    class="poster-facts"></ul>
+                  <div class="poster-head">
       
-                <div id="poster-team"
-                     class="poster-team">
-                  Autorid: ...
+                    <h3
+                      id="poster-title"
+                      class="poster-title">
+                      Merkuur
+                    </h3>
+      
+                    <p
+                      id="poster-subtitle"
+                      class="poster-subtitle">
+                    </p>
+      
+                  </div>
+      
+                  <ul
+                    id="poster-facts"
+                    class="poster-facts">
+                  </ul>
+      
+                  <div
+                    id="poster-team"
+                    class="poster-authors">
+                    Autorid: ...
+                  </div>
+      
                 </div>
       
               </div>
+      
             </div>
       
           </div>
+      
         </div>
       </details>
-
+      
       <!-- 6. ETAPP -->
       <details class="journey-step" data-step="6">
         <summary>
