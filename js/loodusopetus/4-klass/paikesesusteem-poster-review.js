@@ -1,40 +1,23 @@
 (() => {
   const root = document.querySelector("#poster-review");
-  if (!root) return;
+  const data = window.paikesesusteemData;
+  if (!root || !data) return;
 
-  const imagePath = new URL(
-    "../../images/loodusopetus/poster/",
-    document.currentScript.src
-  ).href;
-
-  const imageUrl = (type, number) =>
-    `${imagePath}4-klass_poster-${type}${number}.webp`;
-
-  const planetNames = [
-    "Merkuur", "Veenus", "Maa", "Marss",
-    "Jupiter", "Saturn", "Uraan", "Neptuun"
-  ];
-
-  const planetIds = [
-    "merkuur", "veenus", "maa", "marss",
-    "jupiter", "saturn", "uraan", "neptuun"
-  ];
-
-  const correctFactIndices = new Set([0, 2, 4]);
-
-  const storageKey =
-    window.lessonConfig?.storageKey || "digiope-paikesesusteem";
-
+  const storageKey = window.lessonConfig.storageKey;
   const el = id => root.querySelector(`#${id}`);
 
   const empty = el("poster-review-empty");
   const layout = el("poster-review-layout");
-  const preview = el("poster-review-preview");
   const formPanel = el("poster-review-form-panel");
   const form = el("poster-review-form");
   const resultPanel = el("poster-review-results");
   const peer = el("poster-review-peer");
   const check = el("poster-review-check");
+
+  if (
+    !empty || !layout || !formPanel ||
+    !form || !resultPanel || !peer || !check
+  ) return;
 
   let currentPoster = null;
   let currentSignature = "";
@@ -49,46 +32,53 @@
     }
   }
 
-  function addLine(parent, label, value, status = "") {
+  function addLine(parent, heading, value, status = "") {
     const line = document.createElement("div");
     line.className = `poster-review-line ${status}`;
 
-    const heading = document.createElement("strong");
-    heading.textContent = label;
+    const title = document.createElement("strong");
+    title.textContent = heading;
 
     const text = document.createElement("p");
     text.textContent = value;
 
-    line.append(heading, text);
+    line.append(title, text);
     parent.append(line);
   }
 
   function renderPoster(poster) {
+    const planet = data.planets.find(
+      item => item.id === poster.planet
+    );
+
+    el("poster-review-title").textContent =
+      planet?.name || "Planeet";
+
+    el("poster-review-subtitle").textContent =
+      poster.subtitle || "";
+
+    el("poster-review-bg").src = data.imageUrl(
+      "taust",
+      Number(poster.background) || 6
+    );
+
     const image = el("poster-review-planet");
-    const background = el("poster-review-bg");
+    const imageNumber = Number(poster.planetImage);
+
+    if (
+      Number.isInteger(imageNumber) &&
+      imageNumber >= 1 &&
+      imageNumber <= 8
+    ) {
+      image.src = data.imageUrl("planeet", imageNumber);
+      image.hidden = false;
+    } else {
+      image.removeAttribute("src");
+      image.hidden = true;
+    }
+
     const decorationContainer =
       el("poster-review-decorations");
-    const title = el("poster-review-title");
-    const subtitle = el("poster-review-subtitle");
-    const facts = el("poster-review-facts");
-    const authors = el("poster-review-authors");
-
-    const index = planetIds.indexOf(poster.planet);
-
-    title.textContent =
-      index >= 0 ? planetNames[index] : "Planeet";
-
-    subtitle.textContent = poster.subtitle || "";
-
-    background.src = imageUrl(
-      "taust",
-      Number(poster.background) || 1
-    );
-
-    image.src = imageUrl(
-      "planeet",
-      Number(poster.planetImage) || 1
-    );
 
     decorationContainer.replaceChildren();
 
@@ -109,26 +99,31 @@
 
       const layer = document.createElement("img");
       layer.className = "poster-layer poster-decor";
-      layer.src = imageUrl("kaunistus", number);
+      layer.src = data.imageUrl("kaunistus", number);
       layer.alt = "";
 
       decorationContainer.append(layer);
     });
 
-    facts.replaceChildren();
+    const list = el("poster-review-facts");
+    list.replaceChildren();
 
     const factTexts = Array.isArray(poster.factTexts)
       ? poster.factTexts
-      : [];
+      : (poster.facts || []).map(
+          index => data.facts[poster.planet]?.[Number(index)]?.[0]
+        );
 
     factTexts.forEach(value => {
+      if (!value) return;
+
       const item = document.createElement("li");
       item.className = "poster-fact";
       item.textContent = String(value);
-      facts.append(item);
+      list.append(item);
     });
 
-    authors.textContent =
+    el("poster-review-authors").textContent =
       `Autorid: ${poster.authors || ""}`;
   }
 
@@ -139,65 +134,57 @@
     peer.replaceChildren();
     check.replaceChildren();
 
-    addLine(
-      peer,
-      "Hindajad",
-      review.reviewers
-    );
+    addLine(peer, "Hindajad", review.reviewers);
 
     addLine(
       peer,
-      "Kas pilt sobib planeedi nimega?",
-      review.image === "jah"
-        ? "Jah"
-        : "Vajab parandamist"
+      "Kas planeedi nimi ja pilt sobivad kokku?",
+      review.image === "jah" ? "Jah" : "Vajab parandamist"
     );
 
     addLine(
       peer,
       "Kas kõik kolm fakti on õiged?",
-      review.facts === "jah"
-        ? "Jah"
-        : "Vajab parandamist"
+      review.facts === "jah" ? "Jah" : "Vajab parandamist"
     );
 
     addLine(
       peer,
-      "Kas plakat on selge ja loetav?",
-      review.design === "jah"
-        ? "Jah"
-        : "Vajab parandamist"
+      "Kas plakatit on lihtne lugeda?",
+      review.design === "jah" ? "Jah" : "Vajab parandamist"
     );
 
     if (review.comment) {
-      addLine(
-        peer,
-        "Meeskonna soovitus",
-        review.comment
-      );
+      addLine(peer, "Meeskonna soovitus", review.comment);
     }
 
-    const expectedImage =
-      planetIds.indexOf(currentPoster.planet) + 1;
+    const expectedPlanet = data.planets.find(
+      planet => planet.id === currentPoster.planet
+    );
 
-    const chosenImage =
-      Number(currentPoster.planetImage);
+    const picturedPlanet = data.planets.find(
+      planet =>
+        planet.image === Number(currentPoster.planetImage)
+    );
 
-    if (chosenImage === expectedImage) {
+    if (
+      expectedPlanet &&
+      picturedPlanet?.id === expectedPlanet.id
+    ) {
       addLine(
         check,
         "Planeedi pilt",
-        "Pilt vastab planeedi nimele.",
+        "Pilt sobib planeedi nimega.",
         "is-correct"
       );
     } else {
       addLine(
         check,
         "Planeedi pilt",
-        `Pilt ei vasta nimele. Pealkiri: ${
-          planetNames[expectedImage - 1] || "–"
-        }. Pildil: ${
-          planetNames[chosenImage - 1] || "tundmatu planeet"
+        `Pilt ei sobi pealkirjaga. Pealkiri: ${
+          expectedPlanet?.name || "–"
+        }. Valitud pilt: ${
+          picturedPlanet?.name || "tundmatu planeet"
         }.`,
         "is-wrong"
       );
@@ -207,25 +194,23 @@
       ? currentPoster.facts.map(Number)
       : [];
 
+    const bank = data.facts[currentPoster.planet] || [];
+
     const texts = Array.isArray(currentPoster.factTexts)
       ? currentPoster.factTexts
       : [];
 
-    const incorrectFacts = indices
-      .map((value, index) => ({
-        value,
-        text: String(
-          texts[index] || `Fakt ${index + 1}`
-        )
+    const mistakes = indices
+      .map((index, position) => ({
+        correct: bank[index]?.[1] === true,
+        text:
+          texts[position] ||
+          bank[index]?.[0] ||
+          `Väide ${position + 1}`
       }))
-      .filter(item =>
-        !correctFactIndices.has(item.value)
-      );
+      .filter(item => !item.correct);
 
-    if (
-      indices.length === 3 &&
-      incorrectFacts.length === 0
-    ) {
+    if (indices.length === 3 && mistakes.length === 0) {
       addLine(
         check,
         "Planeedi faktid",
@@ -236,18 +221,27 @@
       addLine(
         check,
         "Planeedi faktid",
-        "Need väited ei sobi valitud planeedi kohta:",
+        "Mõni fakt vajab parandamist.",
         "is-wrong"
       );
 
-      incorrectFacts.forEach(item => {
+      mistakes.forEach(item => {
         addLine(
           check,
-          "Vajab parandamist",
+          "Kontrolli seda väidet",
           item.text,
           "is-wrong"
         );
       });
+
+      if (indices.length !== 3) {
+        addLine(
+          check,
+          "Faktide arv",
+          "Plakatil peab olema kolm fakti.",
+          "is-wrong"
+        );
+      }
     }
   }
 
@@ -259,12 +253,10 @@
       review.comment || "";
 
     ["image", "facts", "design"].forEach(name => {
-      form.querySelectorAll(
-        `input[name="${name}"]`
-      ).forEach(input => {
-        input.checked =
-          input.value === review[name];
-      });
+      form.querySelectorAll(`input[name="${name}"]`)
+        .forEach(input => {
+          input.checked = input.value === review[name];
+        });
     });
   }
 
@@ -274,8 +266,11 @@
 
     if (
       !poster ||
-      !planetIds.includes(poster.planet)
+      !data.planets.some(planet => planet.id === poster.planet)
     ) {
+      currentPoster = null;
+      currentSignature = "";
+
       empty.hidden = false;
       layout.hidden = true;
       return;
@@ -284,23 +279,19 @@
     empty.hidden = true;
     layout.hidden = false;
 
-    const newSignature = JSON.stringify(poster);
+    const signature = JSON.stringify(poster);
 
-    if (newSignature !== currentSignature) {
+    if (signature !== currentSignature) {
       currentPoster = poster;
-      currentSignature = newSignature;
+      currentSignature = signature;
       renderPoster(poster);
     }
 
-    const savedReview =
-      progress.responses?.posterReview;
+    const review = progress.responses?.posterReview;
 
-    if (
-      savedReview?.posterSignature ===
-      currentSignature
-    ) {
-      fillForm(savedReview);
-      displayReview(savedReview);
+    if (review?.posterSignature === currentSignature) {
+      fillForm(review);
+      displayReview(review);
     } else {
       form.reset();
       formPanel.hidden = false;
@@ -311,34 +302,25 @@
   form.addEventListener("submit", event => {
     event.preventDefault();
 
-    if (!currentPoster) return;
+    if (!currentPoster || !form.reportValidity()) return;
 
-    const data = new FormData(form);
+    const values = new FormData(form);
 
     const review = {
       posterSignature: currentSignature,
       reviewers: String(
-        data.get("reviewers") || ""
+        values.get("reviewers") || ""
       ).trim(),
-      image: String(data.get("image") || ""),
-      facts: String(data.get("facts") || ""),
-      design: String(data.get("design") || ""),
-      comment: String(
-        data.get("comment") || ""
-      ).trim()
+      image: String(values.get("image") || ""),
+      facts: String(values.get("facts") || ""),
+      design: String(values.get("design") || ""),
+      comment: String(values.get("comment") || "").trim()
     };
-
-    const answers = [
-      review.image,
-      review.facts,
-      review.design
-    ];
 
     if (
       !review.reviewers ||
-      answers.some(value =>
-        !["jah", "ei"].includes(value)
-      )
+      [review.image, review.facts, review.design]
+        .some(value => !["jah", "ei"].includes(value))
     ) return;
 
     document.dispatchEvent(
@@ -354,14 +336,11 @@
     displayReview(review);
   });
 
-  el("poster-review-edit").addEventListener(
-    "click",
-    () => {
-      formPanel.hidden = false;
-      resultPanel.hidden = true;
-      form.querySelector("input")?.focus();
-    }
-  );
+  el("poster-review-edit").addEventListener("click", () => {
+    formPanel.hidden = false;
+    resultPanel.hidden = true;
+    form.querySelector("input")?.focus();
+  });
 
   root.closest(".journey-step")
     ?.addEventListener("toggle", event => {
@@ -370,14 +349,11 @@
       }
     });
 
-  document.addEventListener(
-    "lesson:save-response",
-    event => {
-      if (event.detail?.id === "poster") {
-        loadPoster();
-      }
+  document.addEventListener("lesson:save-response", event => {
+    if (event.detail?.id === "poster") {
+      loadPoster();
     }
-  );
+  });
 
   loadPoster();
 })();
