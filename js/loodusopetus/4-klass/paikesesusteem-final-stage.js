@@ -1,8 +1,8 @@
 (() => {
   const form = document.querySelector("#final-mission");
-  if (!form) return;
+  const storageKey = window.lessonConfig?.storageKey;
 
-  const storageKey = window.lessonConfig.storageKey;
+  if (!form || !storageKey) return;
 
   const checkButton = document.querySelector("#final-check");
   const finishButton = document.querySelector("#final-finish");
@@ -10,8 +10,10 @@
   const total = document.querySelector("#final-total");
 
   if (
-    !checkButton || !finishButton ||
-    !success || !total
+    !checkButton ||
+    !finishButton ||
+    !success ||
+    !total
   ) return;
 
   const tasks = [
@@ -19,16 +21,18 @@
       name: "bag",
       correct: 1,
       explanation:
-        "7 + 4 + 5 + 3 = 19 kg. 20 − 19 = 1 kg."
+        "7 + 4 + 5 + 3 = 19 kg. " +
+        "20 − 19 = 1 kg."
     },
     {
       name: "oxygen",
       correct: 3,
       explanation:
-        "Kaks astronauti vajavad minutis kokku 4 liitrit. " +
+        "Kaks astronauti vajavad minutis kokku " +
+        "4 liitrit hapnikku. " +
         "30 minutiga kulub 120 liitrit. " +
-        "Kahes balloonis on kokku 100 liitrit, " +
-        "seega tuleb kaasa võtta 3 ballooni."
+        "Kahes balloonis on 100 liitrit, " +
+        "seega on vaja 3 ballooni."
     },
     {
       name: "budget",
@@ -61,6 +65,11 @@
     };
   }
 
+  function isCorrect(task, answers) {
+    return answers[task.name] !== "" &&
+      Number(answers[task.name]) === task.correct;
+  }
+
   function showResults(answers) {
     let correctCount = 0;
 
@@ -69,9 +78,9 @@
         `#final-result-${task.name}`
       );
 
-      const correct =
-        answers[task.name] !== "" &&
-        Number(answers[task.name]) === task.correct;
+      if (!result) return;
+
+      const correct = isCorrect(task, answers);
 
       if (correct) correctCount++;
 
@@ -81,29 +90,30 @@
 
       result.textContent = correct
         ? `Õige vastus! ${task.explanation}`
-        : `Õige vastus on ${task.correct}. ${task.explanation}`;
+        : "Vastus ei ole veel õige. " +
+          "Kontrolli arvutust ja proovi uuesti.";
 
       result.hidden = false;
     });
 
-    total.textContent =
-      `Õigeid vastuseid: ${correctCount} / 3.`;
+    const allCorrect = correctCount === tasks.length;
+
+    total.textContent = allCorrect
+      ? "Kõik 3 vastust on õiged! " +
+        "Võid kosmosereisi lõpetada."
+      : `Õigeid vastuseid: ${correctCount} / 3. ` +
+        "Paranda valed vastused ja kontrolli uuesti.";
 
     total.hidden = false;
-    finishButton.hidden = false;
+    finishButton.hidden = !allCorrect;
+
+    return allCorrect;
   }
 
-  checkButton.addEventListener("click", () => {
-    if (!form.reportValidity()) return;
-
-    showResults(collectAnswers());
-    success.hidden = true;
-  });
-
-  form.addEventListener("input", () => {
+  function resetResults() {
     finishButton.hidden = true;
-    total.hidden = true;
     success.hidden = true;
+    total.hidden = true;
 
     tasks.forEach(task => {
       const result = document.querySelector(
@@ -112,12 +122,21 @@
 
       if (result) result.hidden = true;
     });
-  });
+  }
 
-  finishButton.addEventListener("click", () => {
+  function completeMission() {
     if (!form.reportValidity()) return;
 
     const answers = collectAnswers();
+
+    const allCorrect = tasks.every(task =>
+      isCorrect(task, answers)
+    );
+
+    if (!allCorrect) {
+      showResults(answers);
+      return;
+    }
 
     document.dispatchEvent(
       new CustomEvent("lesson:save-response", {
@@ -130,6 +149,7 @@
     );
 
     success.hidden = false;
+    finishButton.hidden = true;
 
     success.scrollIntoView({
       behavior: window.matchMedia(
@@ -137,7 +157,22 @@
       ).matches ? "auto" : "smooth",
       block: "nearest"
     });
+  }
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
   });
+
+  checkButton.addEventListener("click", () => {
+    if (!form.reportValidity()) return;
+
+    success.hidden = true;
+    showResults(collectAnswers());
+  });
+
+  form.addEventListener("input", resetResults);
+
+  finishButton.addEventListener("click", completeMission);
 
   const saved = getSaved();
 
@@ -150,13 +185,13 @@
       }
     });
 
-    if (
-      tasks.every(task =>
-        saved[task.name] !== "" &&
-        saved[task.name] != null
-      )
-    ) {
+    const allCorrect = tasks.every(task =>
+      isCorrect(task, saved)
+    );
+
+    if (allCorrect) {
       showResults(saved);
+      finishButton.hidden = true;
       success.hidden = false;
     }
   }
