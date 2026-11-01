@@ -1114,12 +1114,12 @@ nav {
 .poster-facts {
   position: absolute;
   z-index: 4;
-  bottom: 9%;
-  left: 7%;
-  right: 7%;
+  bottom: 18%;
+  left: 22%;
+  right: 22%;
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 15px;
   margin: 0;
   padding: 0;
   list-style: none;
