@@ -504,6 +504,22 @@
 
   updateProgress();
 
+  // Return to the first stage after resetting progress
+  if (sessionStorage.getItem("digiope-reset-scroll") === "1") {
+    sessionStorage.removeItem("digiope-reset-scroll");
+
+    history.scrollRestoration = "manual";
+
+    window.addEventListener("load", () => {
+      requestAnimationFrame(() => {
+        steps[0]?.scrollIntoView({
+          behavior: "instant",
+          block: "start"
+        });
+      });
+    });
+  }
+  
   // Reset the entire learning journey
   document.querySelector("#reset-journey")?.addEventListener("click", () => {
     const confirmed = confirm(
@@ -513,6 +529,9 @@
     if (!confirmed) return;
   
     localStorage.removeItem(config.storageKey);
+    sessionStorage.setItem("digiope-reset-scroll", "1");
+  
+    history.scrollRestoration = "manual";
     window.location.reload();
   });
 })();
