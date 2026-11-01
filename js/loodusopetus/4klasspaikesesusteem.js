@@ -21,8 +21,8 @@ window.lessonConfig = {
           text: "Mis on Päike?",
           options: {
             planeet: "Planeet",
-            taht: "Täht",
-            kaaslane: "Kaaslane"
+            kaaslane: "Kaaslane",
+            taht: "Täht"
           },
           correct: "taht",
           explanation: "Päike on täht ja annab ise valgust."
@@ -31,8 +31,8 @@ window.lessonConfig = {
           id: "q2",
           text: "Mitu planeeti on Päikesesüsteemis?",
           options: {
-            "7": "7",
             "8": "8",
+            "7": "7",
             "9": "9"
           },
           correct: "8",
@@ -76,8 +76,8 @@ window.lessonConfig = {
           text: "Mille ümber tiirlevad Päikesesüsteemi planeedid?",
           options: {
             maa: "Maa ümber",
-            paike: "Päikese ümber",
-            kuu: "Kuu ümber"
+            kuu: "Kuu ümber",
+            paike: "Päikese ümber"
           },
           correct: "paike",
           explanation: "Kõik kaheksa planeeti tiirlevad ümber Päikese."
@@ -86,8 +86,8 @@ window.lessonConfig = {
           id: "s3q2",
           text: "Mitmes planeet Päikesest on Maa?",
           options: {
-            esimene: "Esimene",
             kolmas: "Kolmas",
+            esimene: "Esimene",
             viies: "Viies"
           },
           correct: "kolmas",
