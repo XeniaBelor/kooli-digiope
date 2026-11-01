@@ -727,13 +727,20 @@
             </p>
           </div>
 
-          <button
-            type="button"
-            class="action-button"
-            data-complete-step="7"
-            data-next-step="8">
-            Edasi 8. etapiga
-          </button>
+        <label class="scratch-confirm">
+          <input id="scratch-confirm" type="checkbox">
+          Olen Scratchi mängu läbi proovinud ja küsimustele vastanud.
+        </label>
+        
+        <button
+          type="button"
+          class="action-button"
+          data-complete-step="7"
+          data-next-step="8"
+          disabled>
+          Edasi 8. etapiga
+        </button>
+          
         </div>
       </details>
 
@@ -1009,5 +1016,20 @@
   </footer>
 
   <script src="https://sisuloome.e-koolikott.ee/sites/default/files/h5p/h5p-core/js/h5p-resizer.js"></script>
+
+  <script>
+  (() => {
+    const checkbox = document.querySelector("#scratch-confirm");
+    const next = document.querySelector(
+      '[data-complete-step="7"]'
+    );
+
+    if (!checkbox || !next) return;
+    checkbox.addEventListener("change", () => {
+      next.disabled = !checkbox.checked;
+      });
+    })();
+  </script>
+  
 </body>
 </html>
