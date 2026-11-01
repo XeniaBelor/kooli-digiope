@@ -29,11 +29,17 @@
 
 .poster-review-preview .poster-review-subtitle {
   margin: 0;
-  color: #fff;
+  color: #ffffff;
   font-size: clamp(14px, 1.8vw, 21px);
   font-weight: 600;
   line-height: 1.3;
   text-shadow: 0 2px 7px #10244380;
+}
+
+.poster-review-preview .poster-facts {
+  bottom: 9%;
+  left: 7%;
+  right: 7%;
 }
 
 .poster-review-card {
